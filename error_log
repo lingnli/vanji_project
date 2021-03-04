@@ -1,0 +1,28 @@
+[06-Oct-2020 01:16:04 UTC] PHP Parse error:  syntax error, unexpected 'list' (T_LIST), expecting identifier (T_STRING) in /home2/anbon/public_html/taitra/application/controllers/mgr/Quest.php on line 33
+[06-Oct-2020 01:16:09 UTC] PHP Parse error:  syntax error, unexpected 'list' (T_LIST), expecting identifier (T_STRING) in /home2/anbon/public_html/taitra/application/controllers/mgr/Quest.php on line 33
+[06-Oct-2020 06:08:17 UTC] PHP Parse error:  syntax error, unexpected 'list' (T_LIST), expecting identifier (T_STRING) in /home2/anbon/public_html/taitra/application/controllers/mgr/Quest.php on line 33
+[06-Oct-2020 06:08:25 UTC] PHP Parse error:  syntax error, unexpected 'list' (T_LIST), expecting identifier (T_STRING) in /home2/anbon/public_html/taitra/application/controllers/mgr/Quest.php on line 33
+[19-Oct-2020 11:58:06 UTC] PHP Parse error:  syntax error, unexpected 'list' (T_LIST), expecting identifier (T_STRING) in /home2/anbon/public_html/taitra/application/controllers/mgr/Quest.php on line 33
+[21-Oct-2020 14:40:37 UTC] PHP Parse error:  syntax error, unexpected 'list' (T_LIST), expecting identifier (T_STRING) in /home2/anbon/public_html/taitra/application/controllers/mgr/Quest.php on line 33
+[22-Oct-2020 08:48:16 Asia/Taipei] PHP Fatal error:  Cannot access protected property Member::$log_record_table in /home2/anbon/public_html/taitra/system/core/Model.php on line 77
+[22-Oct-2020 08:49:15 Asia/Taipei] PHP Fatal error:  Cannot access protected property Member::$log_record_table in /home2/anbon/public_html/taitra/system/core/Model.php on line 77
+[22-Oct-2020 08:49:43 Asia/Taipei] PHP Fatal error:  Cannot access protected property Member::$log_record_table in /home2/anbon/public_html/taitra/system/core/Model.php on line 77
+[22-Oct-2020 09:07:18 Asia/Taipei] PHP Fatal error:  Cannot access protected property Member::$log_record_table in /home2/anbon/public_html/taitra/system/core/Model.php on line 77
+[22-Oct-2020 10:14:42 Asia/Taipei] PHP Fatal error:  Cannot access protected property Member::$log_record_table in /home2/anbon/public_html/taitra/system/core/Model.php on line 77
+[22-Oct-2020 10:17:39 Asia/Taipei] PHP Fatal error:  Cannot access protected property Member::$log_record_table in /home2/anbon/public_html/taitra/system/core/Model.php on line 77
+[22-Oct-2020 10:38:35 Asia/Taipei] PHP Fatal error:  Cannot access protected property Member::$log_record_table in /home2/anbon/public_html/taitra/system/core/Model.php on line 77
+[22-Oct-2020 10:39:52 Asia/Taipei] PHP Fatal error:  Cannot access protected property Member::$log_record_table in /home2/anbon/public_html/taitra/system/core/Model.php on line 77
+[22-Oct-2020 03:44:29 UTC] PHP Parse error:  syntax error, unexpected '"currentPage"' (T_CONSTANT_ENCAPSED_STRING), expecting ')' in /home2/anbon/public_html/taitra/application/controllers/mgr/Webex.php on line 69
+[26-Oct-2020 06:05:03 UTC] PHP Parse error:  syntax error, unexpected 'list' (T_LIST), expecting identifier (T_STRING) in /home2/anbon/public_html/taitra/application/controllers/mgr/Quest.php on line 33
+[26-Oct-2020 06:05:12 UTC] PHP Parse error:  syntax error, unexpected 'list' (T_LIST), expecting identifier (T_STRING) in /home2/anbon/public_html/taitra/application/controllers/mgr/Quest.php on line 33
+[26-Oct-2020 14:05:17 Asia/Taipei] PHP Fatal error:  Cannot access protected property Member::$log_record_table in /home2/anbon/public_html/taitra/system/core/Model.php on line 77
+[27-Oct-2020 06:07:10 UTC] PHP Parse error:  syntax error, unexpected 'list' (T_LIST), expecting identifier (T_STRING) in /home2/anbon/public_html/taitra/application/controllers/mgr/Quest.php on line 33
+[27-Oct-2020 09:45:18 UTC] PHP Fatal error:  Cannot redeclare Webex::$service_key in /home2/anbon/public_html/taitra/application/controllers/mgr/Webex.php on line 102
+[03-Nov-2020 03:00:42 UTC] PHP Parse error:  syntax error, unexpected 'list' (T_LIST), expecting identifier (T_STRING) in /home2/anbon/public_html/taitra/application/controllers/mgr/Quest.php on line 33
+[03-Nov-2020 11:00:46 Asia/Taipei] PHP Fatal error:  Cannot access protected property Member::$log_record_table in /home2/anbon/public_html/taitra/system/core/Model.php on line 77
+[03-Nov-2020 03:33:36 UTC] PHP Parse error:  syntax error, unexpected 'list' (T_LIST), expecting identifier (T_STRING) in /home2/anbon/public_html/taitra/application/controllers/mgr/Quest.php on line 33
+[04-Nov-2020 04:50:45 Asia/Taipei] PHP Fatal error:  Cannot access protected property Member::$log_record_table in /home2/anbon/public_html/taitra/system/core/Model.php on line 77
+[04-Nov-2020 04:50:56 Asia/Taipei] PHP Fatal error:  Cannot access protected property Member::$log_record_table in /home2/anbon/public_html/taitra/system/core/Model.php on line 77
+[08-Nov-2020 15:32:03 UTC] PHP Parse error:  syntax error, unexpected 'list' (T_LIST), expecting identifier (T_STRING) in /home2/anbon/public_html/taitra/application/controllers/mgr/Quest.php on line 33
+[08-Nov-2020 23:34:26 Asia/Taipei] PHP Fatal error:  Call to undefined method Priv_model::edit() in /home2/anbon/public_html/taitra/application/controllers/mgr/Member.php on line 161
+[08-Nov-2020 23:34:30 Asia/Taipei] PHP Fatal error:  Call to undefined method Priv_model::edit() in /home2/anbon/public_html/taitra/application/controllers/mgr/Member.php on line 161
