@@ -96,10 +96,6 @@
 ============================================ -->
 
 
-<div id="toTop"></div><!-- Back to top button -->
-<div class="layer"></div><!-- Opacity Mask Menu Mobile -->
-<div id="like-store">已加入最愛店家</div><!-- Lke Store -->
-<!-- <add like> -->
 
 
 <script>

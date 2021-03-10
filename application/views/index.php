@@ -32,13 +32,13 @@
                     <div class="col-lg-12">
 
                         <div class="section-title text-center">
-                            <h2>主打商品</h2>
+                            <h2 data-aos="fade-up">主打商品</h2>
                             <p class="p16">我們認為高品質的珠寶不應該只適合少數人使用，因此我們在提供合理價格的同時珠寶主打高品質的珠寶不應該只適合少數人使用。</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="row product-active-lg-4">
+                <div class="row">
 
                     <?foreach($top as $t){?>
                     <div class="col-lg-3">
@@ -89,7 +89,7 @@
                 <div class="row">
 
                     <?foreach($banner as $b){?>
-                    <div class="col-lg-4 col-md-6">
+                    <div class="col-lg-4 col-md-6 h-100 d-flex justify-content-center">
                         <!-- Single Banner Start -->
                         <div class="single-banner mt-30">
                             <?if($b['cover']==""){?>
@@ -121,7 +121,7 @@
                     <div class="col-lg-12">
 
                         <div class="section-title text-center">
-                            <h2>精選商品</h2>
+                            <h2 data-aos="fade-up">精選商品</h2>
                             <p class="p16">我們認為高品質的珠寶不應該只適合少數人使用，因此我們在提供合理價格的同時珠寶主打高品質的珠寶不應該只適合少數人使用。</p>
                         </div>
                     </div>
@@ -184,7 +184,7 @@
                     <div class="col-lg-12">
 
                         <div class="section-title text-center">
-                            <h2>最新消息</h2>
+                            <h2 data-aos="fade-up">最新消息</h2>
                             <p class="p16">我們認為高品質的珠寶不應該只適合少數人使用，因此我們在提供合理價格的同時珠寶主打
                                 高品質的珠寶不應該只適合少數人使用。</p>
                         </div>

@@ -8,14 +8,12 @@
             <div class="col-lg-4 col-md-3">
               <div class="social-top">
                 <ul>
-                  <li><a href="#"><i class="ion-social-facebook"></i></a></li>
-                  <li><a href="#"><i class="ion-social-twitter"></i></a></li>
-                  <li><a href="#"><i class="ion-social-tumblr"></i></a></li>
-                  <li><a href="#"><i class="ion-social-googleplus"></i></a></li>
+                  <li><a href="#"><i class="fab fa-facebook"></i></a></li>
+                  <li><a href="#"><i class="fab fa-instagram"></i></a></li>
                 </ul>
               </div>
             </div>
-            <div class="col-lg-8 col-md-9">
+            <!-- <div class="col-lg-8 col-md-9">
               <div class="top-info-wrap text-right">
                 <ul class="top-info">
                   <li><?= $work_time ?></li>
@@ -23,7 +21,7 @@
                   <li><a><?= $web_email ?></a></li>
                 </ul>
               </div>
-            </div>
+            </div> -->
           </div>
 
         </div>
@@ -34,47 +32,56 @@
 <!-- Header Top End -->
 
 <!-- haeader bottom Start -->
-<div class="haeader-bottom-area header-sticky">
-  <div class="container">
+<div class="haeader-bottom-area">
+  <div class="container custom-container">
     <div class="row align-items-center">
-      <div class="col-lg-2 col-md-4 col-5">
-        <div class="logo-area vjlogo-size">
+      <div class="col-lg-12">
+        <div class="logo-area vjlogo-size pt-30">
           <a href="<?= base_url() ?>"><img src="<?= base_url() ?>assets/images/logo/vjlogo.png" alt=""></a>
+          <span>Vanji Jewelry</span>
         </div>
       </div>
-      <div class="col-lg-8 d-none d-lg-block">
+    </div>
+    <div class="row align-items-center header-sticky nav-block">
+      <div class="col-lg-12 d-none d-lg-block">
         <div class="main-menu-area text-center">
           <!--  Start Mainmenu Nav-->
           <nav class="main-navigation">
             <ul>
               <li class="active"><a href="<?= base_url() ?>">首頁</a>
               </li>
-              <li><a href="<?= base_url() ?>home/about">關於</a>
+              <li><a href="<?= base_url() ?>home/about">關於品牌</a>
               </li>
-              <li><a href="<?= base_url() ?>product">全部商品</a>
+              <li><a href="<?= base_url() ?>news">最新系列</a>
               </li>
-              <li><a href="<?= base_url() ?>home/faq">FAQ</a>
+              <li><a href="<?= base_url() ?>product">所有商品</a>
+              </li>
+              <li><a href="<?= base_url() ?>home/faq">購物說明</a>
               </li>
               <li><a href="<?= base_url() ?>home/contact">聯絡我們</a>
               </li>
-              <li><a href="<?= base_url() ?>news">最新消息</a>
-              </li>
             </ul>
           </nav>
-
         </div>
       </div>
-
-      <div class="col-lg-2 col-md-8 col-7">
+      <div class="shopcart-icon-group d-flex justify-content-between">
+        <div class="left-mobile-group d-lg-none d-flex align-items-center">
+          <ul class="d-flex">
+            <li class="pr-2">
+              <a href="<?= base_url() ?>news">最新系列</a>
+            </li>
+            <li>
+              <a href="<?= base_url() ?>product">所有商品</a>
+            </li>
+          </ul>
+        </div>
         <div class="right-blok-box d-flex">
           <div class="search-wrap">
             <a href="#" class="trigger-search"><i class="ion-ios-search-strong"></i></a>
           </div>
-
           <div class="user-wrap">
             <a href="<?= base_url() ?>member/favorite"><i class="ion-android-favorite-outline"></i></a>
           </div>
-
           <div class="person-wrap" style="padding:0 20px 0 0;">
             <?if($isLogin == 0){?>
             <a href="<?= base_url() ?>home/login_register"><i class="ion-android-person"></i></a>
@@ -82,8 +89,6 @@
             <a href="<?= base_url() ?>member/home"><i class="ion-android-person"></i></a>
             <?}?>
           </div>
-
-
           <div class="shopping-cart-wrap">
             <a><i class="ion-ios-cart-outline"></i> <span id="cart-total"><?= $menu_count ?></span></a>
             <ul class="mini-cart">
@@ -104,7 +109,6 @@
                 </div>
               </li>
               <?}?>
-
               <li class="subtotal-titles">
                 <div class="subtotal-titles">
                   <h3>小計 :</h3><span>$ <?= $menu_total ?></span>
@@ -117,13 +121,11 @@
               </li>
             </ul>
           </div>
-
           <div class="mobile-menu-btn d-block d-lg-none">
             <div class="off-canvas-btn">
               <i class="ion-android-menu"></i>
             </div>
           </div>
-
         </div>
       </div>
     </div>
