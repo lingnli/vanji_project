@@ -13,7 +13,15 @@
 
 
         <!-- breadcrumb-area start -->
-        <div class="breadcrumb-area section-ptb">
+        <div class="breadcrumb-area section-ptb" <?if($top_bg[4]['cover']=="" ):?>
+            style=" background: url(<?= base_url() ?>assets/images/bg/bgb.png); background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;"
+            <?else:?>
+            style=" background: url(<?= base_url() . $top_bg[4]['cover'] ?>); background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;"
+            <?endif;?>>
             <div class="container">
                 <div class="row">
                     <div class="col-12">
@@ -106,7 +114,7 @@
         <script src="https://www.google.com/recaptcha/api.js"></script>
         <script>
             function callback() {
-                
+
 
 
                 $('#contactform').submit();

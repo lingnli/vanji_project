@@ -13,7 +13,15 @@
 
 
         <!-- breadcrumb-area start -->
-        <div class="breadcrumb-area section-ptb">
+        <div class="breadcrumb-area section-ptb" <?if($top_bg[2]['cover']=="" ):?>
+            style=" background: url(<?= base_url() ?>assets/images/bg/bgb.png); background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;"
+            <?else:?>
+            style=" background: url(<?= base_url() . $top_bg[2]['cover'] ?>); background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;"
+            <?endif;?>>
             <div class="container">
                 <div class="row">
                     <div class="col-12">
@@ -150,14 +158,14 @@
                     alert("請先登入，才可以加入最愛");
                     return false;
                 }
-                
+
                 var id = $(this).data("id");
                 // console.log('id:' + id);
 
                 $.ajax({
                     url: '<?= base_url() ?>/member/add_favorite',
                     data: {
-                        id: id,                        
+                        id: id,
                     },
                     type: "POST",
                     dataType: "json",
@@ -165,7 +173,7 @@
                         if (msg.status) {
                             alert('已加入喜愛清單');
 
-                            
+
                         } else {
                             alert('已加入喜愛清單');
                         }

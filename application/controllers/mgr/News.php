@@ -10,7 +10,7 @@ class News extends Base_Controller {
 	private $param = [
 							["標題", 		"title", 		"text", 				"", 		TRUE, 	"", 	4, 		12],
 							["分類", 		"classify_id", "select", 				"", 		TRUE, 	"", 	4, 		12, 	["id", "text"]],
-							["圖片<br><span class='text text-danger'>尺寸比例 500 x 250</span>", 		"cover", 		"img", 				"", 		TRUE, 	"", 	4, 		12 , 1000/500],
+							["圖片<br><span class='text text-danger'>尺寸比例 500 x 330</span>", 		"cover", 		"img", 				"", 		TRUE, 	"", 	4, 		12 , 500/330],
 							["介紹", 		"content", 		"textarea", 				"", 		TRUE, 	"", 	4, 		12],
 							["日期", 		"date", 		"day", 				'', 		TRUE, 	"", 	4, 		12],
 							

@@ -1,5 +1,13 @@
         <!-- testimonial-area start -->
-        <div class="testimonial-area testimonial-bg bg-gray overly-image section-ptb">
+        <div class="testimonial-area testimonial-bg bg-gray overly-image section-ptb" <?if($down_bg['cover']=="" ):?>
+          style=" background: url(<?= base_url()?>assets/images/bg/t05.png); background-size: cover;
+          background-repeat: no-repeat;
+          background-position: center;"
+          <?else:?>
+          style=" background: url(<?= base_url() . $down_bg['cover'] ?>); background-size: cover;
+          background-repeat: no-repeat;
+          background-position: center;"
+          <?endif;?>>
           <div class="container">
             <div class="row">
               <div class="col-lg-8 offset-md-2 col-md-8 col-sm-12">

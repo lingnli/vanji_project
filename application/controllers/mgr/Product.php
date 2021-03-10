@@ -139,7 +139,7 @@ class Product extends Base_Controller {
 
 		["商品名稱", 		"name", 		"text", 				"", 		TRUE, 	"", 	4, 		12],
 		["商品簡介", 		"sub_title", 		"text", 				"", 		FALSE, 	"", 	4, 		12],				
-		["定價", 		"price", 		"number", 				"", 		TRUE, 	"", 	4, 		12],
+		["定價", 		"price", 		"number", 				"", 		FALSE, 	"", 	4, 		12],
 		["售價", 		"sale_price", 		"number", 				"", 		TRUE, 	"", 	4, 		12],
 		["數量", 		"number", 		"number", 				"", 		TRUE, 	"", 	4, 		12],
 		["商品類別", 		"classify_id", 	"select", 		"", 		TRUE, 	"",4, 		12,		['id', 'classify']],

@@ -32,7 +32,7 @@
                     <div class="col-lg-12">
 
                         <div class="section-title text-center">
-                            <h2 data-aos="fade-up">主打商品</h2>
+                            <h2 >主打商品</h2>
                             <p class="p16">我們認為高品質的珠寶不應該只適合少數人使用，因此我們在提供合理價格的同時珠寶主打高品質的珠寶不應該只適合少數人使用。</p>
                         </div>
                     </div>
@@ -63,13 +63,15 @@
 
                                 <div class="product-action">
                                     <a href="<?= base_url() ?>cart/add/<?= $t['id'] ?>" class="add-to-cart"><i class="ion-bag"></i></a>
-                                    <a class="wishlist heart" data-id="<?=$t['id']?>"><i class="ion-android-favorite-outline"></i></a>
+                                    <a class="wishlist heart" data-id="<?= $t['id'] ?>"><i class="ion-android-favorite-outline"></i></a>
                                 </div>
                             </div>
                             <div class="product-content">
                                 <h3><a href="<?= base_url() ?>product/detail/<?= $t['id'] ?>"><?= $t['name'] ?></a></h3>
                                 <div class="price-box">
+                                    <?if($t['price']!=0):?>
                                     <span class="old-price">$<?= $t['price'] ?></span>
+                                    <?endif;?>
                                     <span class="new-price">$<?= $t['sale_price'] ?></span>
                                 </div>
                             </div>
@@ -121,7 +123,7 @@
                     <div class="col-lg-12">
 
                         <div class="section-title text-center">
-                            <h2 data-aos="fade-up">精選商品</h2>
+                            <h2 >精選商品</h2>
                             <p class="p16">我們認為高品質的珠寶不應該只適合少數人使用，因此我們在提供合理價格的同時珠寶主打高品質的珠寶不應該只適合少數人使用。</p>
                         </div>
                     </div>
@@ -152,13 +154,15 @@
 
                                 <div class="product-action">
                                     <a href="<?= base_url() ?>cart/add/<?= $t['id'] ?>" class="add-to-cart"><i class="ion-bag"></i></a>
-                                    <a class="heart wishlist" data-id="<?=$t['id']?>"><i class="ion-android-favorite-outline"></i></a>
+                                    <a class="heart wishlist" data-id="<?= $t['id'] ?>"><i class="ion-android-favorite-outline"></i></a>
                                 </div>
                             </div>
                             <div class="product-content">
                                 <h3><a href="<?= base_url() ?>product/detail/<?= $t['id'] ?>"><?= $t['name'] ?></a></h3>
                                 <div class="price-box">
+                                    <?if($t['price']!=0):?>
                                     <span class="old-price">$<?= $t['price'] ?></span>
+                                    <?endif;?>
                                     <span class="new-price">$<?= $t['sale_price'] ?></span>
                                 </div>
                             </div>
@@ -184,7 +188,7 @@
                     <div class="col-lg-12">
 
                         <div class="section-title text-center">
-                            <h2 data-aos="fade-up">最新消息</h2>
+                            <h2 >最新消息</h2>
                             <p class="p16">我們認為高品質的珠寶不應該只適合少數人使用，因此我們在提供合理價格的同時珠寶主打
                                 高品質的珠寶不應該只適合少數人使用。</p>
                         </div>

@@ -52,7 +52,7 @@
               </li>
               <li><a href="<?= base_url() ?>home/about">關於品牌</a>
               </li>
-              <li><a href="<?= base_url() ?>news">最新系列</a>
+              <li><a href="<?= base_url() ?>news">最新消息</a>
               </li>
               <li><a href="<?= base_url() ?>product">所有商品</a>
               </li>
@@ -68,7 +68,7 @@
         <div class="left-mobile-group d-lg-none d-flex align-items-center">
           <ul class="d-flex">
             <li class="pr-2">
-              <a href="<?= base_url() ?>news">最新系列</a>
+              <a href="<?= base_url() ?>news">最新消息</a>
             </li>
             <li>
               <a href="<?= base_url() ?>product">所有商品</a>

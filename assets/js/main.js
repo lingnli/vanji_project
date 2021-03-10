@@ -333,7 +333,7 @@ var testimonialSlider = $('.testimonial-slider');
 testimonialSlider.slick({
     arrows: false,
     autoplay: true,
-    autoplaySpeed: 7000,
+    autoplaySpeed: 4500,
     dots: true,
     pauseOnFocus: false,
     pauseOnHover: false,

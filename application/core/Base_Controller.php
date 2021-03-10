@@ -11,6 +11,7 @@ class  Base_Controller  extends  CI_Controller  {
 	protected $page_count = 25;
 
 	protected $log_record_table = "log_record";
+	protected $top = "top";
 
 	protected $products_classify = "products_classify";
 	protected $product = "product";
@@ -133,7 +134,11 @@ class  Base_Controller  extends  CI_Controller  {
 		// print_r($menu_product);exit;
 
 		//中間
-		$this->data['down'] = $this->db->where(array("is_delete" => 0))->get($this->down)->result_array();
+		$this->data['down'] = $this->db->where(array("is_delete" => 0,"id>"=>1))->get($this->down)->result_array();
+		$this->data['down_bg'] = $this->db->where(array("is_delete" => 0, "id" => 1))->get($this->down)->row_array();
+
+		$this->data['top_bg'] = $this->db->get($this->top)->result_array();
+		// print_r($this->data['top_bg']);exit;
 		//新聞
 		$this->data['footer_news'] = $this->db->limit(2)->where(array("is_delete" => 0))->order_by('create_date DESC')->get($this->news)->result_array();
 	}

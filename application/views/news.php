@@ -13,7 +13,15 @@
 
 
         <!-- breadcrumb-area start -->
-        <div class="breadcrumb-area section-ptb">
+        <div class="breadcrumb-area section-ptb" <?if($top_bg[1]['cover']=="" ):?>
+            style=" background: url(<?= base_url() ?>assets/images/bg/bgb.png); background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;"
+            <?else:?>
+            style=" background: url(<?= base_url() . $top_bg[1]['cover'] ?>); background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;"
+            <?endif;?>>
             <div class="container">
                 <div class="row">
                     <div class="col-12">
@@ -76,7 +84,7 @@
         <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
         <script>
             var page = 1;
-            
+
 
             $(document).ready(function($) {
 
@@ -94,13 +102,13 @@
                     type: "POST",
                     url: "<?= base_url() ?>news/data/tw",
                     data: {
-                        page: page,                        
+                        page: page,
                     },
                     dataType: "json",
                     success: function(data) {
                         if (data.status) {
                             $("#products").html(data.html);
-                            
+
                             page = parseInt(data.page);
                             total = parseInt(data.total);
                             search = data.search;

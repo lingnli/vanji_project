@@ -14,6 +14,8 @@ class  Base_Model  extends  CI_Model  {
     protected $news = "news";
     protected $discount = "discout";
 
+    protected $top = "top";
+
     protected $faq = "faq";
     protected $user = "user";
     protected $priv_menu_table = "privilege_menu";

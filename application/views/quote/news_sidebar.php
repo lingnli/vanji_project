@@ -23,7 +23,7 @@
                             <li style="margin-bottom:40px;">
                               <div class="widget-blog-wrap">
                                 <div class="widget-blog-image">
-                                  <a href="<?= base_url() ?>news/detail/<?= $n['id'] ?>"><img src="<?= base_url() ?><?= ($n['cover'] =="") ? "assets/images/blog/sb1.png" : $n['cover'] ?>" alt=""></a>
+                                  <a href="<?= base_url() ?>news/detail/<?= $n['id'] ?>"><img src="<?= base_url() ?><?= ($n['cover'] =="") ? "assets/images/blog/b01.png" : $n['cover'] ?>" alt=""></a>
                                 </div>
                                 <div class="widget-blog-content">
                                   <h6><a href="<?= base_url() ?>news/detail/<?= $n['id'] ?>"><?= $n['title'] ?></a></h6>

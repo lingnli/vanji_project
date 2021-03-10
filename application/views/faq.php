@@ -17,7 +17,15 @@
         </style>
 
         <!-- breadcrumb-area start -->
-        <div class="breadcrumb-area section-ptb">
+        <div class="breadcrumb-area section-ptb" <?if($top_bg[3]['cover']=="" ):?>
+            style=" background: url(<?= base_url() ?>assets/images/bg/bgb.png); background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;"
+            <?else:?>
+            style=" background: url(<?= base_url() . $top_bg[3]['cover'] ?>); background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;"
+            <?endif;?>>
             <div class="container">
                 <div class="row">
                     <div class="col-12">
@@ -84,8 +92,8 @@
                                             <h3>
                                                 <?= $f['title'] ?>
                                             </h3>
-                                            
-                                                <?= $f['content'] ?>
+
+                                            <?= $f['content'] ?>
                                             <p class="faq-pline"></p>
                                             <?}?>
                                         </div>

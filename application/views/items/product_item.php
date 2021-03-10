@@ -15,7 +15,9 @@
       <div class="product-content">
         <h3><a href="<?= base_url() ?>product/detail"><?= $item['name'] ?></a></h3>
         <div class="price-box">
+          <?if($item['price']!=0):?>
           <span class="old-price">$<?= $item['price'] ?></span>
+          <?endif;?>
           <span class="new-price">$<?= $item['sale_price'] ?></span>
         </div>
       </div>

@@ -8,7 +8,7 @@ class Home extends Base_Controller {
 		private $can_order_fields = [0, 5];
 
 		private $param = [
-								["輪播圖<br><span class='text text-danger'>尺寸比例 1200 x 800</span>", "cover", "img",	"", 		TRUE, 	"", 	4, 		12, 1420/680],
+								["輪播圖<br><span class='text text-danger'>尺寸比例 1420 x 680</span>", "cover", "img",	"", 		TRUE, 	"", 	4, 		12, 1420/680],
 								// ["手機版尺寸圖<br><span class='text text-danger'>尺寸比例 480 x 860</span>", "mobile_cover", "img",	"", 		TRUE, 	"", 	4, 		12, 480 / 860],								
 								// ["標題", "title", "text","", 		FALSE, 	"", 	4, 		12],								
 						];
@@ -22,6 +22,13 @@ class Home extends Base_Controller {
 	private $down_params = [
 		["發言人", "speaker", "text",	"", 		TRUE, 	"", 	4, 		12],
 		["內文", "content", "text", "", 		TRUE, 	"", 	4, 		12],
+		["背景圖<br><span class='text text-danger'>尺寸比例 1920 x 600</span>", "cover", "img",	"", 		FALSE, 	"", 	4, 		12, 1920 / 600],
+	];
+
+	private $down_params1 = [
+		["發言人", "speaker", "text",	"", 		TRUE, 	"", 	4, 		12],
+		["內文", "content", "text", "", 		TRUE, 	"", 	4, 		12],
+		// ["背景圖<br><span class='text text-danger'>尺寸比例 1920 x 600</span>", "cover", "img",	"", 		FALSE, 	"", 	4, 		12, 1920 / 600],
 	];	
 						
 	public function __construct(){
@@ -401,8 +408,8 @@ class Home extends Base_Controller {
 
 			$this->data['action'] = base_url() . "mgr/home/down/";
 
-			$this->data['th_title'] = ["發言人",  "內文", "建立日期", "動作"];
-			$this->data['th_width'] = $this->th_width;
+			$this->data['th_title'] = ["發言人",  "背景圖","內文", "建立日期", "動作"];
+			$this->data['th_width'] = ["","","","",""];
 			$this->data['can_order_fields'] = $this->can_order_fields;
 			$this->data['tool_btns'] = [
 				['新增文案', base_url() . "mgr/home/down/add", "btn-primary"]
@@ -472,7 +479,7 @@ class Home extends Base_Controller {
 			if ($_POST) {
 				$data = array();
 
-				$data = $this->process_post_data($this->down_params);
+				$data = $this->process_post_data($this->down_params1);
 
 				$res = $this->db->insert($this->down, $data);
 				if ($res) {
@@ -481,15 +488,15 @@ class Home extends Base_Controller {
 					$this->js_output_and_back("發生錯誤");
 				}
 			} else {
-				$this->data['title'] = '新增中間圖';
+				$this->data['title'] = '新增底部文案';
 
-				$this->data['parent'] = '中間圖管理';
+				$this->data['parent'] = '底部文案管理';
 				$this->data['parent_link'] = base_url() . "mgr/home/down";
 
 				$this->data['action'] = base_url() . "mgr/home/down/add";
 				$this->data['submit_txt'] = "新增";
 
-				$this->data['param'] = $this->down_params;
+				$this->data['param'] = $this->down_params1;
 				$this->load->view("mgr/template_form", $this->data);
 			}
 		} else if ($path == "edit") {
@@ -500,7 +507,12 @@ class Home extends Base_Controller {
 			if ($_POST) {
 				$data = array();
 
-				$data = $this->process_post_data($this->down_params);
+				if($id==1){
+					$data = $this->process_post_data($this->down_params);
+				}else{
+					$data = $this->process_post_data($this->down_params1);
+				}
+				
 
 				$res = $this->db->where(array("id" => $id))->update($this->down, $data);
 				if ($res) {
@@ -509,15 +521,20 @@ class Home extends Base_Controller {
 					$this->js_output_and_back("發生錯誤");
 				}
 			} else {
-				$this->data['title'] = '編輯中間圖';
+				$this->data['title'] = '編輯底部文案';
 
-				$this->data['parent'] = '中間圖管理';
+				$this->data['parent'] = '底部文案管理';
 				$this->data['parent_link'] = base_url() . "mgr/home/down";
 
 				$this->data['action'] = base_url() . "mgr/home/down/edit/" . $data['id'];
 				$this->data['submit_txt'] = "確認編輯";
 
-				$this->data['param'] = $this->set_data_to_param($this->down_params, $data);
+				if($id==1){
+					$this->data['param'] = $this->set_data_to_param($this->down_params, $data);
+				}else{
+					$this->data['param'] = $this->set_data_to_param($this->down_params1, $data);
+				}
+				
 				$this->load->view("mgr/template_form", $this->data);
 			}
 		} else if ($path == "del") {

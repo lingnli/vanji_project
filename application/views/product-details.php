@@ -156,7 +156,10 @@
                             <!-- pro_details end -->
                             <!-- pro_dtl_prize start -->
                             <ul class="pro_dtl_prize">
-                                <li class="old_prize">$<?= $product['price'] ?></li>
+                                <?if($product['price']!=0):?>
+                                <li class="old_prize"> $<?= $product['price'] ?></li>
+                                <?endif;?>
+  
                                 <li> $<?= $product['sale_price'] ?></li>
                             </ul>
 
@@ -257,22 +260,22 @@
                                                 </div>
                                             </div>
 
-                                                <?if($c['replay']!=""){?>
-                                                <div class="pro_review">
-                                                    <div class="review_details" style="padding-left: 120px;">
-                                                        <div class="review_info">
-                                                            <h5>店長</h5>
-                                                            <div class="rating_send">
-                                                                <!-- <a href="#">回復</a> -->
-                                                            </div>
+                                            <?if($c['replay']!=""){?>
+                                            <div class="pro_review">
+                                                <div class="review_details" style="padding-left: 120px;">
+                                                    <div class="review_info">
+                                                        <h5>店長</h5>
+                                                        <div class="rating_send">
+                                                            <!-- <a href="#">回復</a> -->
                                                         </div>
-                                                        <div class="review_date">
-                                                            <span><?= date("d M , Y H:i", strtotime($c['update_time'])) ?></span>
-                                                        </div>
-                                                        <p><?= $c['replay'] ?></p>
                                                     </div>
+                                                    <div class="review_date">
+                                                        <span><?= date("d M , Y H:i", strtotime($c['update_time'])) ?></span>
+                                                    </div>
+                                                    <p><?= $c['replay'] ?></p>
                                                 </div>
-                                                <?}?>
+                                            </div>
+                                            <?}?>
                                             <?}?>
 
                                         </div>
