@@ -25,11 +25,11 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <h2 class="breadcrumb-title">最新消息</h2>
+                        <h2 class="breadcrumb-title">最新系列</h2>
                         <!-- breadcrumb-list start -->
                         <ul class="breadcrumb-list">
                             <li class="breadcrumb-item"><a href="<?= base_url() ?>">首頁</a></li>
-                            <li class="breadcrumb-item">最新消息</li>
+                            <li class="breadcrumb-item">最新系列</li>
                         </ul>
                         <!-- breadcrumb-list end -->
                     </div>

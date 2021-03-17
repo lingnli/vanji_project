@@ -28,7 +28,7 @@
               <li><a href="<?= base_url() ?>product">全部商品</a></li>
               <li><a href="<?= base_url() ?>home/faq">FAQ</a></li>
               <li><a href="<?= base_url() ?>home/contact">聯絡我們</a></li>
-              <li><a href="<?= base_url() ?>news">最新消息</a></li>
+              <li><a href="<?= base_url() ?>news">最新系列</a></li>
             </ul>
           </div>
         </div>
@@ -53,7 +53,7 @@
         </div>
         <div class="col-lg-3 col-md-6">
           <div class="widget-footer mt-30">
-            <h6 class="title-widget">最新消息</h6>
+            <h6 class="title-widget">最新系列</h6>
             <ul class="footer-blog">
               <?foreach($footer_news as $n){?>
               <li>

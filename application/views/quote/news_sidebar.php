@@ -16,7 +16,7 @@
 
                         <!-- shop-sidebar start -->
                         <div class="sidbar-product shop-sidebar mb-30">
-                          <h4 class="title">最新消息</h4>
+                          <h4 class="title">最新系列</h4>
                           <ul class="footer-blog">
                             <?foreach($news as $n){
                               ?>

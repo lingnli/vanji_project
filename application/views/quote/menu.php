@@ -52,7 +52,7 @@
               </li>
               <li><a href="<?= base_url() ?>home/about">關於品牌</a>
               </li>
-              <li><a href="<?= base_url() ?>news">最新消息</a>
+              <li><a href="<?= base_url() ?>news">最新系列</a>
               </li>
               <li><a href="<?= base_url() ?>product">所有商品</a>
               </li>
@@ -65,10 +65,10 @@
         </div>
       </div>
       <div class="shopcart-icon-group d-flex justify-content-between">
-        <div class="left-mobile-group d-lg-none d-flex align-items-center">
+        <div class="left-mobile-group d-lg-none d-flex align-items-center" style="margin-bottom:5px;">
           <ul class="d-flex">
             <li class="pr-2">
-              <a href="<?= base_url() ?>news">最新消息</a>
+              <a href="<?= base_url() ?>news">最新系列</a>
             </li>
             <li>
               <a href="<?= base_url() ?>product">所有商品</a>
@@ -170,10 +170,11 @@
           <ul class="mobile-menu">
             <li><a href="<?= base_url() ?>">首頁</a></li>
             <li><a href="<?= base_url() ?>home/about">關於</a></li>
+            <li><a href="<?= base_url() ?>news">最新系列</a></li>
             <li><a href="<?= base_url() ?>product">全部商品</a></li>
-            <li><a href="<?= base_url() ?>home/faq">FAQ</a></li>
+            <li><a href="<?= base_url() ?>home/faq">購物說明</a></li>
             <li><a href="<?= base_url() ?>home/contact">聯絡我們</a></li>
-            <li><a href="<?= base_url() ?>news">最新消息</a></li>
+
           </ul>
         </nav>
         <!-- mobile menu navigation end -->

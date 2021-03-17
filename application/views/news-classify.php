@@ -17,11 +17,11 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <h2 class="breadcrumb-title">最新消息</h2>
+                        <h2 class="breadcrumb-title">最新系列</h2>
                         <!-- breadcrumb-list start -->
                         <ul class="breadcrumb-list">
                             <li class="breadcrumb-item"><a href="<?= base_url() ?>">首頁</a></li>
-                            <li class="breadcrumb-item"><a href="<?= base_url() ?>news">最新消息</a></li>
+                            <li class="breadcrumb-item"><a href="<?= base_url() ?>news">最新系列</a></li>
                             <li class="breadcrumb-item"><?= $classify_top['title'] ?></li>
                         </ul>
                         <!-- breadcrumb-list end -->
