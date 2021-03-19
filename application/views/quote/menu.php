@@ -64,7 +64,7 @@
           </nav>
         </div>
       </div>
-      <div class="shopcart-icon-group d-flex justify-content-between align-items-center">
+      <div class="shopcart-icon-group d-flex justify-content-between align-items-end align-items-md-center py-2">
         <div class="left-mobile-group d-lg-none d-flex align-items-center">
           <ul class="d-flex">
             <li class="pr-2">
@@ -75,7 +75,7 @@
             </li>
           </ul>
         </div>
-        <div class="right-blok-box d-flex align-items-center">
+        <div class="right-blok-box d-flex align-items-end align-items-md-center my-0">
           <div class="search-wrap">
             <a href="#" class="trigger-search"><i class="ion-ios-search-strong"></i></a>
           </div>
@@ -89,7 +89,8 @@
             <a href="<?= base_url() ?>member/home"><i class="ion-android-person"></i></a>
             <?}?>
           </div>
-          <div class="shopping-cart-wrap">
+          <a href="<?= base_url() ?>cart/index"><i class="fas fa-shopping-cart d-flex align-items-center justify-content-center" style="font-size: 16px; height: 26px; padding-right: 10px;"></i></a>
+          <!-- <div class="shopping-cart-wrap">
             <a><i class="ion-ios-cart-outline"></i> <span id="cart-total"><?= $menu_count ?></span></a>
             <ul class="mini-cart">
               <?foreach($menu_product as $p){?>
@@ -120,9 +121,9 @@
                 </div>
               </li>
             </ul>
-          </div>
+          </div> -->
           <div class="mobile-menu-btn d-block d-lg-none">
-            <div class="off-canvas-btn">
+            <div class="off-canvas-btn" style="padding-bottom: 2px;">
               <i class="ion-android-menu"></i>
             </div>
           </div>

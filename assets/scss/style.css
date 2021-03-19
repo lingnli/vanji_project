@@ -10621,6 +10621,7 @@ img.mfp-img {
 ----------------------------*/
 .shopping-cart-wrap {
   position: relative;
+  bottom: 0;
 }
 
 .shopping-cart-wrap ul.mini-cart {
@@ -10717,6 +10718,12 @@ img.mfp-img {
   opacity: 1;
   -ms-filter: 1;
   top: 100%;
+}
+
+@media (max-width: 576px) {
+  .shopping-cart-wrap {
+    padding-top: 20px;
+  }
 }
 
 #cart-total {
