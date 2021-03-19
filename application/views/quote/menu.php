@@ -64,7 +64,7 @@
           </nav>
         </div>
       </div>
-      <div class="shopcart-icon-group d-flex justify-content-between">
+      <div class="shopcart-icon-group d-flex justify-content-between align-items-center">
         <div class="left-mobile-group d-lg-none d-flex align-items-center" style="margin-bottom:5px;">
           <ul class="d-flex">
             <li class="pr-2">
