@@ -38,7 +38,7 @@
       <div class="col-lg-12">
         <div class="logo-area vjlogo-size pt-30">
           <a href="<?= base_url() ?>"><img src="<?= base_url() ?>assets/images/logo/vjlogo.png" alt=""></a>
-          <span>Vanji Jewelry</span>
+          <!-- <span>Vanji Jewelry</span> -->
         </div>
       </div>
     </div>
