@@ -488,7 +488,7 @@ $.scrollUp({
     scrollText: '<i class="ion-chevron-up"></i>',
     easingType: 'linear',
     scrollSpeed: 900,
-    animation: 'fade'
+    animation: 'fade',
 });    
     
     
