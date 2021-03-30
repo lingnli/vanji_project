@@ -8,8 +8,8 @@
             <div class="col-lg-4 col-md-3">
               <div class="social-top">
                 <ul>
-                  <li><a href="#"><i class="fab fa-facebook"></i></a></li>
-                  <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                  <li><a target="_blank" href="https://www.facebook.com/simple.jewelry2016/"><i class="fab fa-facebook"></i></a></li>
+                  <li><a target="_blank" href="https://instagram.com/simple.jewelry?igshid=w8nwgdpyi3nz"><i class="fab fa-instagram"></i></a></li>
                 </ul>
               </div>
             </div>
