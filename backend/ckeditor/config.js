@@ -3,7 +3,7 @@
  * For licensing, see LICENSE.html or http://ckeditor.com/license
  */
 // var BASE_URL = "https://anbon.works/microtek/backend/";
-var BASE_URL = "https://microtek.com/backend/";
+var BASE_URL = "https://vanji.com.tw/backend/";
 CKEDITOR.editorConfig = function( config ) {
 //	 Define changes to default configuration here. For example:
 	config.toolbarGroups = [

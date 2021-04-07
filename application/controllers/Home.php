@@ -66,7 +66,8 @@ class Home extends Base_Controller {
 
 	//使用者登入
 	public function login_register()
-	{
+	{		
+
 		if ($_POST) {
 			$this->load->model('Member_model');
 			$this->load->model('Login_model');

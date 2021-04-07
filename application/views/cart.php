@@ -11,7 +11,15 @@
         </header>
 
         <!-- breadcrumb-area start -->
-        <div class="breadcrumb-area section-ptb">
+        <div class="breadcrumb-area section-ptb" <?if($top_bg[6]['cover']=="" ):?>
+            style=" background: url(<?= base_url() ?>assets/images/bg/bgb.png); background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;"
+            <?else:?>
+            style=" background: url(<?= base_url() . $top_bg[6]['cover'] ?>); background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;"
+            <?endif;?>>
             <div class="container">
                 <div class="row">
                     <div class="col-12">
@@ -123,92 +131,92 @@
                                         </div>
                                     </div>
                                 </div>
-                        
+
+                            </div>
+                        </form>
                     </div>
-                    </form>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- main-content-wrap end -->
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+        <!-- main-content-wrap end -->
+        <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 
-    <script>
-        var count;
-        var output = $('.detailOutput');
+        <script>
+            var count;
+            var output = $('.detailOutput');
 
-        //優惠代碼 未
-        $(document).on('click', ".coupon-check", function(event) {
-                var coupon = $('#coupon_code').val();
+            //優惠代碼 未
+            $(document).on('click', ".coupon-check", function(event) {
+                    var coupon = $('#coupon_code').val();
 
-                console.log(coupon);
-                // //資料送到後端
-                $.ajax({
-                    url: '<?= base_url() ?>/cart/coupon_check',
-                    data: {
-                        coupon: coupon,
-                    },
-                    type: "POST",
-                    dataType: "json",
-                    success: function(data) {
-                        if (data.status) {
+                    console.log(coupon);
+                    // //資料送到後端
+                    $.ajax({
+                        url: '<?= base_url() ?>/cart/coupon_check',
+                        data: {
+                            coupon: coupon,
+                        },
+                        type: "POST",
+                        dataType: "json",
+                        success: function(data) {
+                            if (data.status) {
 
-                            console.log(data)
-                            alert('優惠代碼使用成功')
+                                console.log(data)
+                                alert('優惠代碼使用成功')
 
-                            $('.coupon_discount').text('折價$' + data.discount + '元');
-                            $('.coupon').val(coupon);
+                                $('.coupon_discount').text('折價$' + data.discount + '元');
+                                $('.coupon').val(coupon);
 
-                        } else {
-                            alert('請確認優惠代碼')
+                            } else {
+                                alert('請確認優惠代碼')
+                            }
                         }
-                    }
-                });
+                    });
 
 
-            }
-
-        );
-
-        //商品數量增減
-        $(document).on('click', "#detailPlus", function(event) {
-                var p_id = $(this).data('id');
-                console.log(p_id);
-
-                var price = $(this).data('price');
-                console.log(price);
-
-                var num = $(this).val();
-                console.log(num);
-
-                if (count < 100) {
-                    count = parseInt(count) + 1;
                 }
-                // //資料送到後端
-                $.ajax({
-                    url: '<?= base_url() ?>/cart/update_amount',
-                    data: {
-                        p_id: p_id,
-                        num: num,
-                    },
-                    type: "POST",
-                    dataType: "json",
-                    success: function(data) {
-                        if (data.status) {
 
-                            // console.log(data)                                
+            );
 
-                            $('.product_amount_' + p_id).text(data.product_price);
-                            $('.total_price').text(data.total_price);
+            //商品數量增減
+            $(document).on('click', "#detailPlus", function(event) {
+                    var p_id = $(this).data('id');
+                    console.log(p_id);
 
-                        }
+                    var price = $(this).data('price');
+                    console.log(price);
+
+                    var num = $(this).val();
+                    console.log(num);
+
+                    if (count < 100) {
+                        count = parseInt(count) + 1;
                     }
-                });
+                    // //資料送到後端
+                    $.ajax({
+                        url: '<?= base_url() ?>/cart/update_amount',
+                        data: {
+                            p_id: p_id,
+                            num: num,
+                        },
+                        type: "POST",
+                        dataType: "json",
+                        success: function(data) {
+                            if (data.status) {
+
+                                // console.log(data)                                
+
+                                $('.product_amount_' + p_id).text(data.product_price);
+                                $('.total_price').text(data.total_price);
+
+                            }
+                        }
+                    });
 
 
-            }
+                }
 
-        );
-    </script>
+            );
+        </script>
 
-    <?php include("quote/footer.php"); ?>
+        <?php include("quote/footer.php"); ?>
