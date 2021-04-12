@@ -1,25 +1,24 @@
 <!-- Your Chat Plugin code -->
-<div class="fb-customerchat"
-      attribution="setup_tool"
-      page_id="949142695176781">
-  </div>
-  <!-- Load Facebook SDK for JavaScript -->
+<div class="fb-customerchat" attribution="setup_tool" page_id="949142695176781">
+</div>
+<!-- Load Facebook SDK for JavaScript -->
 <div id="fb-root"></div>
 <script>
-    window.fbAsyncInit = function() {
+  window.fbAsyncInit = function() {
     FB.init({
-        xfbml: true,
-        version: 'v10.0'
+      xfbml: true,
+      version: 'v10.0'
     });
-    };
+  };
 
-    (function(d, s, id) {
+  (function(d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
     if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
+    js = d.createElement(s);
+    js.id = id;
     js.src = 'https://connect.facebook.net/zh_TW/sdk/xfbml.customerchat.js';
     fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
+  }(document, 'script', 'facebook-jssdk'));
 </script>
 <footer>
   <div class="footer-top section-pb section-pt-60" style="background-color:#D6D7D7">
@@ -30,8 +29,7 @@
             <div class="footer-logo vjlogo-size">
               <a href="<?= base_url() ?>"><img src="<?= base_url() ?>assets/images/logo/vjlogo.png" alt=""></a>
             </div>
-            <p>訂閱電子報我們認為高品質的珠寶不應該只適合少數人使
-              用，因此我們在提供合理價格的同時珠寶主打高品質的珠寶不應該只適合少數人使用。</p>
+            <p><?= $footer_text ?></p>
             <div class="newsletter-footer">
               <form action="<?= base_url() ?>home/email" method="post">
                 <input type="text" name="email" placeholder="您的Email">
@@ -79,15 +77,21 @@
             <h6 class="title-widget">最新系列</h6>
             <ul class="footer-blog">
               <?foreach($footer_news as $n){?>
-              <li>
+              <li style="padding-bottom: 10px;">
                 <div class="widget-blog-wrap">
                   <div class="widget-blog-image">
-                    <a href="#"><img src="<?= base_url() ?>assets/images/blog/sb1.png" alt=""></a>
+                    <a href="<?= base_url() ?>news/detail/<?= $n['id'] ?>">
+                      <?if($n['cover']==""){?>
+                      <img src="<?= base_url() ?>assets/images/blog/sb1.png" alt="" style="width:70px;height:70px;">
+                      <?}else{?>
+                      <img src="<?= base_url() . $n['cover'] ?>" style="width:70px;height:70px;">
+                      <?}?>
+                    </a>
                   </div>
                   <div class="widget-blog-content">
-                    <h6><a href="#">我們認為高品質的珠寶不應該只適合少數人。</a></h6>
+                    <h6><a href="<?= base_url() ?>news/detail/<?= $n['id'] ?>"><?= $n['title'] ?></a></h6>
                     <div class="widget-blog-meta">
-                      <span>21 Aug 2020</span>
+                      <span><?= date("d M Y", strtotime($n['date'])) ?></span>
                     </div>
                   </div>
                 </div>

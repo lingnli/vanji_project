@@ -11,26 +11,33 @@ class Product extends base_Controller
 
     public function index()
     {
-        
+        if($_POST){
+            $this->data['search'] = $_POST['search'];
+        }else{
+            $this->data['search'] = "";
+        }
+
         $this->flow_record("product");
 
         $this->data['classify'] =  $this->db->select('P.classify,count(PD.id) as num,P.id')
-                                        ->from($this->products_classify . " P")
-                                        ->join("product PD", "PD.classify_id = P.id AND PD.is_delete=0", "left")
-                                        ->where('P.is_delete=0')            
-                                        ->group_by('P.id')
-                                        ->get()->result_array();
+            ->from($this->products_classify . " P")
+            ->join("product PD", "PD.classify_id = P.id AND PD.is_delete=0", "left")
+            ->where('P.is_delete=0')
+            ->group_by('P.id')
+            ->get()->result_array();
 
-        $this->data['best'] = $this->db->limit(3)->where(array("is_delete" => 0))->order_by('id')->get($this->product)->result_array();                                      
+        $this->data['best'] = $this->db->limit(3)->where(array("is_delete" => 0))->order_by('id')->get($this->product)->result_array();
 
-        // print_r($this->data);exit;
+
+
+        $this->load->view('product', $this->data);
         
-        $this->load->view('product',$this->data);
+
     }
 
     public function data()
     {
-        
+        $search     = ($this->input->post("search")) ? $this->input->post("search") : "";
         $page     = ($this->input->post("page")) ? $this->input->post("page") : 1;
         $sort   = ($this->input->post("sort")) ? $this->input->post("sort") : "";
 
@@ -39,7 +46,22 @@ class Product extends base_Controller
 
 
         $syntax = "P.is_delete = 0";
+        if ($search == "") {
+            // $syntax .= " AND P.classify = '{$classify}'";
+        } else {
 
+            $canbe_search_field = ["P.name"];
+
+
+            $index = 0;
+            $syntax .= " AND (";
+            foreach ($canbe_search_field as $field) {
+                if ($index > 0) $syntax .= " OR ";
+                $syntax .= $field . " LIKE '%" . $search . "%'";
+                $index++;
+            }
+            $syntax .= ")";
+        }
 
         $order_by = "P.create_date DESC";
 

@@ -71,9 +71,11 @@ class  Base_Controller  extends  CI_Controller  {
 			$this->data['web_addr'] = $this->db->get_where("settings", array("id" => 7))->row()->content;
 			$this->data['web_copyright'] = $this->db->get_where("settings", array("id" => 9))->row()->content;
 			$this->data['ship'] = $this->db->get_where("settings", array("id" =>11))->row()->content;
-			$this->data['discount_type'] = $this->db->get_where("settings", array("id" => 17))->row()->content;
-			$this->data['discount_array_1'] = $this->db->get_where("settings", array("id" => 13))->row()->content;
-			$this->data['discount_array_2'] = $this->db->get_where("settings", array("id" => 15))->row()->content;		
+			
+			$this->data['contactus_text'] = $this->db->get_where("settings", array("id" => 13))->row()->content;
+			$this->data['footer_text'] = $this->db->get_where("settings", array("id" => 15))->row()->content;
+
+			$this->data['discount_type'] = $this->db->get_where("settings", array("id" => 17))->row()->content;		
 			
 			$this->data['is_login'] = $this->is_login();
 
@@ -140,7 +142,8 @@ class  Base_Controller  extends  CI_Controller  {
 		$this->data['top_bg'] = $this->db->get($this->top)->result_array();
 		// print_r($this->data['top_bg']);exit;
 		//新聞
-		$this->data['footer_news'] = $this->db->limit(2)->where(array("is_delete" => 0))->order_by('create_date DESC')->get($this->news)->result_array();
+		$this->data['footer_news'] = $this->db->limit(2)->where(array("is_delete" => 0))->order_by('id DESC')->get($this->news)->result_array();
+		// print_r($this->data['footer_news']);exit;
 	}
 
 	//Param

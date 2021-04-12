@@ -140,10 +140,10 @@
     <button class="search-close"><span class="ion-android-close"></span></button>
   </div>
   <div class="sidebar-search-input">
-    <form>
+    <form method="post" action="<?=base_url()?>product">
       <div class="form-search">
-        <input id="search" class="input-text" value="" placeholder="搜尋商品" type="search">
-        <button class="search-btn" type="button">
+        <input id="search" class="input-text" name="search" placeholder="搜尋商品名稱" type="input">
+        <button class="search-btn" type="submit">
           <i class="ion-ios-search"></i>
         </button>
       </div>

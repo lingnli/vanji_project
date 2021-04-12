@@ -12,7 +12,7 @@ class Setting extends Base_Controller {
 	public function index(){
 		// print_r('222');exit;
 
-		$this->data['list'] = $this->db->order_by("id asc")->get_where('settings', array("id<"=>13))->result_array();
+		$this->data['list'] = $this->db->order_by("id asc")->get_where('settings', array("id<"=>17))->result_array();
 		
 		$this->load->view('mgr/setting', $this->data);
 	}
@@ -37,28 +37,20 @@ class Setting extends Base_Controller {
 			}
 		}
 
-		if ($id == 13 || $id == 15) {
+		// if ($id == 13 || $id == 15) {
 
-			$content_array = explode(',',$content);
-			if(count($content_array)!=2){
-				$this->output(false, "false");
-			}else{
-				if(!($content_array[1]>0 && $content_array[1] < 100)){
-					$this->output(false, "false");
-				}
-			}
+		// 	$content_array = explode(',',$content);
+		// 	if(count($content_array)!=2){
+		// 		$this->output(false, "false");
+		// 	}else{
+		// 		if(!($content_array[1]>0 && $content_array[1] < 100)){
+		// 			$this->output(false, "false");
+		// 		}
+		// 	}
 			
-		}
+		// }
 
-		if ($id == 17) {
 
-			if (trim($content)!=1) {
-				if (trim($content) != 2) {
-				$this->output(false, "false");
-				exit();
-				}
-			}
-		}
 
 		// $mobileregex = "/^09[0-9]{8}$/";
 		// if ($phone == "" || !preg_match($mobileregex, $phone)) {

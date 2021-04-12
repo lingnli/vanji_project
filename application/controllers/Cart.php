@@ -384,9 +384,9 @@ class Cart extends Base_Controller {
 							->where("C.is_delete=0 AND C.code = '$coupon'")
 							->get()->row_array();
 		
-		
-		if ($coupon_check['id']!= null) {
-			if($coupon_check['use_limit']==-1 ||$coupon_check['use_limit']<$coupon_check['used']){
+		// print_r($coupon_check);exit;
+		if (isset($coupon_check['id'])) {
+			if($coupon_check['use_limit']== -1 || $coupon_check['use_limit'] > $coupon_check['used']){
 				$this->output(TRUE, '成功', array('discount' => $coupon_check['discount']));	
 			}else{
 				$this->output(FALSE, '失敗');
@@ -480,7 +480,7 @@ class Cart extends Base_Controller {
 		$this->data['payment'] = $payment;
 		$this->data['product'] = $product;
 
-		$discount_type = (int)$this->data['discount_type'];
+		$discount_type = (int)$this->data['discount_type'];		
 		$this->data['discount_type_code'] = $discount_type;
 		$today = date('Y-m-d H:i:s');
 		$discount_str = "";

@@ -87,20 +87,18 @@
                                 <h3>聯絡我們</h3>
                             </div>
                             <div class="contact-dec">
-                                <p>簡易資訊描述鑽石戒指我們認為高品質的珠寶不應該只適合少
-                                    數人使用，因此我在提供合理價格的同時珠寶主打高品質的珠
-                                    寶不應該只適合少數使用。 </p>
+                                <p><?= $contactus_text ?> </p>
                             </div>
                             <div class="contact-address">
                                 <ul>
-                                    <li><i class="zmdi zmdi-home"></i> 地址 : 台北市大安區大安街125段30號之2</li>
-                                    <li><i class="zmdi zmdi-email"></i> jewelry@gmail.com</li>
-                                    <li><i class="zmdi zmdi-phone"></i> 02 2665 5179</li>
+                                    <li><i class="zmdi zmdi-home"></i> 地址 :<?= $web_addr ?></li>
+                                    <li><i class="zmdi zmdi-email"></i> <?= $web_email ?></li>
+                                    <li><i class="zmdi zmdi-phone"></i> <?= $web_phone ?></li>
                                 </ul>
                             </div>
                             <div class="work-hours">
                                 <h5>營業時間</h5>
-                                <p><strong>周一 - 週三</strong>: 8:00 - 18:00</p>
+                                <p><?= $work_time ?></p>
                             </div>
                         </div>
                     </div>
