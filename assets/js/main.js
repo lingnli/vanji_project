@@ -193,7 +193,7 @@ $offCanvasNav.on('click', 'li a, li .menu-expand', function(e) {
 --------------------------------------------*/
 var heroSlider = $('.hero-slider-one');
 heroSlider.slick({
-    arrows: true,
+    arrows: false,
     autoplay: true,
     autoplaySpeed: 4500,
     dots: true,
