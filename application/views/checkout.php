@@ -79,6 +79,13 @@
 
                                         <div class="col-lg-12">
                                             <p class="single-form-row">
+                                                <label>收件地區 <span class="required">*</span></label>
+                                                <input type="text" placeholder=" " name="addr" disabled value="<?if($area=='tw'):?>台灣<?elseif($area=='hk'):?>香港<?elseif($area=='au'):?>澳門<?elseif($area=='ma'):?>馬來西亞<?endif;?>">
+                                            </p>
+                                        </div>
+
+                                        <div class="col-lg-12">
+                                            <p class="single-form-row">
                                                 <label>收件地址 <span class="required">*</span></label>
                                                 <input type="text" placeholder=" " name="addr" required>
                                             </p>
@@ -87,6 +94,7 @@
                                         <input type="hidden" name="coupon" value="<?= $coupon_code ?>">
                                         <input type="hidden" name="delivery" value="<?= $delivery ?>">
                                         <input type="hidden" name="payment" value="<?= $payment ?>">
+                                        <input type="hidden" name="area" value="<?= $area ?>">
 
 
 
@@ -163,6 +171,46 @@
                                                     <td><strong><span class="amount">$<?= $total_price_ship ?></span></strong>
                                                     </td>
                                                 </tr>
+
+                                                <tr class="order-total">
+                                                    <th>付款方式</th>
+                                                    <td>
+                                                        <?if($payment=='credit'):?>
+                                                        信用卡一次付清
+                                                        <?elseif($payment=='credit_3'):?>
+                                                        信用卡分三期
+                                                        <?elseif($payment=='atm'):?>
+                                                        銀行轉帳
+                                                        <?endif;?>
+                                                    </td>
+                                                </tr>
+
+                                                <tr class="order-total">
+                                                    <th>運送方式</th>
+                                                    <td>
+                                                        <?if($delivery == 'home'):?>
+                                                        宅配
+                                                        <?elseif($delivery == 'convenient'):?>
+                                                        超商取貨
+
+                                                        <!-- 超商選擇 -->
+                                                        <div class="product-short pdd10">
+                                                            <select class="nice-select" name="con_choose">
+                                                                <option value="">請選擇取貨超商</option>
+                                                                <option value="UNIMARTC2C">711統一超商</option>
+                                                                <option value="FAMIC2C">全家便利商店</option>
+                                                                <option value="HILIFEC2C">萊爾富便利商店</option>
+                                                                <option value="OKMARTC2C">OK便利商店</option>
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="product-short pdd10 ">
+
+                                                            <a href="javascript:choosecsv();" class="mx-auto" style="background: #000000;border: 0 none;color: #ffffff;cursor: pointer;display: inline-block;font-size: 12px;font-weight: 600;height: 36px;letter-spacing: 1px;line-height: 36px;padding: 0 14px;text-transform: uppercase;-webkit-transition: 0.3s;transition: 0.3s;width: inherit;">選擇取貨店家</a>
+                                                        </div>
+                                                        <?endif;?>
+                                                    </td>
+                                                </tr>
                                             </tfoot>
                                         </table>
                                     </div>
@@ -207,6 +255,24 @@
         <!-- main-content-wrap end -->
 
 
+        <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+        <script>
+            function choosecsv() {
+
+                // createCookie('username', $("input[name=username]").val(), 3);
+                // createCookie('phone', $("input[name=phone]").val(), 3);
+                // createCookie('addr', $("input[name=addr]").val(), 3);
+                // createCookie('email', $("input[name=email]").val(), 3);
+                // createCookie('remarks', $("input[name=remarks]").val(), 3);
+
+                // createCookie('delivery', $("#delivery").val(), 3);
+                // createCookie('store', $("input[name=store]:checked").val(), 3);
+                // console.log($("select[name=con_choose]").val());
+                location.href = '<?= base_url() ?>cart/cvschoose/' + $("select[name=con_choose]").val();
+
+            }
+        </script>
 
 
         <?php include("quote/footer.php"); ?>

@@ -209,9 +209,34 @@ class Cart extends Base_Controller {
 
 	}
 
-
 	public function index() //購物車頁面
 	{
+
+		//選超取後回傳到結帳頁面，接收超商的資訊
+		if ($_POST) {
+			$MerchantTradeNo  = $this->input->post("MerchantTradeNo");
+			$LogisticsSubType = $this->input->post("LogisticsSubType");
+			$CVSStoreID       = $this->input->post("CVSStoreID");
+			$CVSStoreName     = $this->input->post("CVSStoreName");
+			$CVSAddress       = $this->input->post("CVSAddress");
+			$CVSTelephone     = $this->input->post("CVSTelephone");
+			$CVSOutSide       = $this->input->post("CVSOutSide");
+			$ExtraData        = $this->input->post("ExtraData");
+			$this->data['shop'] = array(
+				"MerchantTradeNo"  =>	$MerchantTradeNo,
+				"LogisticsSubType" =>	$LogisticsSubType,
+				"CVSStoreID"       =>	$CVSStoreID,
+				"CVSStoreName"     =>	$CVSStoreName,
+				"CVSAddress"       =>	$CVSAddress,
+				"CVSTelephone"     =>	$CVSTelephone,
+				"CVSOutSide"       =>	$CVSOutSide,
+				"ExtraData"        =>	$ExtraData
+			);
+			// print_r($this->data['shop']);exit;
+		} else {
+			$this->data['shop'] = array();
+		}
+
 
 		//判斷是否登入
 		// $user_id = $this->encryption->decrypt($this->session->uid);w
@@ -278,7 +303,6 @@ class Cart extends Base_Controller {
 
 		$this->load->view('cart', $this->data);
 	}
-
 
 	//商品數量增加存入db
 	public function update_amount()
@@ -397,6 +421,24 @@ class Cart extends Base_Controller {
 		}
 	}
 
+	//選擇超商
+	public function cvschoose($con_choose)
+	{
+		// $con_choose  =	$this->input->post("con_choose") ? $this->input->post("con_choose") : "";
+
+		// print_r($con_choose);exit;
+		if ($con_choose == '') {
+			$this->js_output_and_back("請選擇取貨超商");
+			exit();
+		}
+
+		$this->load->model("EC_logistic");
+
+		$redirect_url = base_url()."cart/check";
+
+		$this->EC_logistic->choose_store($con_choose, 'N', $redirect_url);
+	}
+
 	//結帳頁面
 	public function check() 
 	{
@@ -404,9 +446,14 @@ class Cart extends Base_Controller {
 		// print_r($_POST);exit;
 
 		$coupon            =	$this->input->post("coupon");
+		$area            =	$this->input->post("area") ? $this->input->post("area") : "";
 		$delivery            =	$this->input->post("delivery") ? $this->input->post("delivery") : "";
 		$payment            =	$this->input->post("payment") ? $this->input->post("payment") : "";
 
+		if ($area == "") {
+			$this->js_output_and_back("請選擇運送地區");
+			exit();
+		}
 		if ($payment == "") {
 			$this->js_output_and_back("請選擇付款方式");
 			exit();
@@ -476,6 +523,7 @@ class Cart extends Base_Controller {
 		$total_price = $total_price - $coupon_discount;
 
 		$this->data['coupon_code'] = $coupon;
+		$this->data['area'] = $area;
 		$this->data['delivery'] = $delivery;
 		$this->data['payment'] = $payment;
 		$this->data['product'] = $product;
@@ -583,7 +631,7 @@ class Cart extends Base_Controller {
 		$this->data['ship'] = (int)$this->data['ship'];
 		$this->data['total_price_ship'] = $total_price + (int)$this->data['ship'];
 		
-
+		
 
 				
 		
@@ -709,45 +757,67 @@ class Cart extends Base_Controller {
 
 		//總訂單
 		$data = array(
-			"order_no" =>	$order_no, //訂單編號
-			"user_id" =>	$u_id,						
-			"username" =>	$username,
-			"phone"    =>	$phone,
-			"addr"     =>	$addr,
-			"email"    =>	$email,
-			"payment"  =>	$payment, //結帳方式->credit
-			"delivery"    =>	$delivery,
-			"remark"    =>	$remark,
-			"products" =>	serialize($product_data_array), //將cart轉成存入db的格式
-			"amount"   =>	$amount,
-			"products_str"   =>	$products_str,
-			"fee"   =>	$ship,
-			"coupon"   =>	$coupon,
+			"order_no" 					=>	$order_no, //訂單編號
+			"user_id"						=>	$u_id,						
+			"username" 					=>	$username,
+			"phone"  					  =>	$phone,
+			"addr"   					  =>	$addr,
+			"email" 				    =>	$email,
+			"payment" 				  =>	$payment, //結帳方式->credit
+			"delivery"  			  =>	$delivery,
+			"remark"  				  =>	$remark,
+			"products"				  =>	serialize($product_data_array), //將cart轉成存入db的格式
+			"amount"  				  =>	$amount,
+			"products_str"      =>	$products_str,
+			"fee" 							=>	$ship,
+			"coupon" 					  =>	$coupon,
 			"coupon_discount"   =>	$coupon_discount,			
-			"status"   =>	"pending", //第一次將訂單存入db中，狀態為處理中
-			"discount_type"   =>	$discount_type_code,
-			"discount_percent"   =>	$discount_percent_code,
+			"status"  				  =>	"pending", //第一次將訂單存入db中，狀態為處理中
+			"discount_type" 	  =>	$discount_type_code,
+			"discount_percent"  =>	$discount_percent_code,
 		);
-		// print_r($products_str);exit;
 
 		//存入order db
 		$res = $this->db->insert("order", $data);		
 
 		if ($res) {
 
-			//送到Pay model的pay function做處理
-			$this->Pay_model->pay(
-				$order_no, 											//訂單編號
-				$product_data_array, 						//商品內容(array)
-				$amount, 												//總金額
-				$products_str, 											//訂單描述
-				$payment,												//付款方式(optional) 預設為all
-				base_url() . "cart/paysuccess",		//付款完成通知接收post
-				base_url() . "cart/payresult",	//付款完成通知return_url
-				"",											//cvsextend 超商選擇
-				"",																//信用卡，定期定額, D/M/Y
-				""																//信用卡，定期周期
-			);
+			//信用卡一次付清
+			if($payment == 'credit'){
+				$this->Pay_model->pay(
+					$order_no, 												//訂單編號
+					$product_data_array, 							//商品內容(array)
+					$amount, 													//總金額
+					$products_str, 										//訂單描述
+					$payment,													//付款方式(optional) 預設為all
+					base_url() . "cart/paysuccess",		//付款完成通知接收post
+					base_url() . "cart/payresult",		//付款完成通知return_url
+					"",																//cvsextend 超商選擇
+					"",																//信用卡，定期定額, D/M/Y
+					"",																//信用卡，定期周期
+					""																//信用卡分期
+				);
+
+			} elseif ($payment == 'credit_3') {
+				//分三期
+				$this->Pay_model->pay(
+					$order_no, 												//訂單編號
+					$product_data_array, 							//商品內容(array)
+					$amount, 													//總金額
+					$products_str, 										//訂單描述
+					'credit',													//付款方式(optional) 預設為all
+					base_url() . "cart/paysuccess",		//付款完成通知接收post
+					base_url() . "cart/payresult",		//付款完成通知return_url
+					"",																//cvsextend 超商選擇
+					"",																//信用卡，定期定額, D/M/Y
+					"",																//信用卡，定期周期
+					"3"																//信用卡分期
+				); 
+
+			} elseif ($payment == 'atm') {
+				//atm轉帳->不進金流 顯示轉帳帳號
+			}
+
 
 			// }
 

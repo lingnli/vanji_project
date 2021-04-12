@@ -48,7 +48,7 @@ class Pay_model extends CI_Model
 		parent::__construct();
 	}
 
-	public function pay($MerchantTradeNo, $items, $totalAmount, $dec, $payType = "all", $retureURL = FALSE, $ClientRedirectURL = FALSE, $cvsextend = "CVS", $periodType = "", $periodFrequency = "")
+	public function pay($MerchantTradeNo, $items, $totalAmount, $dec, $payType = "credit", $retureURL = FALSE, $ClientRedirectURL = FALSE, $cvsextend = "CVS", $periodType = "", $periodFrequency = "", $CreditInstallment="")
 	{
 
 
@@ -105,7 +105,12 @@ class Pay_model extends CI_Model
 		} else if ($payType == "credit") {
 			$obj->Send['ChoosePayment'] = ECPay_PaymentMethod::Credit;
 
-			//?付款
+			//分期
+			if($CreditInstallment!=""){
+				$obj->SendExtend['CreditInstallment'] = '3';	
+			}
+			
+			//定期定額付款
 		} else if ($payType == "credit_period") {
 			$obj->Send['ChoosePayment'] = ECPay_PaymentMethod::Credit;
 			$obj->SendExtend['PeriodAmount'] = $totalAmount;

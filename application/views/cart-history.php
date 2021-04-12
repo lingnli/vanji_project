@@ -88,7 +88,7 @@
                                             <p style="border: 1px solid #ebebeb; background-color: #fff; width: 200px; padding: 5px 10px;">cc820 (折扣200)</p>
                                         </div> -->
                                         <div class="cart-page-total">
-                                            <h2>購買資訊</h2>
+                                            <h2></h2>
                                             <ul>
                                                 <li>寄送方式:
                                                     <?if($cart['delivery']=='home'){?>郵寄

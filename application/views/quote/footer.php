@@ -126,11 +126,11 @@
 
 
 <script>
-  $(".wishlist").on('click', function() {
-    $('#like-store').fadeIn('slow', function() {
-      $('#like-store').delay(1000).fadeOut();
-    });
-  });
+  // $(".wishlist").on('click', function() {
+  //   $('#like-store').fadeIn('slow', function() {
+  //     $('#like-store').delay(1000).fadeOut();
+  //   });
+  // });
 </script>
 
 <!-- Modernizer JS -->

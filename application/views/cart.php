@@ -101,22 +101,49 @@
                                 <div class="col-md-4">
                                     <div class="cart-page-total">
                                         <h2>購買資訊</h2>
-                                        <div class="product-short pdd10">
-                                            <select class="nice-select" name="delivery">
-                                                <option value="">請選擇運送方式</option>
-                                                <!-- <option value="rating">郵寄</option> -->
-                                                <!-- <option value="rating">超商取貨</option> -->
-                                                <option value="home">宅配</option>
+
+                                        <div class="product-short" style="margin-bottom: 10px;">
+                                            <select class="nice-select" id="area" name="area">
+                                                <option value="">請選擇地區</option>
+                                                <option value="tw">台灣</option>
+                                                <option value="hk">香港</option>
+                                                <option value="au">澳門</option>
+                                                <option value="ma">馬來西亞</option>
                                             </select>
                                         </div>
-                                        <div class="product-short">
+
+                                        <div class="product-short" style="margin-bottom: 10px;">
                                             <select class="nice-select" name="payment">
                                                 <option value="">請選擇付款方式</option>
-                                                <!-- <option value="rating">取貨付款</option> -->
-                                                <option value="credit">信用卡</option>
-                                                <!-- <option value="sales">paypal</option> -->
+                                                <option value="credit">信用卡一次付清</option>
+                                                <option value="credit_3">信用卡三期零利率</option>
+                                                <option value="atm">銀行轉帳</option>
                                             </select>
                                         </div>
+
+                                        <div class="product-short pdd10" style="margin-bottom: 10px;">
+                                            <select class="nice-select" id="delivery" name="delivery">
+                                                <option value="">請選擇運送方式</option>
+                                                <option value="convenient" class="delivery-con">超商取貨</option>
+                                                <option value="home" class="delivery-home">宅配</option>
+                                            </select>
+                                        </div>
+
+                                        <!-- 超商選擇 -->
+                                        <!-- <div class="product-short pdd10 convenient-choose">
+                                            <select class="nice-select" id="convenient" name="convenient">
+                                                <option value="">請選擇取貨超商</option>
+                                                <option value="711">711統一超商</option>
+                                                <option value="allhome">全家便利商店</option>
+                                                <option value="hilife">萊爾富便利商店</option>
+                                                <option value="ok">OK便利商店</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="product-short pdd10 convenient-select">
+
+                                            <div class="con-select" style="background: #000000;border: 0 none;color: #ffffff;cursor: pointer;display: inline-block;font-size: 12px;font-weight: 600;height: 36px;letter-spacing: 1px;line-height: 36px;padding: 0 14px;text-transform: uppercase;-webkit-transition: 0.3s;transition: 0.3s;width: inherit;">選擇取貨店家</div>
+                                        </div> -->
 
                                     </div>
                                 </div>
@@ -143,6 +170,8 @@
 
         <script>
             var count;
+            var area;
+            var delivery;
             var output = $('.detailOutput');
 
             //優惠代碼 未
@@ -217,6 +246,37 @@
                 }
 
             );
+
+            //選擇地區
+            $("#area").change(function() {
+                area = $(this).val();
+
+                if (area != 'tw') {
+                    alert('台灣以外地區自動選擇為宅配');
+                    $('.delivery-con').hide();
+                    // $('#convenient').hide();
+                    // $('.convenient-select').hide();
+                } else {
+                    $('.delivery-con').show();
+                    // $('#convenient').show();
+                    // $('.convenient-select').show();
+                }
+            });
+
+            //選擇超商
+            $("#delivery").change(function() {
+                delivery = $(this).val();
+
+                if (delivery == 'convenient') {
+                    $('.delivery-con').show();
+                    $('#convenient').show();
+                    $('.convenient-select').show();
+                } else {
+                    $('#convenient').hide();
+                    $('.convenient-select').hide();
+                }
+
+            });
         </script>
 
         <?php include("quote/footer.php"); ?>
