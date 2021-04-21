@@ -113,7 +113,7 @@
                                         </div>
 
                                         <div class="product-short" style="margin-bottom: 10px;">
-                                            <select class="nice-select" name="payment">
+                                            <select class="nice-select" id="payment" name="payment">
                                                 <option value="">請選擇付款方式</option>
                                                 <option value="credit">信用卡一次付清</option>
                                                 <option value="credit_3">信用卡三期零利率</option>
@@ -172,6 +172,7 @@
             var count;
             var area;
             var delivery;
+            var payment;
             var output = $('.detailOutput');
 
             //優惠代碼 未
@@ -250,7 +251,7 @@
             //選擇地區
             $("#area").change(function() {
                 area = $(this).val();
-
+                $("#delivery").val("");
                 if (area != 'tw') {
                     alert('台灣以外地區自動選擇為宅配');
                     $('.delivery-con').hide();
@@ -260,6 +261,22 @@
                     $('.delivery-con').show();
                     // $('#convenient').show();
                     // $('.convenient-select').show();
+                }
+            });
+
+            //付款方式
+            $("#payment").change(function() {
+                payment = $(this).val();
+                $("#delivery").val("");
+                if (area != 'tw') {
+                    $('.delivery-con').hide();
+
+                } else {
+                    if (payment == 'atm') {
+                        $('.delivery-con').hide();
+                    } else {
+                        $('.delivery-con').show();
+                    }
                 }
             });
 

@@ -6,7 +6,7 @@ ini_set('upload_max_filesize','1024M');
 require_once("./phpexcel/Classes/PHPExcel/IOFactory.php");
 
 class Bill extends Base_Controller {
-	private $th_title = ["訂單編號", "訂購者資訊","訂購商品", "付款方式","狀態", "折扣","金額","出貨", "建立時間", "動作"]; //, "置頂"
+	private $th_title = ["訂單編號", "訂購者資訊","訂購商品", "付款方式","狀態", "取貨方式","金額","出貨", "建立時間", "動作"]; //, "置頂"
 	private $th_width = ["20px", "", "250px", "","","80px","90px","","", "100px"];
 	private $order_column = ["id", "sort","", "","", "","","create_date", ""]; //, "is_head"
 	private $can_order_fields = [0, 6];
@@ -68,7 +68,23 @@ class Bill extends Base_Controller {
 		foreach ($oridata['products'] as $p) {
 			$products_srt .= 	 "#" . $p['name'] . " x " . $p['quantity'] . " $" . $p['sale_price'] * $p['quantity'] . "<br>";
 		}
-		
+		$shop_str ="";
+		if($oridata['delivery_status']==1){
+			$shopinfo = unserialize($oridata['convenient_data']);
+			
+			if ($shopinfo['LogisticsSubType'] == 'FAMIC2C') {
+				$store_type = '全家店到店';
+			} else if (
+				$shopinfo['LogisticsSubType'] == 'UNIMARTC2C'
+			) {
+				$store_type = '7-ELEVEN 超商交貨便';
+			} else if ($shopinfo['LogisticsSubType'] == 'HILIFEC2C') {
+				$store_type = '萊爾富店到店';
+			} else if ($shopinfo['LogisticsSubType'] == 'OKMARTC2C:OK') {
+				$store_type = 'OK店到店';
+			}
+			$shop_str = $store_type.'<br>CVSStoreID：'.$shopinfo['CVSStoreID'].'<br>門市：'.$shopinfo['CVSStoreName'];
+		}
 
 		$param = [
 								["姓名", "username", "plain", $oridata['username']],
@@ -79,21 +95,23 @@ class Bill extends Base_Controller {
 								["付款方式", "payment", "select", $oridata['payment'], ["id","payment"]],
 								["運送方式", "delivery", "select", $oridata['delivery'], ["id","delivery"]],
 								["狀態", "status", "select", $oridata['status'], ["id","status"]],
-								["是否出貨", "delivery_status", "select", $oridata['delivery_status'], ["id", "delivery_status"]],
-								["訂單日期", "create_date", "plain", $oridata['create_date']]
+								["是否出貨", "delivery_success", "select", $oridata['delivery_success'], ["id", "delivery_success"]],
+								["訂單日期", "create_date", "plain", $oridata['create_date']],
+								["超取資訊", "", "plain", $shop_str]
 						];
 						
 
 		if ($_POST) {
-
+			
 			$data = array();
 			foreach ($param as $item) {
 				$data[$item[1]] = $this->input->post($item[1]);	
 			}
-
+			
 			$save = array(
 				'payment' => $data['payment'],
-				'status' => $data['status']
+				'status' => $data['status'],
+				'delivery_success' => $data['delivery_success'],
 			);
 
 			$res = $this->db->where(array("id"=>$id))->update($this->order, $save);
@@ -117,31 +135,35 @@ class Bill extends Base_Controller {
 			array(
 				0=>array(
 					'id'=>'credit',
-					'payment'=>'信用卡'),
-				// 1=>array(
-				// 	'id'=>'atm',
-				// 	'payment'=>"銀行轉帳")
+					'payment'=>'信用卡一次付清'),
+				1=>array(
+					'id'=> 'credit_3',
+					'payment'=>"信用卡分三期"),
+				2 => array(
+					'id' => 'atm',
+					'payment' => "銀行轉帳"
+				),
 			);
 
 			//付款方式選項列表
-			$this->data['select']['delivery_status'] =
+			$this->data['select']['delivery_success'] =
 			array(
 				0 => array(
 					'id' => 0,
-					'delivery_status' => '未出貨'
+					'delivery_success' => '未出貨'
 				),
 				1 => array(
 					'id' => 1,
-					'delivery_status' => "已出貨"
+					'delivery_success' => "已出貨"
 				)
 			);	
 
 		//付款方式選項列表
 			$this->data['select']['delivery'] = 
 			array(
-				// 0=>array(
-				// 	'id'=>'custom',
-				// 	'delivery'=>'與客服聯絡'),
+				0=>array(
+					'id'=>'convenient',
+					'delivery'=>'超商取貨'),
 				1=>array(
 					'id'=>'home',
 					'delivery'=>"宅配"),					

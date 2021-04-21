@@ -90,12 +90,25 @@
                                         <div class="cart-page-total">
                                             <h2></h2>
                                             <ul>
-                                                <li>寄送方式:
-                                                    <?if($cart['delivery']=='home'){?>郵寄
+                                                <li>寄送方式：
+                                                    <?if($cart['delivery_status']==0){?>
+                                                    郵寄
+                                                    <?}elseif($cart['delivery_status']==1){?>
+                                                    超商取貨<br> <?= $store_type ?> <?= $store ?>
                                                     <?}?> <span></span>
                                                 </li>
                                                 <li>付款方式:
-                                                    <?if($cart['payment']=='credit'){?>信用卡付款
+                                                    <?if($cart['payment']=='credit'){?>
+                                                    信用卡一次付清
+                                                    <?}else if($cart['payment']=='credit_3'){?>
+                                                    信用卡分三期
+                                                    <?}else if($cart['payment']=='atm'){?>
+                                                    atm轉帳<br>
+                                                    【ATM匯款資料】<br>
+                                                    銀行代號：012(台北富邦)<br>
+                                                    戶名：梵日精品股份有限公司<br>
+                                                    銀行帳號(南港分行)：<br>
+                                                    4201 0206 9209
                                                     <?}?> <span></span>
                                                 </li>
                                             </ul>
@@ -105,7 +118,7 @@
 
                                 <div class="col-md-4">
                                     <div class="cart-page-total">
-                                        <h2>寄送資訊</h2>
+                                        <h2>訂購人資訊</h2>
                                         <ul>
                                             <li>姓名: <span><?= $cart['username'] ?></span></li>
                                             <li>手機: <span><?= $cart['phone'] ?></span></li>
@@ -121,7 +134,7 @@
                                         <h2>總計</h2>
                                         <ul>
                                             <?if($discount_str!=""){?>
-                                            <li><?= $discount_type?>
+                                            <li><?= $discount_type ?>
                                                 <span><?= $discount_str ?></span>
                                             </li>
                                             <?}?>

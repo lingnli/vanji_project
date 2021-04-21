@@ -9,11 +9,11 @@
     </td>
     <td>
         <?if( $item['payment']=='credit'){?>
-        <span class="label" style="background-color: #75A8FE">信用卡</span>
-        <?}elseif( $item['payment'] =='pending'){?>
-        <span class="label" style="background-color: #F29191">處理中</span>
-        <?}elseif( $item['payment'] =='cancel'){?>
-        <span class="label" style="background-color: brown">已取消</span>
+        <span class="label" style="background-color: #75A8FE">信用卡一次付清</span>
+        <?}elseif( $item['payment'] =='credit_3'){?>
+        <span class="label" style="background-color: green">信用卡分三期</span>
+        <?}elseif( $item['payment'] =='atm'){?>
+        <span class="label" style="background-color: brown">銀行轉帳</span>
         <?}?>
     </td>
     <td>
@@ -25,25 +25,24 @@
         <span class="label" style="background-color: brown">已取消</span>
         <?}?>
     </td>
+
     <td>
         <?if( $item['delivery_status']==0){?>
+        宅配
+        <?}elseif( $item['delivery_status']==1){?>
+        超取
+        <?}?>
+    </td>
+
+    <td><?= $item['amount'] ?></td>
+    <td>
+        <?if( $item['delivery_success']==0){?>
         未出貨
         <?}else{?>
         已出貨
         <?}?>
     </td>
 
-    <td>
-        <?if( $item['discount_type']==1){?>
-        滿額折扣
-        <?}elseif( $item['discount_type']==2){?>
-        滿件折扣
-        <?}else{?>
-        無折扣
-        <?}?>
-    </td>
-
-    <td><?= $item['amount'] ?></td>
     <td><?= $item['create_date'] ?></td>
     <td>
 

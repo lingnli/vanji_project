@@ -32,8 +32,8 @@
                     <div class="col-lg-12">
 
                         <div class="section-title text-center">
-                            <h2 >主打商品</h2>
-                            <p class="p16">我們認為高品質的珠寶不應該只適合少數人使用，因此我們在提供合理價格的同時珠寶主打高品質的珠寶不應該只適合少數人使用。</p>
+                            <h2>主打商品</h2>
+                            <p class="p16"><?= $index_top ?></p>
                         </div>
                     </div>
                 </div>
@@ -123,8 +123,8 @@
                     <div class="col-lg-12">
 
                         <div class="section-title text-center">
-                            <h2 >精選商品</h2>
-                            <p class="p16">我們認為高品質的珠寶不應該只適合少數人使用，因此我們在提供合理價格的同時珠寶主打高品質的珠寶不應該只適合少數人使用。</p>
+                            <h2>精選商品</h2>
+                            <p class="p16"><?= $index_select ?></p>
                         </div>
                     </div>
                 </div>
@@ -188,9 +188,8 @@
                     <div class="col-lg-12">
 
                         <div class="section-title text-center">
-                            <h2 >最新系列</h2>
-                            <p class="p16">我們認為高品質的珠寶不應該只適合少數人使用，因此我們在提供合理價格的同時珠寶主打
-                                高品質的珠寶不應該只適合少數人使用。</p>
+                            <h2>最新系列</h2>
+                            <p class="p16"><?= $index_new ?></p>
                         </div>
                     </div>
                 </div>

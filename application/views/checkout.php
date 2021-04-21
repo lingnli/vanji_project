@@ -208,6 +208,21 @@
 
                                                             <a href="javascript:choosecsv();" class="mx-auto" style="background: #000000;border: 0 none;color: #ffffff;cursor: pointer;display: inline-block;font-size: 12px;font-weight: 600;height: 36px;letter-spacing: 1px;line-height: 36px;padding: 0 14px;text-transform: uppercase;-webkit-transition: 0.3s;transition: 0.3s;width: inherit;">選擇取貨店家</a>
                                                         </div>
+                                                        <?if($shop != array()):?>
+                                                        <div class="product-short pdd10 ">
+                                                            取貨方式：<?= $shop['store'] ?><br>
+                                                            取貨店家資訊：<?= $shop['CVSStoreName'] ?>
+                                                            <input type="hidden" name="shop[store_MerchantTradeNo]" value="<?= $shop['MerchantTradeNo'] ?>">
+                                                            <input type="hidden" name="shop[LogisticsSubType]" value="<?= $shop['LogisticsSubType'] ?>">
+                                                            <input type="hidden" name="shop[CVSStoreID]" value="<?= $shop['CVSStoreID'] ?>">
+                                                            <input type="hidden" name="shop[CVSStoreName]" value="<?= $shop['CVSStoreName'] ?>">
+                                                            <input type="hidden" name="shop[CVSAddress]" value="<?= $shop['CVSAddress'] ?>">
+                                                            <input type="hidden" name="shop[CVSTelephone]" value="<?= $shop['CVSTelephone'] ?>">
+                                                            <input type="hidden" name="shop[CVSOutSide]" value="<?= $shop['CVSOutSide'] ?>">
+                                                            <input type="hidden" name="shop[ExtraData]" value="<?= $shop['ExtraData'] ?>">
+                                                        </div>
+                                                        <?endif;?>
+
                                                         <?endif;?>
                                                     </td>
                                                 </tr>

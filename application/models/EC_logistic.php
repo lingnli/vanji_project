@@ -24,9 +24,9 @@ class EC_logistic extends CI_Model {
 		parent::__construct ();
 	}
 
-	public function store_pay($trade_no, $sender, $bill, $isCollection, $server_reply, $logistics_c2c_server_reply, $LogisticsType = 'CVS', $LogisticsSubType = '',$HashKey,$HashIV,$MerchantID){
+	public function logistic_order($trade_no, $sender, $bill, $isCollection, $server_reply, $logistics_c2c_server_reply, $LogisticsType = 'CVS',$HashKey,$HashIV,$MerchantID){
 
-		
+
 		/*
 			trade_no										訂單編號
 			bill 												訂單資訊 即存進db的資料
@@ -53,7 +53,7 @@ class EC_logistic extends CI_Model {
 			FAMIC2C-建立訂單起 6 天；UNIMARTC2C、HILIFEC2C-建立訂單起7 天。
 		*/
 		// $f = fopen("log.txt", "a+");
-
+		$LogisticsSubType = '';
 		$this->load->library("ECPayLogistics");
 
 		try {
@@ -71,8 +71,6 @@ class EC_logistic extends CI_Model {
 	        $AL->HashKey = $HashKey;
 					$AL->HashIV = $HashIV;
 					
-	// print_r('222');
-// print_r($trade_no);exit;
 
 	        $send_data = array(
 				'MerchantID'           => $MerchantID,
@@ -87,14 +85,14 @@ class EC_logistic extends CI_Model {
 				'SenderName'           => $sender['username'],
 				'SenderPhone'          => $sender['phone'],
 				'SenderCellPhone'      => $sender['phone'],
-				'ReceiverName'         => mb_substr($bill['recipient_name'], 0, 5, 'utf-8'),
+				'ReceiverName'         => mb_substr($bill['username'], 0, 5, 'utf-8'),
 				// 'ReceiverPhone'        => $bill['tel'],
 				'ReceiverCellPhone'    => $bill['phone'],
 				'ReceiverEmail'        => $bill['email'],
-				'TradeDesc'            => $bill['remarks'],
+				'TradeDesc'            => $bill['remark'],
 				'ServerReplyURL'       => $server_reply,
 				'LogisticsC2CReplyURL' => $logistics_c2c_server_reply,
-				'Remark'               => $bill['remarks'],
+				'Remark'               => $bill['remark'],
 				'PlatformID'           => ''
 	        );
 
@@ -102,7 +100,7 @@ class EC_logistic extends CI_Model {
 	        $AL->Send = $send_data;
 
 	        if ($LogisticsType == "CVS") {
-	        	$store = unserialize($bill['store']);
+	        	$store = unserialize($bill['convenient_data']);
 						// fwrite($f, "=======asdsdssss===== \n");
 						
 						
@@ -140,8 +138,9 @@ class EC_logistic extends CI_Model {
 	        // BGCreateShippingOrder()
 	        $Result = $AL->BGCreateShippingOrder();
 					
-					// print_r($Result);
-					// exit;
+					return $Result;
+					print_r($Result);
+					exit;
 
 
 	        if ($Result['ResCode'] == 1) {
@@ -219,7 +218,7 @@ class EC_logistic extends CI_Model {
 	            'MerchantTradeNo' => 'FL' . date('mdHis') . rand(100,999),
 	            'LogisticsSubType' => $Logistics_type,
 	            'IsCollection' => $IsCollection,
-	            'ServerReplyURL' => $redirectURL.'#redirect',
+	            'ServerReplyURL' => $redirectURL,
 	            'ExtraData' => '',
 	            'Device' => $isMobile
 					);

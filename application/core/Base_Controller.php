@@ -75,7 +75,12 @@ class  Base_Controller  extends  CI_Controller  {
 			$this->data['contactus_text'] = $this->db->get_where("settings", array("id" => 13))->row()->content;
 			$this->data['footer_text'] = $this->db->get_where("settings", array("id" => 15))->row()->content;
 
-			$this->data['discount_type'] = $this->db->get_where("settings", array("id" => 17))->row()->content;		
+			$this->data['discount_type'] = $this->db->get_where("settings", array("id" => 17))->row()->content;
+
+			$this->data['index_top'] = $this->db->get_where("settings", array("id" => 18))->row()->content;
+			$this->data['index_select'] = $this->db->get_where("settings", array("id" => 19))->row()->content;
+			$this->data['index_new'] = $this->db->get_where("settings", array("id" => 20))->row()->content;		
+
 			
 			$this->data['is_login'] = $this->is_login();
 
