@@ -12,8 +12,17 @@ class Setting extends Base_Controller {
 	public function index(){
 		// print_r('222');exit;
 
-		$this->data['list'] = $this->db->order_by("id asc")->get_where('settings', array("id<"=>17))->result_array();
+		$list = $this->db->order_by("id asc")->get_where('settings', array("id<"=>21))->result_array();
+		$i=0;
+		foreach($list as $l){
+
+			if($l['id']==17){
+				unset($list[$i]);
+			}
+			$i++;
+		}
 		
+			$this->data['list'] =$list;
 		$this->load->view('mgr/setting', $this->data);
 	}
 

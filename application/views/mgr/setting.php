@@ -49,8 +49,8 @@
                                 <tbody>
                                     <? 
                                         $price_sep = 0;
-                                        for($i=0;$i<count($list);$i++){ 
-                                            $item = $list[$i]; 
+                                        foreach($list as $item){ 
+                    
                                     ?>
                                     <form action="<?= base_url() . "mgr/setting/edit" ?>" method="POST">
                                         <!-- <input type="hidden" name="id" value="<?= $item['id'] ?>"> -->
