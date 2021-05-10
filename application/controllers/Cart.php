@@ -694,12 +694,13 @@ class Cart extends Base_Controller {
 	//綠界付款頁面
 	public function pay()
 	{
-		// print_r($_POST);exit;
+
 
 		$username = $this->input->post("username");
 		$phone    = $this->input->post("phone");
 		$email    = $this->input->post("email");
-		$addr     = $this->input->post("addr");
+		$addr     =
+		$this->input->post("addr") ? $this->input->post("addr") : "";
 		$coupon     = $this->input->post("coupon");
 		$remark  = $this->input->post("remark");
 		$payment  = $this->input->post("payment");
@@ -709,10 +710,19 @@ class Cart extends Base_Controller {
 		$shop     = $this->input->post("shop") ? $this->input->post("shop") : "";
 
 		//防呆
-		if ($username == "" ||$phone == ""|| $addr == ""|| $email == ""
-		) {
-			$this->js_output_and_back("請確認必填欄位是否填寫");
-			exit();
+		if($delivery=='home'){
+			if ($username == "" ||$phone == ""|| $addr == ""|| $email == ""
+			) {
+				$this->js_output_and_back("請確認必填欄位是否填寫");
+				exit();
+			}
+		}else{
+			if (
+				$username == "" || $phone == ""  || $email == ""
+			) {
+				$this->js_output_and_back("請確認必填欄位是否填寫");
+				exit();
+			}
 		}
 
 		if ($username == "") {
@@ -826,7 +836,7 @@ class Cart extends Base_Controller {
 			"delivery"  			  =>	$delivery,
 			"remark"  				  =>	$remark,
 			"products"				  =>	serialize($product_data_array), //將cart轉成存入db的格式
-			"amount"  				  =>	100,
+			"amount"  				  =>	$amount,
 			"products_str"      =>	$products_str,
 			"fee" 							=>	$ship,
 			"coupon" 					  =>	$coupon,
@@ -848,7 +858,7 @@ class Cart extends Base_Controller {
 				$this->Pay_model->pay(
 					$order_no, 												//訂單編號
 					$product_data_array, 							//商品內容(array)
-					100, 													//總金額
+					$amount, 													//總金額
 					$products_str, 										//訂單描述
 					$payment,													//付款方式(optional) 預設為all
 					base_url() . "cart/paysuccess",		//付款完成通知接收post

@@ -83,14 +83,14 @@
                                                 <input type="text" placeholder=" " name="addr" disabled value="<?if($area=='tw'):?>台灣<?elseif($area=='hk'):?>香港<?elseif($area=='au'):?>澳門<?elseif($area=='ma'):?>馬來西亞<?endif;?>">
                                             </p>
                                         </div>
-
+<?if($delivery=='home'):?>
                                         <div class="col-lg-12">
                                             <p class="single-form-row">
                                                 <label>收件地址 <span class="required">*</span></label>
                                                 <input type="text" placeholder=" " name="addr" required>
                                             </p>
                                         </div>
-
+<?endif;?>
                                         <input type="hidden" name="coupon" value="<?= $coupon_code ?>">
                                         <input type="hidden" name="delivery" value="<?= $delivery ?>">
                                         <input type="hidden" name="payment" value="<?= $payment ?>">
