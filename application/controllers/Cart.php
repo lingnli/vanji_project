@@ -235,7 +235,7 @@ class Cart extends Base_Controller {
 				"CVSOutSide"       =>	$CVSOutSide,
 				"ExtraData"        =>	$ExtraData
 			);
-			print_r($this->data['shop']);exit;
+			// print_r($this->data['shop']);exit;
 		} else {
 			$this->data['shop'] = array();
 		}
@@ -1062,7 +1062,7 @@ class Cart extends Base_Controller {
 				);
 				$Result = $_POST;
 
-				if ($Result['RtnCode'] == 1) {
+				if ($Result['ResCode'] == 1) {
 
 					$data = array(
 						"trade_no"    =>  $Result['MerchantTradeNo'],
@@ -1190,10 +1190,10 @@ class Cart extends Base_Controller {
 				unserialize($order['convenient_data'])['LogisticsSubType']					//選擇超商取貨
 
 				);
-				print_r($Result);exit;
-				$Result = $_POST;
+				// print_r($Result);exit;
+				// $Result = $_POST;
 
-				if ($Result['RtnCode'] == 1) {
+				if ($Result['ResCode'] == 1) {
 
 					$data = array(
 						"trade_no"    =>  $Result['MerchantTradeNo'],

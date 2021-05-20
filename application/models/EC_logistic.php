@@ -106,8 +106,9 @@ class EC_logistic extends CI_Model {
 
 			$Result = $AL->BGCreateShippingOrder();
 
-			print_r($Result);
-			exit;
+			return $Result;
+			// print_r($Result);
+			// exit;
 
 
 			if ($Result['ResCode'] == 1) {
