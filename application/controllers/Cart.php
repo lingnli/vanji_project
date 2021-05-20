@@ -2,10 +2,8 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Cart extends Base_Controller {
-	
-	private $HashKey    = 'Eg9AvMpW65j2EJNB';
-	private $HashIV     = 'CUuk6pXxA9za9LZ1';
-	private $MerchantID = 3172126;
+
+
 
 	public function __construct(){
 		parent::__construct();
@@ -1044,7 +1042,6 @@ class Cart extends Base_Controller {
 
 		if ($_POST) {
 			$trade_no = $this->input->post("MerchantTradeNo");
-			$payment_type = $this->input->post("PaymentType");
 
 			// 取得寄件人資訊
 			$sender = array('username'=> '何逸中','phone'=> '0976105940');
@@ -1053,7 +1050,7 @@ class Cart extends Base_Controller {
 			if($order['delivery_status']==1){
 				$this->load->model("EC_logistic");
 				//超商取貨付款
-				$Result = $this->EC_logistic->logistic_order(
+				$Result = $this->EC_logistic->store_pay(
 					$trade_no, 							//訂單編號
 					$sender,							//寄件人資訊:站台管理員id
 					$order, 								//訂單資訊 即存進db的資料
@@ -1061,9 +1058,7 @@ class Cart extends Base_Controller {
 					base_url() . "cart/store_result",			//物流狀態都會透過此 URL 通知。	
 					base_url() . "cart/store_reply",			//當 user 選擇取貨門市有問題時，會透過此 URL 通知特店，請特店通知 User 重新		選擇門市。
 					'CVS',					//選擇超商取貨
-					$this->HashKey,
-					$this->HashIV,
-					$this->MerchantID
+					unserialize($order['convenient_data'])['LogisticsSubType']					//選擇超商取貨
 				);
 				$Result = $_POST;
 
@@ -1164,6 +1159,67 @@ class Cart extends Base_Controller {
 
 
 
+
+
+
+
+
+	//綠界 前端返回頁面
+	public function test_log()
+	{
+
+			$trade_no = $this->input->post("MerchantTradeNo");
+			$payment_type = $this->input->post("PaymentType");
+
+			// 取得寄件人資訊
+			$sender = array('username'=> '何逸中','phone'=> '0976105940');
+			$order = $this->db->get_where("order", array("order_no" => '20210511113422657'))->row_array();
+		// print_r(unserialize($order['convenient_data']));exit;
+		// print_r($order);exit;
+			if($order['delivery_status']==1){
+				// $this->load->model("EC_logistic");
+				//超商取貨付款
+				$Result = $this->EC_logistic->store_pay(
+				'20210511113422657', 							//訂單編號
+					$sender,							//寄件人資訊:站台管理員id
+					$order, 								//訂單資訊 即存進db的資料
+					'N',								//是否代收
+					base_url() . "cart/store_result",			//物流狀態都會透過此 URL 通知。	
+					base_url() . "cart/store_reply",			//當 user 選擇取貨門市有問題時，會透過此 URL 通知特店，請特店通知 User 重新		選擇門市。
+					'CVS',					//選擇超商取貨
+				unserialize($order['convenient_data'])['LogisticsSubType']					//選擇超商取貨
+
+				);
+				print_r($Result);exit;
+				$Result = $_POST;
+
+				if ($Result['RtnCode'] == 1) {
+
+					$data = array(
+						"trade_no"    =>  $Result['MerchantTradeNo'],
+						"data"        =>  serialize($Result),
+						"status"      =>  $Result['RtnMsg'],
+						"action"      =>  "create"
+					);
+					$this->db->insert("logistics", $data);
+					
+				} else {
+					$data = array(
+						"trade_no"    =>  $Result['MerchantTradeNo'],
+						"data"        =>  serialize($Result),
+						"status"      =>  $Result['RtnMsg'],
+						"action"      =>  "err"
+					);
+				$this->db->insert("logistics", $data);
+
+			}
+
+
+
+			$data = $this->db->get_where("order", array("order_no" => $trade_no))->row_array();
+			exit();
+		} else {
+			show_404();
+		}
+	}
 }
-
-
