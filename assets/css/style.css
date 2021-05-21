@@ -11354,7 +11354,7 @@ ul.minicart-pricing-box li:last-child {
   z-index: 1;
 }
 .hero-slider-one .single-slide::before {
-  background: rgba(0, 0, 0, 0.15);
+  /* background: rgba(0, 0, 0, 0.15); */
   content: '';
   height: 100%;
   width: 100%;
