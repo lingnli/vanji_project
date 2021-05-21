@@ -11340,6 +11340,9 @@ ul.minicart-pricing-box li:last-child {
 /*--
     03. Hero Css
 --------------------------------*/
+.hero-slider {
+  box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+}
 .hero-slider-one .single-slide {
   align-items: center;
   background-position: center center;
@@ -11355,6 +11358,7 @@ ul.minicart-pricing-box li:last-child {
 }
 .hero-slider-one .single-slide::before {
   /* background: rgba(0, 0, 0, 0.15); */
+  box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
   content: '';
   height: 100%;
   width: 100%;
