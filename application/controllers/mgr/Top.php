@@ -4,12 +4,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Top extends Base_Controller
 {
 	private $th_title = ["頁面", "圖片", "編輯日期", "動作"]; //, "置頂"
-	private $th_width = ["", "150px", "100px", "",  "150px", "100px"];
+	private $th_width = ["", "", "200px", ""];
 	private $order_column = ["", "", "", "", "", "", ""]; //, "is_head"
 	private $can_order_fields = [4];
 
 	private $param = [
-		["頁面", 		"title", 		"text", 				"", 		TRUE, 	"", 	4, 		12],
+		["頁面", 		"title", 		"plain", 				"", 		TRUE, 	"", 	4, 		12],
 		// ["分類", 		"classify", "select", 				"", 		TRUE, 	"", 	4, 		12, 	["id", "text"]],
 		["圖片", 		"cover", 		"img", 				"", 		FALSE, 	"", 	4, 		12 , 1920/320],
 		// ["說明", 		"content", 		"textarea", 				"", 		TRUE, 	"", 	4, 		12],
@@ -95,6 +95,7 @@ class Top extends Base_Controller
 		if ($_POST) {
 			$data = $this->process_post_data($this->param);
 
+			unset($data['title']);
 			if ($this->Top_model->edit($id, $data)) {
 				$this->js_output_and_redirect("編輯成功", base_url() . "mgr/top");
 			} else {
@@ -137,7 +138,7 @@ class Top extends Base_Controller
 			$syntax .= ")";
 		}
 
-		$order_by = "N.edit_date DESC";
+		$order_by = "N.id DESC";
 		if ($order_column[$order] != "") {
 			$order_by = $order_column[$order] . " " . $direction . ", " . $order_by;
 		}

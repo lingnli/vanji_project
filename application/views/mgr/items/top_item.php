@@ -11,7 +11,7 @@
     <td>
         <?
             if ($item['cover'] != "") {
-                echo '<a data-fancybox="cover_'.$item['id'].'" href="'.base_url().$item['cover'].'"><img src="'.base_url().$item['cover'].'" style="width:150px;"></a>';
+                echo '<a data-fancybox="cover_'.$item['id'].'" href="'.base_url().$item['cover'].'"><img src="'.base_url().$item['cover'].'" style="width:500px;"></a>';
             }
         ?>
     </td>

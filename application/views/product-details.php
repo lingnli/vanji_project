@@ -13,7 +13,11 @@
 
 
         <!-- breadcrumb-area start -->
-        <div class="breadcrumb-area section-ptb">
+        <div class="breadcrumb-area section-ptb" <? if ($top_bg[7]['cover'] == "") : ?> style=" background: url(<?= base_url() ?>assets/images/bg/bgb.png); background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;" <? else : ?> style=" background: url(<?= base_url() . $top_bg[7]['cover'] ?>); background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;" <? endif; ?>>
             <div class="container">
                 <div class="row">
                     <div class="col-12">
@@ -42,100 +46,104 @@
                                 <!-- product_big_images start -->
                                 <div class="product_big_images-right">
                                     <div class="portfolio-full-image tab-content">
-                                        <?if($images==array()){?>
-                                        <div role="tabpanel" class="tab-pane active product-image-position" id="img-tab-5">
-                                            <a href="<?= base_url() ?>assets/images/product/details/l01.jpg" class="img-poppu">
-                                                <img src="<?= base_url() ?>assets/images/product/details/l01.jpg" alt="#">
-                                            </a>
-                                        </div>
-                                        <div role="tabpanel" class="tab-pane product-image-position" id="img-tab-6">
-                                            <a href="<?= base_url() ?>assets/images/product/details/l02.jpg" class="img-poppu">
-                                                <img src="<?= base_url() ?>assets/images/product/details/l02.jpg" alt="#">
-                                            </a>
-                                        </div>
-                                        <div role="tabpanel" class="tab-pane product-image-position" id="img-tab-7">
-                                            <a href="<?= base_url() ?>assets/images/product/details/l03.jpg" class="img-poppu">
-                                                <img src="<?= base_url() ?>assets/images/product/details/l03.jpg" alt="#">
-                                            </a>
-                                        </div>
-                                        <div role="tabpanel" class="tab-pane product-image-position" id="img-tab-8">
-                                            <a href="<?= base_url() ?>assets/images/product/details/l04.jpg" class="img-poppu">
-                                                <img src="<?= base_url() ?>assets/images/product/details/l04.jpg" alt="#">
-                                            </a>
-                                        </div>
-                                        <div role="tabpanel" class="tab-pane product-image-position" id="img-tab-9">
-                                            <a href="<?= base_url() ?>assets/images/product/details/l03.jpg" class="img-poppu">
-                                                <img src="<?= base_url() ?>assets/images/product/details/l03.jpg" alt="#">
-                                            </a>
-                                        </div>
-                                        <?}else{?>
-                                        <?$i=0;
-                                            foreach($images as $m){
-                                                if($i==0){
-                                        ?>
-                                        <div role="tabpanel" class="tab-pane product-image-position active" id="img-tab-<?= $i ?>">
-                                            <a href="<?= base_url() . $m ?>" class="img-poppu">
-                                                <img src="<?= base_url() . $m ?>" alt="#">
-                                            </a>
-                                        </div>
-                                        <?}else{?>
-                                        <div role="tabpanel" class="tab-pane product-image-position" id="img-tab-<?= $i ?>">
-                                            <a href="<?= base_url() . $m ?>" class="img-poppu">
-                                                <img src="<?= base_url() . $m ?>" alt="#">
-                                            </a>
-                                        </div>
-                                        <?}$i++;}?>
-                                        <?}?>
+                                        <? if ($images == array()) { ?>
+                                            <div role="tabpanel" class="tab-pane active product-image-position" id="img-tab-5">
+                                                <a href="<?= base_url() ?>assets/images/product/details/l01.jpg" class="img-poppu">
+                                                    <img src="<?= base_url() ?>assets/images/product/details/l01.jpg" alt="#">
+                                                </a>
+                                            </div>
+                                            <div role="tabpanel" class="tab-pane product-image-position" id="img-tab-6">
+                                                <a href="<?= base_url() ?>assets/images/product/details/l02.jpg" class="img-poppu">
+                                                    <img src="<?= base_url() ?>assets/images/product/details/l02.jpg" alt="#">
+                                                </a>
+                                            </div>
+                                            <div role="tabpanel" class="tab-pane product-image-position" id="img-tab-7">
+                                                <a href="<?= base_url() ?>assets/images/product/details/l03.jpg" class="img-poppu">
+                                                    <img src="<?= base_url() ?>assets/images/product/details/l03.jpg" alt="#">
+                                                </a>
+                                            </div>
+                                            <div role="tabpanel" class="tab-pane product-image-position" id="img-tab-8">
+                                                <a href="<?= base_url() ?>assets/images/product/details/l04.jpg" class="img-poppu">
+                                                    <img src="<?= base_url() ?>assets/images/product/details/l04.jpg" alt="#">
+                                                </a>
+                                            </div>
+                                            <div role="tabpanel" class="tab-pane product-image-position" id="img-tab-9">
+                                                <a href="<?= base_url() ?>assets/images/product/details/l03.jpg" class="img-poppu">
+                                                    <img src="<?= base_url() ?>assets/images/product/details/l03.jpg" alt="#">
+                                                </a>
+                                            </div>
+                                        <? } else { ?>
+                                            <? $i = 0;
+                                            foreach ($images as $m) {
+                                                if ($i == 0) {
+                                            ?>
+                                                    <div role="tabpanel" class="tab-pane product-image-position active" id="img-tab-<?= $i ?>">
+                                                        <a href="<?= base_url() . $m ?>" class="img-poppu">
+                                                            <img src="<?= base_url() . $m ?>" alt="#">
+                                                        </a>
+                                                    </div>
+                                                <? } else { ?>
+                                                    <div role="tabpanel" class="tab-pane product-image-position" id="img-tab-<?= $i ?>">
+                                                        <a href="<?= base_url() . $m ?>" class="img-poppu">
+                                                            <img src="<?= base_url() . $m ?>" alt="#">
+                                                        </a>
+                                                    </div>
+                                            <? }
+                                                $i++;
+                                            } ?>
+                                        <? } ?>
                                     </div>
                                 </div>
                                 <!-- product_big_images end -->
 
                                 <!-- Start Small images -->
                                 <ul class="product_small_images-left vartical-product-active nav" role="tablist">
-                                    <?if($images==array()){?>
-                                    <li role="presentation" class="pot-small-img active">
-                                        <a href="#img-tab-5" role="tab" data-toggle="tab">
-                                            <img src="<?= base_url() ?>assets/images/product/details/s01.jpg" alt="#">
-                                        </a>
-                                    </li>
-                                    <li role="presentation" class="pot-small-img">
-                                        <a href="#img-tab-6" role="tab" data-toggle="tab">
-                                            <img src="<?= base_url() ?>assets/images/product/details/s02.jpg" alt="#">
-                                        </a>
-                                    </li>
-                                    <li role="presentation" class="pot-small-img">
-                                        <a href="#img-tab-7" role="tab" data-toggle="tab">
-                                            <img src="<?= base_url() ?>assets/images/product/details/s03.jpg" alt="#">
-                                        </a>
-                                    </li>
-                                    <li role="presentation" class="pot-small-img">
-                                        <a href="#img-tab-8" role="tab" data-toggle="tab">
-                                            <img src="<?= base_url() ?>assets/images/product/details/s04.jpg" alt="#">
-                                        </a>
-                                    </li>
-                                    <li role="presentation" class="pot-small-img">
-                                        <a href="#img-tab-9" role="tab" data-toggle="tab">
-                                            <img src="<?= base_url() ?>assets/images/product/details/s03.jpg" alt="#">
-                                        </a>
-                                    </li>
-                                    <?}else{?>
-                                    <?$i=0;
-                                            foreach($images as $m){
-                                                if($i==0){
+                                    <? if ($images == array()) { ?>
+                                        <li role="presentation" class="pot-small-img active">
+                                            <a href="#img-tab-5" role="tab" data-toggle="tab">
+                                                <img src="<?= base_url() ?>assets/images/product/details/s01.jpg" alt="#">
+                                            </a>
+                                        </li>
+                                        <li role="presentation" class="pot-small-img">
+                                            <a href="#img-tab-6" role="tab" data-toggle="tab">
+                                                <img src="<?= base_url() ?>assets/images/product/details/s02.jpg" alt="#">
+                                            </a>
+                                        </li>
+                                        <li role="presentation" class="pot-small-img">
+                                            <a href="#img-tab-7" role="tab" data-toggle="tab">
+                                                <img src="<?= base_url() ?>assets/images/product/details/s03.jpg" alt="#">
+                                            </a>
+                                        </li>
+                                        <li role="presentation" class="pot-small-img">
+                                            <a href="#img-tab-8" role="tab" data-toggle="tab">
+                                                <img src="<?= base_url() ?>assets/images/product/details/s04.jpg" alt="#">
+                                            </a>
+                                        </li>
+                                        <li role="presentation" class="pot-small-img">
+                                            <a href="#img-tab-9" role="tab" data-toggle="tab">
+                                                <img src="<?= base_url() ?>assets/images/product/details/s03.jpg" alt="#">
+                                            </a>
+                                        </li>
+                                    <? } else { ?>
+                                        <? $i = 0;
+                                        foreach ($images as $m) {
+                                            if ($i == 0) {
                                         ?>
-                                    <li role="presentation" class="pot-small-img active">
-                                        <a href="#img-tab-<?= $i ?>" role="tab" data-toggle="tab">
-                                            <img src="<?= base_url() . $m ?>" alt="#">
-                                        </a>
-                                    </li>
-                                    <?}else{?>
-                                    <li role="presentation" class="pot-small-img">
-                                        <a href="#img-tab-<?= $i ?>" role="tab" data-toggle="tab">
-                                            <img src="<?= base_url() . $m ?>" alt="#">
-                                        </a>
-                                    </li>
-                                    <?}$i++;}?>
-                                    <?}?>
+                                                <li role="presentation" class="pot-small-img active">
+                                                    <a href="#img-tab-<?= $i ?>" role="tab" data-toggle="tab">
+                                                        <img src="<?= base_url() . $m ?>" alt="#">
+                                                    </a>
+                                                </li>
+                                            <? } else { ?>
+                                                <li role="presentation" class="pot-small-img">
+                                                    <a href="#img-tab-<?= $i ?>" role="tab" data-toggle="tab">
+                                                        <img src="<?= base_url() . $m ?>" alt="#">
+                                                    </a>
+                                                </li>
+                                        <? }
+                                            $i++;
+                                        } ?>
+                                    <? } ?>
 
                                 </ul>
                                 <!-- End Small images -->
@@ -156,10 +164,10 @@
                             <!-- pro_details end -->
                             <!-- pro_dtl_prize start -->
                             <ul class="pro_dtl_prize">
-                                <?if($product['price']!=0):?>
-                                <li class="old_prize"> $<?= $product['price'] ?></li>
-                                <?endif;?>
-  
+                                <? if ($product['price'] != 0) : ?>
+                                    <li class="old_prize"> $<?= $product['price'] ?></li>
+                                <? endif; ?>
+
                                 <li> $<?= $product['sale_price'] ?></li>
                             </ul>
 
@@ -242,79 +250,79 @@
                                         <div class="col-lg-12 review_address_inner">
                                             <h5>評論區</h5>
 
-                                            <?foreach($comment as $c){?>
-                                            <div class="pro_review">
+                                            <? foreach ($comment as $c) { ?>
+                                                <div class="pro_review">
 
-                                                <div class="review_details">
-                                                    <div class="review_info">
-                                                        <h5><?= $c['name'] ?></h5>
-                                                        <div class="rating_send">
-                                                            <!-- <a href="#">回復</a> -->
+                                                    <div class="review_details">
+                                                        <div class="review_info">
+                                                            <h5><?= $c['name'] ?></h5>
+                                                            <div class="rating_send">
+                                                                <!-- <a href="#">回復</a> -->
+                                                            </div>
+                                                        </div>
+                                                        <div class="review_date">
+                                                            <span><?= date("d M , Y H:i", strtotime($c['create_date'])) ?></span>
+                                                        </div>
+                                                        <p><?= $c['content'] ?></p>
+
+                                                    </div>
+                                                </div>
+
+                                                <? if ($c['replay'] != "") { ?>
+                                                    <div class="pro_review">
+                                                        <div class="review_details" style="padding-left: 120px;">
+                                                            <div class="review_info">
+                                                                <h5>店長</h5>
+                                                                <div class="rating_send">
+                                                                    <!-- <a href="#">回復</a> -->
+                                                                </div>
+                                                            </div>
+                                                            <div class="review_date">
+                                                                <span><?= date("d M , Y H:i", strtotime($c['update_time'])) ?></span>
+                                                            </div>
+                                                            <p><?= $c['replay'] ?></p>
                                                         </div>
                                                     </div>
-                                                    <div class="review_date">
-                                                        <span><?= date("d M , Y H:i", strtotime($c['create_date'])) ?></span>
-                                                    </div>
-                                                    <p><?= $c['content'] ?></p>
-
-                                                </div>
-                                            </div>
-
-                                            <?if($c['replay']!=""){?>
-                                            <div class="pro_review">
-                                                <div class="review_details" style="padding-left: 120px;">
-                                                    <div class="review_info">
-                                                        <h5>店長</h5>
-                                                        <div class="rating_send">
-                                                            <!-- <a href="#">回復</a> -->
-                                                        </div>
-                                                    </div>
-                                                    <div class="review_date">
-                                                        <span><?= date("d M , Y H:i", strtotime($c['update_time'])) ?></span>
-                                                    </div>
-                                                    <p><?= $c['replay'] ?></p>
-                                                </div>
-                                            </div>
-                                            <?}?>
-                                            <?}?>
+                                                <? } ?>
+                                            <? } ?>
 
                                         </div>
 
-                                        <?if($isLogin == 1){?>
+                                        <? if ($isLogin == 1) { ?>
 
-                                        <div class="col-lg-12">
-                                            <div class="comments-reply-area">
-                                                <h5 class="comment-reply-title mb-30">留言</h5>
-                                                <form id="contactform" method="post" action="<?= base_url() ?>product/comment/<?= $product['id'] ?>" class="comment-form-area">
-                                                    <div class="comment-input">
-                                                        <div class="row">
-                                                            <div class="col-lg-6">
-                                                                <p class="comment-form">
-                                                                    <input type="text" required="required" name="name" placeholder="姓名 *">
-                                                                </p>
-                                                            </div>
-                                                            <div class="col-lg-6">
-                                                                <p class="comment-form">
-                                                                    <input type="email" required="required" name="email" placeholder="Email *">
-                                                                </p>
-                                                            </div>
+                                            <div class="col-lg-12">
+                                                <div class="comments-reply-area">
+                                                    <h5 class="comment-reply-title mb-30">留言</h5>
+                                                    <form id="contactform" method="post" action="<?= base_url() ?>product/comment/<?= $product['id'] ?>" class="comment-form-area">
+                                                        <div class="comment-input">
+                                                            <div class="row">
+                                                                <div class="col-lg-6">
+                                                                    <p class="comment-form">
+                                                                        <input type="text" required="required" name="name" placeholder="姓名 *">
+                                                                    </p>
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                    <p class="comment-form">
+                                                                        <input type="email" required="required" name="email" placeholder="Email *">
+                                                                    </p>
+                                                                </div>
 
-                                                            <div class="col-lg-12">
-                                                                <p class="comment-form-comment">
-                                                                    <textarea class="comment-notes" name="content" required="required" placeholder="留言 *"></textarea>
-                                                                </p>
-                                                            </div>
-                                                            <div class="col-lg-12">
-                                                                <div class="comment-form-submit">
-                                                                    <button class="g-recaptcha comment-submit" type="submit" data-sitekey="6Ld0nzIaAAAAAIJ-eMqmXG4vbNoVSN5rqGLarbiW" data-callback="callback">送出</button>
+                                                                <div class="col-lg-12">
+                                                                    <p class="comment-form-comment">
+                                                                        <textarea class="comment-notes" name="content" required="required" placeholder="留言 *"></textarea>
+                                                                    </p>
+                                                                </div>
+                                                                <div class="col-lg-12">
+                                                                    <div class="comment-form-submit">
+                                                                        <button class="g-recaptcha comment-submit" type="submit" data-sitekey="6Ld0nzIaAAAAAIJ-eMqmXG4vbNoVSN5rqGLarbiW" data-callback="callback">送出</button>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </form>
+                                                    </form>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <?}?>
+                                        <? } ?>
                                         <!--// blog-details-wrapper -->
                                     </div>
                                 </div>
