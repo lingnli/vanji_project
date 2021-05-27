@@ -15,7 +15,7 @@
     <!-- single-product-wrap end -->
   </div>
   <div class="col-lg-8 col-md-7">
-    <div class="product-content text-left">
+    <div class="product-content product-list-content">
       <h3><a href="<?= base_url() ?>product/detail"><?= $item['name'] ?></a></h3>
       <div class="price-box">
         <span class="old-price">$<?= $item['price'] ?></span>

@@ -11879,6 +11879,24 @@ ul.minicart-pricing-box li:last-child {
   margin-top: 20px;
   text-align: center;
 }
+.product-list-content {
+  text-align: left;
+}
+@media(max-width: 1119px) {
+  .product-list-content {
+    padding-left: 15px;
+  }
+}
+@media(max-width: 991px) {
+  .product-list-content {
+    padding-left: 0;
+  }
+}
+@media(max-width: 767px) {
+  .product-list-content {
+    text-align: center;
+  }
+}
 .product-content h3 {
   font-size: 16px;
   font-weight: 500;
