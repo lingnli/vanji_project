@@ -13,7 +13,11 @@
 
 
         <!-- breadcrumb-area start -->
-        <div class="breadcrumb-area section-ptb">
+        <div class="breadcrumb-area section-ptb" <? if ($top_bg[1]['cover'] == "") : ?> style=" background: url(<?= base_url() ?>assets/images/bg/bgb.png); background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;" <? else : ?> style=" background: url(<?= base_url() . $top_bg[1]['cover'] ?>); background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;" <? endif; ?>>
             <div class="container">
                 <div class="row">
                     <div class="col-12">
@@ -68,82 +72,82 @@
                             <div class="col-lg-12 review_address_inner">
                                 <h5>留言區</h5>
                                 <!-- Single Review -->
-                                <?foreach($comment as $c){?>
-                                <div class="pro_review">
+                                <? foreach ($comment as $c) { ?>
+                                    <div class="pro_review">
 
-                                    <div class="review_details">
-                                        <div class="review_info">
-                                            <h5><?= $c['name'] ?></h5>
-                                            <div class="rating_send">
-                                                <!-- <a href="#">回復</a> -->
+                                        <div class="review_details">
+                                            <div class="review_info">
+                                                <h5><?= $c['name'] ?></h5>
+                                                <div class="rating_send">
+                                                    <!-- <a href="#">回復</a> -->
+                                                </div>
+                                            </div>
+                                            <div class="review_date">
+                                                <span><?= date("d M , Y H:i", strtotime($c['create_date'])) ?></span>
+                                            </div>
+                                            <p><?= $c['content'] ?></p>
+
+                                        </div>
+                                    </div>
+
+                                    <? if ($c['replay'] != "") { ?>
+                                        <div class="pro_review">
+                                            <div class="review_details" style="padding-left: 120px;">
+                                                <div class="review_info">
+                                                    <h5>店長</h5>
+                                                    <div class="rating_send">
+                                                        <!-- <a href="#">回復</a> -->
+                                                    </div>
+                                                </div>
+                                                <div class="review_date">
+                                                    <span><?= date("d M , Y H:i", strtotime($c['update_time'])) ?></span>
+                                                </div>
+                                                <p><?= $c['replay'] ?></p>
                                             </div>
                                         </div>
-                                        <div class="review_date">
-                                            <span><?= date("d M , Y H:i", strtotime($c['create_date'])) ?></span>
-                                        </div>
-                                        <p><?= $c['content'] ?></p>
-
-                                    </div>
-                                </div>
-
-                                <?if($c['replay']!=""){?>
-                                <div class="pro_review">
-                                    <div class="review_details" style="padding-left: 120px;">
-                                        <div class="review_info">
-                                            <h5>店長</h5>
-                                            <div class="rating_send">
-                                                <!-- <a href="#">回復</a> -->
-                                            </div>
-                                        </div>
-                                        <div class="review_date">
-                                            <span><?= date("d M , Y H:i", strtotime($c['update_time'])) ?></span>
-                                        </div>
-                                        <p><?= $c['replay'] ?></p>
-                                    </div>
-                                </div>
-                                <?}?>
-                                <?}?>
+                                    <? } ?>
+                                <? } ?>
                                 <!--// Single Review -->
                                 <!-- Single Review -->
 
                                 <!--// Single Review -->
                             </div>
 
-                            <?if($isLogin == 1){?>
+                            <? if ($isLogin == 1) { ?>
 
-                            <div class="col-lg-12">
-                                <div class="comments-reply-area">
-                                    <h5 class="comment-reply-title mb-30">留言</h5>
-                                    <form id="contactform" method="post" action="<?= base_url() ?>news/comment/<?= $news_data['id'] ?>" class="comment-form-area">
-                                        <div class="comment-input">
-                                            <div class="row">
-                                                <div class="col-lg-6">
-                                                    <p class="comment-form">
-                                                        <input type="text" required="required" name="name" placeholder="姓名 *">
-                                                    </p>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <p class="comment-form">
-                                                        <input type="email" required="required" name="email" placeholder="Email *">
-                                                    </p>
-                                                </div>
+                                <div class="col-lg-12">
+                                    <div class="comments-reply-area">
+                                        <h5 class="comment-reply-title mb-30">留言</h5>
+                                        <form id="contactform" method="post" action="<?= base_url() ?>news/comment/<?= $news_data['id'] ?>" class="comment-form-area">
+                                            <div class="comment-input">
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <p class="comment-form">
+                                                            <input type="text" required="required" name="name" placeholder="姓名 *">
+                                                        </p>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <p class="comment-form">
+                                                            <input type="email" required="required" name="email" placeholder="Email *">
+                                                        </p>
+                                                    </div>
 
-                                                <div class="col-lg-12">
-                                                    <p class="comment-form-comment">
-                                                        <textarea class="comment-notes" name="content" required="required" placeholder="留言 *"></textarea>
-                                                    </p>
-                                                </div>
-                                                <div class="col-lg-12">
-                                                    <div class="comment-form-submit">
-                                                        <button class="g-recaptcha comment-submit" type="submit" data-sitekey="6Ld0nzIaAAAAAIJ-eMqmXG4vbNoVSN5rqGLarbiW" data-callback="callback">送出</button>
+                                                    <div class="col-lg-12">
+                                                        <p class="comment-form-comment">
+                                                            <textarea class="comment-notes" name="content" required="required" placeholder="留言 *"></textarea>
+                                                        </p>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="comment-form-submit">
+                                                            <button class="g-recaptcha comment-submit" type="submit" data-sitekey="6Ld0nzIaAAAAAIJ-eMqmXG4vbNoVSN5rqGLarbiW" data-callback="callback">送出</button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </form>
+                                        </form>
+                                    </div>
                                 </div>
-                            </div>
-                            <?}?>
+                            <? } ?>
                             <!--// blog-details-wrapper -->
 
                         </div>
