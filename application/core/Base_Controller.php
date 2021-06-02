@@ -79,7 +79,12 @@ class  Base_Controller  extends  CI_Controller  {
 
 			$this->data['index_top'] = $this->db->get_where("settings", array("id" => 18))->row()->content;
 			$this->data['index_select'] = $this->db->get_where("settings", array("id" => 19))->row()->content;
-			$this->data['index_new'] = $this->db->get_where("settings", array("id" => 20))->row()->content;		
+			$this->data['index_new'] = $this->db->get_where("settings", array("id" => 20))->row()->content;
+
+
+			$this->data['checkout_other'] = $this->db->get_where("settings", array("id" => 21))->row()->content;
+			$this->data['checkout_buy'] = $this->db->get_where("settings", array("id" => 22))->row()->content;
+			$this->data['checkout_info'] = $this->db->get_where("settings", array("id" => 23))->row()->content;		
 
 			
 			$this->data['is_login'] = $this->is_login();

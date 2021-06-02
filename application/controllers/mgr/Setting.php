@@ -12,7 +12,7 @@ class Setting extends Base_Controller {
 	public function index(){
 		// print_r('222');exit;
 
-		$list = $this->db->order_by("id asc")->get_where('settings', array("id<"=>21))->result_array();
+		$list = $this->db->order_by("id asc")->get_where('settings', array("id<"=>24))->result_array();
 		$i=0;
 		foreach($list as $l){
 
