@@ -40,7 +40,7 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-2 col-md-6">
+        <div class="col-lg-4 col-md-6">
           <div class="widget-footer mt-30">
             <h6 class="title-widget">連結</h6>
             <ul class="footer-list">
@@ -53,7 +53,7 @@
             </ul>
           </div>
         </div>
-        <div class="col-lg-3 col-md-6">
+        <div class="col-lg-4 col-md-6">
           <div class="widget-footer mt-30">
             <h6 class="title-widget">聯絡資訊</h6>
             <ul class="footer-contact">
@@ -72,7 +72,7 @@
             </ul>
           </div>
         </div>
-        <div class="col-lg-3 col-md-6">
+        <!-- <div class="col-lg-3 col-md-6">
           <div class="widget-footer mt-30">
             <h6 class="title-widget">最新系列</h6>
             <ul class="footer-blog">
@@ -100,7 +100,7 @@
 
             </ul>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
