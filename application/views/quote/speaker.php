@@ -15,7 +15,7 @@
                   <?foreach($down as $d){?>
                   <div class="testimonial-inner text-center">
                     <div class="test-cont">
-                      <img src="<?= base_url() ?>assets/images/icon/quite.png" alt="">
+                      <!-- <img src="<?= base_url() ?>assets/images/icon/quite.png" alt=""> -->
                       <p class="p16"><?= $d['content'] ?></p>
                     </div>
                     <div class="test-author">
