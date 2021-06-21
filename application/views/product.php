@@ -52,6 +52,14 @@
                             <div class="row">
                                 <div class="col">
                                     <!-- shop-top-bar start -->
+                                    <div class="shop-sidebar mb-30 product-top-cate">
+                                        <h4 class="title">分類</h4>
+                                        <ul>
+                                            <?foreach($classify as $c){?>
+                                            <li><a href="<?= base_url() ?>product/classify/<?= $c['id'] ?>"><?= $c['classify'] ?> <span>(<?= $c['num'] ?>)</span></a></li>
+                                            <?}?>
+                                        </ul>
+                                    </div>
                                     <div class="shop-top-bar">
                                         <!-- product-view-mode start -->
 

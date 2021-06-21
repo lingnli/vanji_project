@@ -32,7 +32,7 @@
     <!-- shop-sidebar end -->
 
     <!-- shop-sidebar start -->
-    <div class="shop-sidebar mb-30">
+    <div class="shop-sidebar mb-30 product-cate">
       <h4 class="title">分類</h4>
       <ul>
         <?foreach($classify as $c){?>
