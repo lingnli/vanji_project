@@ -42,6 +42,7 @@
                                     <!-- Nav tabs -->
                                     <ul role="tablist" class="nav flex-column dashboard-list">
                                         <li><a href="#account-details" data-toggle="tab" class="nav-link">個人資料修改</a></li>
+                                        <li> <a href="#password" data-toggle="tab" class="nav-link">密碼修改</a></li>
                                         <li> <a href="#orders" data-toggle="tab" class="nav-link">我的訂單</a></li>
                                         <li><a href="<?= base_url() ?>home/logout" class="nav-link">登出</a></li>
                                     </ul>
@@ -64,24 +65,50 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <?foreach($order as $o){?>
-                                                        <tr>
-                                                            <td><a href="<?= base_url() ?>cart/payment/<?= $o['order_no'] ?>"><?= $o['order_no'] ?></a></td>
-                                                            <td><?= date("Y-m-d", strtotime($o['create_date'])) ?></td>
-                                                            <td>
-                                                                <?if($o['delivery_status']==1){?>
-                                                                已出貨
-                                                                <?}else{?>
-                                                                處理中
-                                                                <?}?>
-                                                            </td>
-                                                            <td>$<?= $o['amount'] ?></td>
-                                                            <td><a href="<?= base_url() ?>cart/payment/<?= $o['order_no'] ?>" class="view">查看</a></td>
-                                                        </tr>
-                                                        <?}?>
+                                                        <? foreach ($order as $o) { ?>
+                                                            <tr>
+                                                                <td><a href="<?= base_url() ?>cart/payment/<?= $o['order_no'] ?>"><?= $o['order_no'] ?></a></td>
+                                                                <td><?= date("Y-m-d", strtotime($o['create_date'])) ?></td>
+                                                                <td>
+                                                                    <? if ($o['delivery_status'] == 1) { ?>
+                                                                        已出貨
+                                                                    <? } else { ?>
+                                                                        處理中
+                                                                    <? } ?>
+                                                                </td>
+                                                                <td>$<?= $o['amount'] ?></td>
+                                                                <td><a href="<?= base_url() ?>cart/payment/<?= $o['order_no'] ?>" class="view">查看</a></td>
+                                                            </tr>
+                                                        <? } ?>
 
                                                     </tbody>
                                                 </table>
+                                            </div>
+                                        </div>
+
+                                        <div class="tab-pane " id="password">
+                                            <h3>密碼修改 </h3>
+                                            <div class="login bg-fqwhite">
+                                                <div class="login-form-container">
+                                                    <div class="account-login-form">
+                                                        <form action="<?= base_url() ?>member/password" method="post">
+
+                                                            <div class="account-input-box">
+                                                                <label>舊密碼*</label>
+                                                                <input type="text" name="old_password" >
+                                                                <label>新密碼*</label>
+                                                                <input type="text" name="password" >
+                                                                <label>再次輸入新密碼*</label>
+                                                                <input type="text" name="password2" >
+                                                                
+                                                            </div>
+                                                           
+                                                            <div class="button-box">
+                                                                <button class="btn default-btn" type="submit">儲存</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
 
@@ -101,7 +128,7 @@
                                                                 <label>Email</label>
                                                                 <input type="text" name="email" value="<?= $user['email'] ?>">
                                                                 <label>生日</label>
-                                                                <input type="date" name="birthday" min="2014-09-09" max="<?= $today ?>" value="<?= $user['birthday'] ?>">
+                                                                <input type="date" name="birthday"  max="<?= $today ?>" value="<?= $user['birthday'] ?>">
                                                             </div>
                                                             <div class="example">
                                                                 (E.g.: 1970/05/31)

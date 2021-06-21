@@ -512,7 +512,6 @@ class Cart extends Base_Controller {
 		}
 
 
-
 		//判斷是否登入
 		$user_id = $this->encryption->decrypt($this->session->uid);
 
@@ -672,15 +671,25 @@ class Cart extends Base_Controller {
 
 		}
 		
+		if($user_id){
+			$ship = 0;
+		}else{
+			if ($area != 'tw') {
+				$ship = 200;
+			} else {
+				$ship = (int)$this->data['ship'];;
+			}
+		}
 		
+
 		$this->data['discount_type'] = $discount_type;
 		$this->data['discount_str'] = $discount_str;		
 		
 		$this->data['discount_percent_code'] = (int)$discount_number;
 
 		$this->data['total_price'] = $total_price;
-		$this->data['ship'] = (int)$this->data['ship'];
-		$this->data['total_price_ship'] = $total_price + (int)$this->data['ship'];
+		$this->data['ship'] = $ship;
+		$this->data['total_price_ship'] = $total_price + $ship;
 		
 		
 
@@ -692,8 +701,8 @@ class Cart extends Base_Controller {
 	//綠界付款頁面
 	public function pay()
 	{
-
-
+		// print_r($_POST);exit;
+		$user_id = $this->encryption->decrypt($this->session->uid);
 		$username = $this->input->post("username");
 		$phone    = $this->input->post("phone");
 		$email    = $this->input->post("email");
@@ -703,6 +712,7 @@ class Cart extends Base_Controller {
 		$remark  = $this->input->post("remark");
 		$payment  = $this->input->post("payment");
 		$delivery     = $this->input->post("delivery");
+		$area     = $this->input->post("area");
 		$discount_type_code     = $this->input->post("discount_type_code") ? $this->input->post("discount_type_code") : 0;
 		$discount_percent_code     = $this->input->post("discount_percent_code") ? $this->input->post("discount_percent_code") : "";
 		$shop     = $this->input->post("shop") ? $this->input->post("shop") : "";
@@ -799,7 +809,17 @@ class Cart extends Base_Controller {
 			$total = $total *((int)$discount_percent_code/100);
 		}
 		//運費
-		$ship = (int)$this->data['ship'];
+		// $ship = (int)$this->data['ship'];
+		if($u_id){
+			$ship =0;
+		}else{
+			if ($area != 'tw') {
+				$ship = 200;
+			} else {
+				$ship = (int)$this->data['ship'];;
+			}
+		}
+		
 
 		$total += $ship;
 
@@ -845,7 +865,7 @@ class Cart extends Base_Controller {
 			'delivery_status'		=>	$delivery_stauts,
 			'convenient_data'		=>	serialize($shop)
 		);
-
+		// print_r($data);exit;
 		//存入order db
 		$res = $this->db->insert("order", $data);		
 

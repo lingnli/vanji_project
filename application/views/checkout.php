@@ -84,7 +84,7 @@
                                         <div class="col-lg-12">
                                             <p class="single-form-row">
                                                 <label>收件地區 <span class="required">*</span></label>
-                                                <input type="text" placeholder=" " name="addr" disabled value="<? if ($area == 'tw') : ?>台灣<? elseif ($area == 'hk') : ?>香港<? elseif ($area == 'au') : ?>澳門<? elseif ($area == 'ma') : ?>馬來西亞<? endif; ?>">
+                                                <input type="text" placeholder=" " name="addr" disabled value="<? if ($area == 'tw') : ?>台灣<? elseif ($area == 'hk') : ?>香港<? elseif ($area == 'sg') : ?>新加玻<? elseif ($area == 'au') : ?>澳門<? elseif ($area == 'ma') : ?>馬來西亞<? endif; ?>">
                                             </p>
                                         </div>
                                         <? if ($delivery == 'home') : ?>

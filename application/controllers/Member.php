@@ -81,6 +81,41 @@ class Member extends Base_Controller {
 		$this->js_output_and_redirect("編輯成功", base_url() . "member/home");
 	}
 
+	//資料儲存
+	public function password()
+	{
+		$user_id = $this->session->id;
+		$old_password = $this->input->post('old_password');
+		$password = $this->input->post('password');
+		$password2 = $this->input->post('password2');
+
+		if ($password == "" || $password2 == "" || $old_password == "") {
+
+			echo "<script> alert('欄位不可為空'); history.back(); </script>";
+			return;
+		}
+
+		if ($password != $password2) {
+			echo "<script> alert('兩次輸入密碼不同'); history.back(); </script>";
+			return;
+		}
+
+		if (!$this->Member_model->pwd_check(md5($old_password), $user_id)) {
+			echo "<script> alert('密碼錯誤'); history.back(); </script>";
+			return;
+		}
+
+		$data = [
+			'password' => $this->encryption->encrypt(md5($password))
+		];
+		// print_r($data);exit;
+		$res = $this->db->where(array("id" => $user_id))->update($this->user, $data);
+
+
+
+		$this->js_output_and_redirect("編輯密碼成功", base_url() . "member/home");
+	}
+
 	//我的最愛
 	public function favorite()
 	{

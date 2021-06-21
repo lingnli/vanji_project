@@ -326,7 +326,7 @@ class Home extends Base_Controller {
 				$params
 				= [
 					["電腦版尺寸圖<br><span class='text text-danger'>尺寸比例 1200 x 800</span>", "cover", "img",	"", 		TRUE, 	"", 	4, 		12, 1200 / 800],
-					// ["連結", "link", "text",	"", 		FALSE, 	"", 	4, 		12],
+					["子標題", "sub_title", "text", "", 		TRUE, 	"", 	4, 		12],
 					["標題", "title", "text", "", 		TRUE, 	"", 	4, 		12],
 				];
 				$data = $this->process_post_data($params);
@@ -349,7 +349,7 @@ class Home extends Base_Controller {
 				$params
 				= [
 					["電腦版尺寸圖<br><span class='text text-danger'>尺寸比例 1200 x 800</span>", "cover", "img",	"", 		TRUE, 	"", 	4, 		12, 1200 / 800],
-					// ["連結", "link", "text",	"", 		TRUE, 	"", 	4, 		12],
+					["子標題", "sub_title", "text", "", 		TRUE, 	"", 	4, 		12],
 					["標題", "title", "text", "", 		TRUE, 	"", 	4, 		12],
 				];
 

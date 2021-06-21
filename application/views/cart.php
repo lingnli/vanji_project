@@ -11,15 +11,11 @@
         </header>
 
         <!-- breadcrumb-area start -->
-        <div class="breadcrumb-area section-ptb" <?if($top_bg[6]['cover']=="" ):?>
-            style=" background: url(<?= base_url() ?>assets/images/bg/bgb.png); background-size: cover;
+        <div class="breadcrumb-area section-ptb" <? if ($top_bg[6]['cover'] == "") : ?> style=" background: url(<?= base_url() ?>assets/images/bg/bgb.png); background-size: cover;
             background-repeat: no-repeat;
-            background-position: center;"
-            <?else:?>
-            style=" background: url(<?= base_url() . $top_bg[6]['cover'] ?>); background-size: cover;
+            background-position: center;" <? else : ?> style=" background: url(<?= base_url() . $top_bg[6]['cover'] ?>); background-size: cover;
             background-repeat: no-repeat;
-            background-position: center;"
-            <?endif;?>>
+            background-position: center;" <? endif; ?>>
             <div class="container">
                 <div class="row">
                     <div class="col-12">
@@ -56,24 +52,24 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?foreach($product as $p){?>
-                                        <tr>
-                                            <td class="plantmore-product-thumbnail"><a href="<?= base_url() ?>product/detail/<?= $p['id'] ?>"><img src="<?= base_url() ?><?= ($p['images'] == array()) ? "assets/images/other/o01.jpg" : $p['images'][0] ?>" alt="" style="height:200px;"></a></td>
-                                            <td class="plantmore-product-name"><a href="<?= base_url() ?>product/detail/<?= $p['id'] ?>"><?= $p['name'] ?></a></td>
-                                            <td class="plantmore-product-price"><span class="amount">$<?= $p['sale_price'] ?></span></td>
-                                            <td class="plantmore-product-quantity">
-                                                <input id="detailPlus" min=0 value="<?= $p['number'] ?>" type="number" name="number" data-id="<?= $p['id'] ?>" data-price="<?= $p['sale_price'] ?>">
-                                            </td>
-                                            <td class="product-subtotal">
-                                                <span class="amount">$<span class="product_amount_<?= $p['id'] ?>"><?= $p['number'] * $p['sale_price'] ?></span></span>
-                                            </td>
-                                            <td class="plantmore-product-remove">
-                                                <a href="<?= base_url() ?>cart/del/<?= $p['id'] ?>">
-                                                    <i class="ion-close"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        <?}?>
+                                        <? foreach ($product as $p) { ?>
+                                            <tr>
+                                                <td class="plantmore-product-thumbnail"><a href="<?= base_url() ?>product/detail/<?= $p['id'] ?>"><img src="<?= base_url() ?><?= ($p['images'] == array()) ? "assets/images/other/o01.jpg" : $p['images'][0] ?>" alt="" style="height:200px;"></a></td>
+                                                <td class="plantmore-product-name"><a href="<?= base_url() ?>product/detail/<?= $p['id'] ?>"><?= $p['name'] ?></a></td>
+                                                <td class="plantmore-product-price"><span class="amount">$<?= $p['sale_price'] ?></span></td>
+                                                <td class="plantmore-product-quantity">
+                                                    <input id="detailPlus" min=0 value="<?= $p['number'] ?>" type="number" name="number" data-id="<?= $p['id'] ?>" data-price="<?= $p['sale_price'] ?>">
+                                                </td>
+                                                <td class="product-subtotal">
+                                                    <span class="amount">$<span class="product_amount_<?= $p['id'] ?>"><?= $p['number'] * $p['sale_price'] ?></span></span>
+                                                </td>
+                                                <td class="plantmore-product-remove">
+                                                    <a href="<?= base_url() ?>cart/del/<?= $p['id'] ?>">
+                                                        <i class="ion-close"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        <? } ?>
 
                                     </tbody>
                                 </table>
@@ -107,6 +103,7 @@
                                                 <option value="">請選擇地區</option>
                                                 <option value="tw">台灣</option>
                                                 <option value="hk">香港</option>
+                                                <option value="sg">新加坡</option>
                                                 <option value="au">澳門</option>
                                                 <option value="ma">馬來西亞</option>
                                             </select>
