@@ -63,7 +63,7 @@
                                     <div class="shop-top-bar">
                                         <!-- product-view-mode start -->
 
-                                        <div class="product-mode">
+                                        <div class="product-mode ">
                                             <!--shop-item-filter-list-->
                                             <ul class="nav shop-item-filter-list" role="tablist">
                                                 <li class="active"><a class="active" data-toggle="tab" href="#grid"><i class="ion-ios-keypad-outline"></i></a></li>

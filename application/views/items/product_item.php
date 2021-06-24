@@ -1,6 +1,6 @@
- <div class="col-xl-4 col-lg-6 col-md-6 col-6">
+ <div class="col-xl-4 col-lg-6 col-md-6 col-6" style="padding-left:3px;padding-right:3px">
    <!-- single-product-wrap start -->
-   <div class="single-product-wrap">
+   <div class="single-product-wrap" style="margin-top:5px;">
 
      <div class="product-image" style="display: flex; justify-content: center;">
        <div class="shape-outer octagon2-none">

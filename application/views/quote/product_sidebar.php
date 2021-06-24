@@ -3,7 +3,7 @@
   <div class="shop-sidebar-wrap">
 
     <!-- shop-sidebar start -->
-    <div class="shop-sidebar mb-30">
+    <div class="shop-sidebar mb-30 product-cate">
       <h4 class="title">依價格篩選</h4>
       <!-- filter-price-content start -->
       <div class="filter-price-content">
@@ -35,37 +35,37 @@
     <div class="shop-sidebar mb-30 product-cate">
       <h4 class="title">分類</h4>
       <ul>
-        <?foreach($classify as $c){?>
-        <li><a href="<?= base_url() ?>product/classify/<?= $c['id'] ?>"><?= $c['classify'] ?> <span>(<?= $c['num'] ?>)</span></a></li>
-        <?}?>
+        <? foreach ($classify as $c) { ?>
+          <li><a href="<?= base_url() ?>product/classify/<?= $c['id'] ?>"><?= $c['classify'] ?> <span>(<?= $c['num'] ?>)</span></a></li>
+        <? } ?>
       </ul>
     </div>
     <!-- shop-sidebar end -->
 
 
     <!-- shop-sidebar start -->
-    <div class="sidbar-product shop-sidebar mb-30">
+    <div class="sidbar-product shop-sidebar mb-30 product-cate">
       <h4 class="title">最佳銷售</h4>
 
-      <?foreach($best as $b){
-        $images = unserialize($b['images']);?>
-      <div class="sidbar-product-inner">
-        <div class="product-image">
-          <a href="<?= base_url() ?>product/detail/<?= $b['id'] ?>">
+      <? foreach ($best as $b) {
+        $images = unserialize($b['images']); ?>
+        <div class="sidbar-product-inner">
+          <div class="product-image">
+            <a href="<?= base_url() ?>product/detail/<?= $b['id'] ?>">
 
-            <img src="<?= base_url() ?><?= ($images == array()) ? "assets/images/product/p1.jpg" : $images[0] ?>" alt=""></a>
-        </div>
-        <div class="product-content text-left">
-          <h3><a href="<?= base_url() ?>product/detail"><?= $b['name'] ?></a></h3>
-          <div class="price-box">
-            <?if($b['price']!=0):?>
-            <span class="old-price">$<?= $b['price'] ?></span>
-            <?endif;?>
-            <span class="new-price">$<?= $b['sale_price'] ?></span>
+              <img src="<?= base_url() ?><?= ($images == array()) ? "assets/images/product/p1.jpg" : $images[0] ?>" alt=""></a>
+          </div>
+          <div class="product-content text-left">
+            <h3><a href="<?= base_url() ?>product/detail"><?= $b['name'] ?></a></h3>
+            <div class="price-box">
+              <? if ($b['price'] != 0) : ?>
+                <span class="old-price">$<?= $b['price'] ?></span>
+              <? endif; ?>
+              <span class="new-price">$<?= $b['sale_price'] ?></span>
+            </div>
           </div>
         </div>
-      </div>
-      <?}?>
+      <? } ?>
 
 
     </div>

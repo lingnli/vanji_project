@@ -6,7 +6,7 @@ class Product extends base_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->page_count = 6;
+        $this->page_count = 18;
     }
 
     public function index()
