@@ -13,15 +13,11 @@
 
 
         <!-- breadcrumb-area start -->
-        <div class="breadcrumb-area section-ptb" <?if($top_bg[2]['cover']=="" ):?>
-            style=" background: url(<?= base_url() ?>assets/images/bg/bgb.png); background-size: cover;
+        <div class="breadcrumb-area section-ptb" <? if ($top_bg[2]['cover'] == "") : ?> style=" background: url(<?= base_url() ?>assets/images/bg/bgb.png); background-size: cover;
             background-repeat: no-repeat;
-            background-position: center;"
-            <?else:?>
-            style=" background: url(<?= base_url() . $top_bg[2]['cover'] ?>); background-size: cover;
+            background-position: center;" <? else : ?> style=" background: url(<?= base_url() . $top_bg[2]['cover'] ?>); background-size: cover;
             background-repeat: no-repeat;
-            background-position: center;"
-            <?endif;?>>
+            background-position: center;" <? endif; ?>>
             <div class="container">
                 <div class="row">
                     <div class="col-12">
@@ -55,9 +51,9 @@
                                     <div class="shop-sidebar mb-30 product-top-cate">
                                         <h4 class="title">分類</h4>
                                         <ul>
-                                            <?foreach($classify as $c){?>
-                                            <li><a href="<?= base_url() ?>product/classify/<?= $c['id'] ?>"><?= $c['classify'] ?> <span>(<?= $c['num'] ?>)</span></a></li>
-                                            <?}?>
+                                            <? foreach ($classify as $c) { ?>
+                                                <li><a href="<?= base_url() ?>product/classify/<?= $c['id'] ?>"><?= $c['classify'] ?> <span>(<?= $c['num'] ?>)</span></a></li>
+                                            <? } ?>
                                         </ul>
                                     </div>
                                     <div class="shop-top-bar">
@@ -65,7 +61,7 @@
 
                                         <div class="product-mode ">
                                             <!--shop-item-filter-list-->
-                                            <ul class="nav shop-item-filter-list" role="tablist">
+                                            <ul class="nav shop-item-filter-list" role="tablist" style="display:inlineblock !important">
                                                 <li class="active"><a class="active" data-toggle="tab" href="#grid"><i class="ion-ios-keypad-outline"></i></a></li>
                                                 <li><a data-toggle="tab" href="#list"><i class="ion-ios-list-outline"></i></a></li>
                                             </ul>
@@ -125,7 +121,7 @@
         <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
         <script>
             var page = 1;
-            var search = "<?=$search?>";
+            var search = "<?= $search ?>";
             var sort = "";
             var min = "";
             var max = "";

@@ -58,8 +58,8 @@
             <h6 class="title-widget">聯絡資訊</h6>
             <ul class="footer-contact">
               <li>
-                <label><b>電話</b></label>
-                <a><?= $web_phone ?></a>
+                <label><b>訊息</b></label>
+                <a target="_blank" href="https://www.facebook.com/messages/t/949142695176781"><?= $web_phone ?></a>
               </li>
               <li>
                 <label><b>Email</b></label>
@@ -76,16 +76,16 @@
           <div class="widget-footer mt-30">
             <h6 class="title-widget">最新系列</h6>
             <ul class="footer-blog">
-              <?foreach($footer_news as $n){?>
+              <? foreach ($footer_news as $n) { ?>
               <li style="padding-bottom: 10px;">
                 <div class="widget-blog-wrap">
                   <div class="widget-blog-image">
                     <a href="<?= base_url() ?>news/detail/<?= $n['id'] ?>">
-                      <?if($n['cover']==""){?>
+                      <? if ($n['cover'] == "") { ?>
                       <img src="<?= base_url() ?>assets/images/blog/sb1.png" alt="" style="width:70px;height:70px;">
-                      <?}else{?>
+                      <? } else { ?>
                       <img src="<?= base_url() . $n['cover'] ?>" style="width:70px;height:70px;">
-                      <?}?>
+                      <? } ?>
                     </a>
                   </div>
                   <div class="widget-blog-content">
@@ -96,7 +96,7 @@
                   </div>
                 </div>
               </li>
-              <?}?>
+              <? } ?>
 
             </ul>
           </div>

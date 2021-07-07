@@ -193,13 +193,13 @@
                             <!-- pro_dtl_btn end -->
                             <!-- pro_social_share start -->
                             <div class="pro_social_share d-flex">
-                                <h2 class="title_2">分享 :</h2>
-                                <ul class="pro_social_link">
+                                <button data-id="<?= $product['id'] ?>" class="btn title_2 copy">複製連結</button>
+                                <!-- <ul class="pro_social_link">
                                     <li><a href="#"><i class="ion-social-twitter"></i></a></li>
                                     <li><a href="#"><i class="ion-social-tumblr"></i></a></li>
                                     <li><a href="#"><i class="ion-social-facebook"></i></a></li>
                                     <li><a href="#"><i class="ion-social-instagram-outline"></i></a></li>
-                                </ul>
+                                </ul> -->
                             </div>
                             <!-- pro_social_share end -->
                         </div>
@@ -341,6 +341,22 @@
         <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 
         <script>
+            $('.copy').on('click', function(e) {
+                console.log(123)
+                var temp = $('<input>'); // 建立input物件
+
+                $('body').append(temp); // 將input物件增加到body
+
+                var url = `<?= base_url() ?>` + '/product/detail/' + $(this).data('id'); // 取得要複製的連結
+
+                temp.val(url).select(); // 將連結加到input物件value
+
+                document.execCommand('copy'); // 複製
+
+                temp.remove(); // 移除input物件
+                alert('連結已複製');
+            });
+
             var is_login = "<?= $is_login ?>";
             //加入最愛
             $(document).on('click', ".heart", function(event) {

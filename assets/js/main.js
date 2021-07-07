@@ -441,8 +441,8 @@ $('.horizantal-product-active a').on('click', function () {
 $( "#price-slider" ).slider({
    range: true,
    min: 0,
-   max: 20000,
-   values: [3000, 10000 ],
+   max: 1000000,
+   values: [300000, 500000 ],
    slide: function( event, ui ) {
         $( "#min-price" ).val('$' + ui.values[ 0 ] );
         $( "#max-price" ).val('$' + ui.values[ 1 ] );

@@ -530,8 +530,14 @@ class Cart extends Base_Controller {
 			$cart = $this->db->where(array("u_id" => $user_id, "is_checkout" => 0))->get($this->cart)->row_array();
 
 			$cart_content = unserialize($cart['content']);
+
 		}else{
 			$cart_content = $this->session->userdata('temp_cart');
+		}
+		// print_r($cart_content);exit;
+
+		if ($cart_content == array() || $cart_content == ' ') {
+			$this->js_output_and_back("請先選擇商品後進行結帳");
 		}
 
 

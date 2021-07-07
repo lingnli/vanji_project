@@ -250,7 +250,7 @@
                 area = $(this).val();
                 $("#delivery").val("");
                 if (area != 'tw') {
-                    alert('台灣以外地區自動選擇為宅配');
+                    // alert('台灣以外地區自動選擇為宅配');
                     $('.delivery-con').hide();
                     // $('#convenient').hide();
                     // $('.convenient-select').hide();
