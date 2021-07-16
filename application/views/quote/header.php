@@ -27,14 +27,15 @@
   <link rel="icon" href="<?= base_url() ?>assets/images/icon/logo.ico" type="image/x-icon" />
 
   <link rel="icon" href="<?= base_url() ?>assets/images/icon/logo.ico" type="image/x-icon" />
+  <!-- Vendor & Plugins CSS (Please remove the comment from below vendor.min.css & plugins.min.css for better website load performance and remove css files from avobe) -->
+  <!--
+    <script src="<?= base_url() ?>assets/js/vendor/vendor.min.js"></script>
+    <script src="<?= base_url() ?>assets/js/plugins/plugins.min.js"></script>
+    -->
 
+  <!-- Main Style CSS (Please use minify version for better website load performance) -->
   <link rel="stylesheet" href="<?= base_url() ?>assets/css/style.css">
   <link rel="stylesheet" href="<?= base_url() ?>assets/css/custom.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <style>
-    .rwd-hide{
-      
-    }
-  </style>
 </head>

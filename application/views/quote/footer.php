@@ -146,7 +146,7 @@
 <!--  Jquery ui JS -->
 <script src="<?= base_url() ?>assets/js/plugins/jqueryui.min.js"></script>
 <!--  Scrollup JS -->
-<script src="<?= base_url() ?>assets/js/plugins/scrollup.min.js"></script>
+<!-- <script src="<?= base_url() ?>assets/js/plugins/scrollup.min.js"></script> -->
 <script src="<?= base_url() ?>assets/js/plugins/ajax-contact.js"></script>
 
 <!-- Main JS -->

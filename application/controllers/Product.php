@@ -11,6 +11,9 @@ class Product extends base_Controller
 
     public function index()
     {
+        $product_id = $this->session->userdata('product_id');
+        
+        $this->session->unset_userdata('product_id');
         if($_POST){
             $this->data['search'] = $_POST['search'];
         }else{
@@ -29,8 +32,15 @@ class Product extends base_Controller
         $this->data['best'] = $this->db->limit(3)->where(array("is_delete" => 0))->order_by('id')->get($this->product)->result_array();
 
 
+        $this->data['product_id'] = $product_id;
+        // if($product_id){
+        //     header("Location: " . base_url() . "product#product_".$product_id);
+        // }else{
+            $this->load->view('product', $this->data);
+        // }
+        
 
-        $this->load->view('product', $this->data);
+        
         
 
     }
@@ -63,7 +73,7 @@ class Product extends base_Controller
             $syntax .= ")";
         }
 
-        $order_by = "P.create_date DESC";
+        $order_by = "P.sort ASC";
 
         if($sort !=""){
             
@@ -273,7 +283,8 @@ class Product extends base_Controller
     public function detail($id = false) 
     {
         $this->flow_record("product/detail/" . $id);
-        
+
+        $this->session->set_userdata('product_id', $id);
 
         $product =  $this->db->select('P.*')
                         ->from("product P")

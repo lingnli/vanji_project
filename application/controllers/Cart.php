@@ -515,6 +515,10 @@ class Cart extends Base_Controller {
 		//判斷是否登入
 		$user_id = $this->encryption->decrypt($this->session->uid);
 
+		//判斷此使用者是否有結帳完成訂單
+		$order_check = $this->db->where(array("user_id" => $user_id,'is_delete'=>0,'status'=>'paid'))->get($this->order)->row_array();
+		// print_r($order_check);
+		// exit;
 		// if (!$user_id) {
 		// $this->js_output_and_redirect("請先登入後再進行結帳", base_url() . "home/login_register");
 		// exit;
@@ -678,15 +682,20 @@ class Cart extends Base_Controller {
 		}
 		
 		if($user_id){
-			$ship = 0;
+			if ($order_check) {
+				$ship = (int)$this->data['ship'];
+			} else {
+				$ship = 0;
+			}
 		}else{
 			if ($area != 'tw') {
 				$ship = 200;
 			} else {
-				$ship = (int)$this->data['ship'];;
+				$ship = (int)$this->data['ship'];
 			}
 		}
-		
+
+		// print_r($ship);exit;
 
 		$this->data['discount_type'] = $discount_type;
 		$this->data['discount_str'] = $discount_str;		
@@ -694,7 +703,10 @@ class Cart extends Base_Controller {
 		$this->data['discount_percent_code'] = (int)$discount_number;
 
 		$this->data['total_price'] = $total_price;
-		$this->data['ship'] = $ship;
+
+			$this->data['ship'] = $ship;
+
+		
 		$this->data['total_price_ship'] = $total_price + $ship;
 		
 		

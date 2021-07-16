@@ -484,14 +484,14 @@ $("#chekout-box-2").on("change",function(){
 /*--
     ScrollUp Active
 -----------------------------------*/
-$.scrollUp({
-    scrollText: '<i class="ion-chevron-up"></i>',
-    easingType: 'linear',
-    scrollSpeed: 900,
-    animation: 'fade',
-});    
+// $.scrollUp({
+//     scrollText: '<i class="ion-chevron-up"></i>',
+//     easingType: 'linear',
+//     scrollSpeed: 900,
+//     animation: 'fade',
+// });    
     
-    
+
     
     
     

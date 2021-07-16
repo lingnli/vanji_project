@@ -130,8 +130,8 @@ class Product extends Base_Controller {
 		}
 	}
 
-	private $th_title = ["#","顯示圖", "商品名稱", "產品分類", "定價/售價", "首頁商品","數量","建立日期", "動作"]; //, "置頂"
-	private $th_width = ["", "150px", "", "",  "150px", "","","","130px"];
+	private $th_title = ["排序","顯示圖", "商品名稱", "產品分類", "定價/售價", "首頁商品","數量","建立日期", "動作"]; //, "置頂"
+	private $th_width = ["180px", "", "", "",  "150px", "","","","130px"];
 	private $order_column = ["", "", "", "", "", "", "", ""]; //, "is_head"
 	private $can_order_fields = [];
 
@@ -345,7 +345,7 @@ class Product extends Base_Controller {
 			$syntax .= ")";
 		}
 
-		$order_by = "create_date DESC";
+		$order_by = "sort ASC";
 		if ($order_column[$order] != "") {
 			$order_by = $order_column[$order] . " " . $direction . ", " . $order_by;
 		}
@@ -369,7 +369,8 @@ class Product extends Base_Controller {
 		$html = "";
 		foreach ($data['list'] as $item) {
 			$html .= $this->load->view("mgr/items/product_item", array(
-				"item"  =>	$item
+				"item"  =>	$item,
+				"total" => $data['total']
 			), TRUE);
 		}
 		if ($search != "") $html = preg_replace('/' . $search . '/i', '<mark data-markjs="true">' . $search . '</mark>', $html);
@@ -377,7 +378,8 @@ class Product extends Base_Controller {
 		$this->output(TRUE, "成功", array(
 			"html"       =>	$html,
 			"page"       =>	$page,
-			"total_page" =>	$data['total_page']
+			"total_page" =>	$data['total_page'],
+			
 		));
 	}
 
@@ -388,7 +390,7 @@ class Product extends Base_Controller {
 		$sort = $this->input->post("sort");
 
 		$index = 1;
-		foreach ($this->db->order_by("sort ASC")->get_where($this->event_table, array("id<>" => $id, "is_delete" => 0))->result_array() as $item) {
+		foreach ($this->db->order_by("sort ASC")->get_where($this->product, array("id<>" => $id, "is_delete" => 0))->result_array() as $item) {
 			if ($index == $sort) $index++;
 			$data[] = array(
 				"id"	=>	$item['id'],
@@ -400,7 +402,7 @@ class Product extends Base_Controller {
 			"id"         =>	$id,
 			"sort"       =>	$sort
 		);
-		$res = $this->db->update_batch($this->event_table, $data, "id");
+		$res = $this->db->update_batch($this->product, $data, "id");
 		if ($res) {
 			$this->output(TRUE, "成功");
 		} else {

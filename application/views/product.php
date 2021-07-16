@@ -126,8 +126,18 @@
             var min = "";
             var max = "";
             var is_login = "<?= $is_login ?>";
-
+            var product_id = "<?= $product_id ?>";
+            // if (product_id != "") {
+            //     location.href = '<?= base_url() ?>product#product_' + product_id;
+            //     console.log(product_id)
+            // } else {
+            //     console.log(123)
+            // }
             $(document).ready(function($) {
+                // $('html,body').animate({
+                //     scrollTop: 0,
+                // }, 1)
+                // console.log(999)
 
                 load_data(page);
 
@@ -212,16 +222,33 @@
                             total = parseInt(data.total);
                             search = data.search;
                             generate_page(data.total_page);
-                            $('html,body').animate({
-                                scrollTop: 0,
-                            }, 500)
+                            if (product_id != "") {
+
+                                console.log($("#product_" + product_id).offset().top)
+
+                                setTimeout(function() {
+                                    $('html,body').animate({
+                                        scrollTop: $("#product_" + product_id).offset().top-100,
+                                    }, 500)
+                                }, 1500);
+
+
+                            } else {
+                                console.log(123)
+                            }
+
                         }
                     },
                     failure: function(errMsg) {}
                 });
             }
 
-
+            function cc(height) {
+                // $('html,body').animate({
+                //     scrollTop: height,
+                // }, 500)
+                console.log(777)
+            }
 
             var page_range = 10;
 
