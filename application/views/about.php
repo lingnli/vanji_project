@@ -42,18 +42,21 @@
         <!-- main-content-wrap start -->
         <div class="main-content-wrap">
             <!-- About Us Area -->
-            <div class="about-us-area section-ptb">
+            <div class="about-us-area pb-40 pt-40">
                 <div class="container">
-                    <div class="row align-items-center">
+                <div class="w-100 mb-20">
+                    <h3>歡迎您來到 <span>梵日珠寶</span></h3>
+                </div>
+                    <div class="row align-items-start">
                         <div class="col-lg-6">
                             <div class="about-us-contents">
-                                <h3>歡迎您來到 <span>梵日珠寶</span></h3>
+                                <!-- <h3>歡迎您來到 <span>梵日珠寶</span></h3> -->
                                 <p>
                                     <?= $top['intro'] ?>
                                 </p>
                             </div>
                         </div>
-                        <div class="col-lg-5 ">
+                        <div class="col-lg-6">
                             <div class="about-us-image text-right">
                                 <?if($top['cover']==""){?>
                                 <img src="<?= base_url() ?>assets/images/other/ab1.png" alt="">
@@ -69,7 +72,7 @@
 
 
             <!-- Our Team Area -->
-            <div class="our-team-area section-ptb">
+            <!-- <div class="our-team-area section-ptb">
                 <div class="container">
                     <div class="row">
 
@@ -93,7 +96,7 @@
 
                     </div>
                 </div>
-            </div>
+            </div> -->
             <!--// Our Team Area -->
 
 
