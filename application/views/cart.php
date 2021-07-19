@@ -58,7 +58,14 @@
                                                 <td class="plantmore-product-name"><a href="<?= base_url() ?>product/detail/<?= $p['id'] ?>"><?= $p['name'] ?></a></td>
                                                 <td class="plantmore-product-price"><span class="amount">$<?= $p['sale_price'] ?></span></td>
                                                 <td class="plantmore-product-quantity">
-                                                    <input id="detailPlus" min=0 value="<?= $p['number'] ?>" type="number" name="number" data-id="<?= $p['id'] ?>" data-price="<?= $p['sale_price'] ?>">
+                                                    <? if ($p['check_number'] == 'zero') { ?>
+                                                        已完售
+                                                    <? } elseif ($p['check_number'] == 'false') { ?>
+                                                        數量不足
+                                                    <? } else { ?>
+                                                        <input id="detailPlus" class="d_<?= $p['id'] ?>" min=0 value="<?= $p['number'] ?>" type="number" name="number" data-id="<?= $p['id'] ?>" data-price="<?= $p['sale_price'] ?>">
+                                                    <? } ?>
+
                                                 </td>
                                                 <td class="product-subtotal">
                                                     <span class="amount">$<span class="product_amount_<?= $p['id'] ?>"><?= $p['number'] * $p['sale_price'] ?></span></span>
@@ -236,6 +243,9 @@
                                 $('.product_amount_' + p_id).text(data.product_price);
                                 $('.total_price').text(data.total_price);
 
+                            } else {
+                                alert(data.msg)
+                                $('.d_'+p_id).val(num - 1)
                             }
                         }
                     });

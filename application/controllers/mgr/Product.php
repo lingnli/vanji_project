@@ -178,7 +178,7 @@ class Product extends Base_Controller {
 
 		if ($_POST) {
 
-
+			// print_r($_POST);exit;
 			$data = $this->process_post_data($this->param);
 
 			
@@ -219,7 +219,7 @@ class Product extends Base_Controller {
 			array(
 				array("id" => "0", "text" => "無"),
 				array("id" => "1", "text" => "精選商品"),
-				array("id" => "1", "text" => "主打商品")				
+				array("id" => "2", "text" => "主打商品")				
 			);
 									
 
@@ -388,7 +388,7 @@ class Product extends Base_Controller {
 		$id = $this->input->post("id");
 		if (!is_numeric($id)) show_404();
 		$sort = $this->input->post("sort");
-
+		
 		$index = 1;
 		foreach ($this->db->order_by("sort ASC")->get_where($this->product, array("id<>" => $id, "is_delete" => 0))->result_array() as $item) {
 			if ($index == $sort) $index++;
@@ -402,7 +402,9 @@ class Product extends Base_Controller {
 			"id"         =>	$id,
 			"sort"       =>	$sort
 		);
+		
 		$res = $this->db->update_batch($this->product, $data, "id");
+		
 		if ($res) {
 			$this->output(TRUE, "成功");
 		} else {

@@ -13,7 +13,11 @@
 
 
         <!-- breadcrumb-area start -->
-        <div class="breadcrumb-area section-ptb">
+        <div class="breadcrumb-area section-ptb" <? if ($top_bg[5]['cover'] == "") : ?> style=" background: url(<?= base_url() ?>assets/images/bg/bgb.png); background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;" <? else : ?> style=" background: url(<?= base_url() . $top_bg[5]['cover'] ?>); background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;" <? endif; ?>>
             <div class="container">
                 <div class="row">
                     <div class="col-12">
@@ -95,14 +99,14 @@
 
                                                             <div class="account-input-box">
                                                                 <label>舊密碼*</label>
-                                                                <input type="text" name="old_password" >
+                                                                <input type="text" name="old_password">
                                                                 <label>新密碼*</label>
-                                                                <input type="text" name="password" >
+                                                                <input type="text" name="password">
                                                                 <label>再次輸入新密碼*</label>
-                                                                <input type="text" name="password2" >
-                                                                
+                                                                <input type="text" name="password2">
+
                                                             </div>
-                                                           
+
                                                             <div class="button-box">
                                                                 <button class="btn default-btn" type="submit">儲存</button>
                                                             </div>
@@ -128,7 +132,7 @@
                                                                 <label>Email</label>
                                                                 <input type="text" name="email" value="<?= $user['email'] ?>">
                                                                 <label>生日</label>
-                                                                <input type="date" name="birthday"  max="<?= $today ?>" value="<?= $user['birthday'] ?>">
+                                                                <input type="date" name="birthday" max="<?= $today ?>" value="<?= $user['birthday'] ?>">
                                                             </div>
                                                             <div class="example">
                                                                 (E.g.: 1970/05/31)

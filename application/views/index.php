@@ -13,14 +13,14 @@
 
         <!-- 輪播圖 -->
         <div class="hero-slider hero-slider-one">
-            <?foreach($carousel as $c){?>
-            <?if($c['cover']==""){?>
-            <div class="single-slide" style="background-image: url(<?= base_url() ?>assets/images/slider/s02.JPG)"></div>
-            <?}else{?>
-            <div class="single-slide" style="background-image: url(<?= base_url() . $c['cover'] ?>)"></div>
-            <?}?>
+            <? foreach ($carousel as $c) { ?>
+                <? if ($c['cover'] == "") { ?>
+                    <div class="single-slide" style="background-image: url(<?= base_url() ?>assets/images/slider/s02.JPG)"></div>
+                <? } else { ?>
+                    <div class="single-slide" style="background-image: url(<?= base_url() . $c['cover'] ?>)"></div>
+                <? } ?>
 
-            <?}?>
+            <? } ?>
 
         </div>
         <!-- Hero Section End -->
@@ -40,44 +40,52 @@
 
                 <div class="row">
 
-                    <?foreach($top as $t){?>
-                    <div class="col-lg-3">
+                    <? foreach ($top as $t) { ?>
+                        <div class="col-lg-3">
 
-                        <div class="single-product-wrap">
+                            <div class="single-product-wrap">
 
-                            <div class="product-image" style="display: flex; justify-content: center;">
-                                <div class="shape-outer octagon2-none">
-                                    <div class="shape-inner-none octagon2-none">
-                                        <a href="<?= base_url() ?>product/detail/<?= $t['id'] ?>">
-                                            <?
-                                        $cover = unserialize($t['images']);
-                                        
-                                        if($cover==array()){?>
-                                            <img src="<?= base_url() ?>assets/images/product/p1.jpg" alt="Produce Images">
-                                            <?}else{?>
-                                            <img src="<?= base_url() . $cover[0] ?>" alt="Produce Images">
-                                            <?}?>
-                                        </a>
+                                <div class="product-image" style="display: flex; justify-content: center;">
+                                    <div class="shape-outer octagon2-none">
+                                        <div class="shape-inner-none octagon2-none">
+                                            <a href="<?= base_url() ?>product/detail/<?= $t['id'] ?>">
+                                                <?
+                                                $cover = unserialize($t['images']);
+
+                                                if ($cover == array()) { ?>
+                                                    <img src="<?= base_url() ?>assets/images/product/p1.jpg" alt="Produce Images">
+                                                <? } else { ?>
+                                                    <img src="<?= base_url() . $cover[0] ?>" alt="Produce Images">
+                                                <? } ?>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <div class="product-action">
+                                        <a href="<?= base_url() ?>cart/add/<?= $t['id'] ?>" class="add-to-cart"><i class="ion-bag"></i></a>
+                                        <a class="wishlist heart" data-id="<?= $t['id'] ?>"><i class="ion-android-favorite-outline"></i></a>
                                     </div>
                                 </div>
+                                <div class="product-content">
+                                    <h3><a href="<?= base_url() ?>product/detail/<?= $t['id'] ?>"><?= $t['name'] ?></a></h3>
+                                    <div class="price-box">
+                                        <? if ($t['price'] != 0) : ?>
+                                            <span class="old-price">$<?= $t['price'] ?></span>
+                                        <? endif; ?>
 
-                                <div class="product-action">
-                                    <a href="<?= base_url() ?>cart/add/<?= $t['id'] ?>" class="add-to-cart"><i class="ion-bag"></i></a>
-                                    <a class="wishlist heart" data-id="<?= $t['id'] ?>"><i class="ion-android-favorite-outline"></i></a>
-                                </div>
-                            </div>
-                            <div class="product-content">
-                                <h3><a href="<?= base_url() ?>product/detail/<?= $t['id'] ?>"><?= $t['name'] ?></a></h3>
-                                <div class="price-box">
-                                    <?if($t['price']!=0):?>
-                                    <span class="old-price">$<?= $t['price'] ?></span>
-                                    <?endif;?>
-                                    <span class="new-price">$<?= $t['sale_price'] ?></span>
+                                        <? if ($all_check == 1) { ?>
+                                            <span class="old-price" style="color:red;">$<?= $t['sale_price'] ?></span>
+                                            <span class="new-price">$<?= $t['sale_price'] * ($all_discount / 100) ?></span>
+                                        <? } else { ?>
+                                            <span class="new-price">$<?= $t['sale_price'] ?></span>
+                                        <? } ?>
+
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <?}?>
+                    <? } ?>
 
 
                 </div>
@@ -90,26 +98,26 @@
             <div class="container-fluid">
                 <div class="row">
 
-                    <?foreach($banner as $b){?>
-                    <div class="col-lg-4 col-md-6 h-100 d-flex justify-content-center">
-                        <!-- Single Banner Start -->
-                        <div class="single-banner mt-30">
-                            <?if($b['cover']==""){?>
-                            <img src="<?= base_url() ?>assets/images/banner/b01.jpg" alt="">
-                            <?}else{?>
-                            <img src="<?= base_url() . $b['cover'] ?>" alt="">
-                            <?}?>
-                            <div class="banner-content text-center">
-                                <div class="banner-content-box">
-                                    <h4><?= $b['title'] ?></h4>
-                                    <p class="p16"><?= $b['sub_title'] ?></p>
-                                    <a href="<?= base_url() ?>product" class="p16">現在去選購</a>
+                    <? foreach ($banner as $b) { ?>
+                        <div class="col-lg-4 col-md-6 h-100 d-flex justify-content-center">
+                            <!-- Single Banner Start -->
+                            <div class="single-banner mt-30">
+                                <? if ($b['cover'] == "") { ?>
+                                    <img src="<?= base_url() ?>assets/images/banner/b01.jpg" alt="">
+                                <? } else { ?>
+                                    <img src="<?= base_url() . $b['cover'] ?>" alt="">
+                                <? } ?>
+                                <div class="banner-content text-center">
+                                    <div class="banner-content-box">
+                                        <h4><?= $b['title'] ?></h4>
+                                        <p class="p16"><?= $b['sub_title'] ?></p>
+                                        <a href="<?= base_url() ?>product" class="p16">現在去選購</a>
+                                    </div>
                                 </div>
                             </div>
+                            <!-- Single Banner End -->
                         </div>
-                        <!-- Single Banner End -->
-                    </div>
-                    <?}?>
+                    <? } ?>
 
                 </div>
             </div>
@@ -131,44 +139,50 @@
 
                 <div class="row product-two-row-4">
 
-                    <?foreach($second as $t){?>
-                    <div class="col-lg-12">
+                    <? foreach ($second as $t) { ?>
+                        <div class="col-lg-12">
 
-                        <div class="single-product-wrap">
+                            <div class="single-product-wrap">
 
-                            <div class="product-image" style="display: flex; justify-content: center;">
-                                <div class="shape-outer octagon2-none">
-                                    <div class="shape-inner-none octagon2-none">
-                                        <a href="<?= base_url() ?>product/detail/<?= $t['id'] ?>">
-                                            <?
-                                        $cover = unserialize($t['images']);
-                                        
-                                        if($cover==array()){?>
-                                            <img src="<?= base_url() ?>assets/images/product/p1.jpg" alt="Produce Images">
-                                            <?}else{?>
-                                            <img src="<?= base_url() . $cover[0] ?>" alt="Produce Images">
-                                            <?}?>
-                                        </a>
+                                <div class="product-image" style="display: flex; justify-content: center;">
+                                    <div class="shape-outer octagon2-none">
+                                        <div class="shape-inner-none octagon2-none">
+                                            <a href="<?= base_url() ?>product/detail/<?= $t['id'] ?>">
+                                                <?
+                                                $cover = unserialize($t['images']);
+
+                                                if ($cover == array()) { ?>
+                                                    <img src="<?= base_url() ?>assets/images/product/p1.jpg" alt="Produce Images">
+                                                <? } else { ?>
+                                                    <img src="<?= base_url() . $cover[0] ?>" alt="Produce Images">
+                                                <? } ?>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <div class="product-action">
+                                        <a href="<?= base_url() ?>cart/add/<?= $t['id'] ?>" class="add-to-cart"><i class="ion-bag"></i></a>
+                                        <a class="heart wishlist" data-id="<?= $t['id'] ?>"><i class="ion-android-favorite-outline"></i></a>
                                     </div>
                                 </div>
-
-                                <div class="product-action">
-                                    <a href="<?= base_url() ?>cart/add/<?= $t['id'] ?>" class="add-to-cart"><i class="ion-bag"></i></a>
-                                    <a class="heart wishlist" data-id="<?= $t['id'] ?>"><i class="ion-android-favorite-outline"></i></a>
-                                </div>
-                            </div>
-                            <div class="product-content">
-                                <h3><a href="<?= base_url() ?>product/detail/<?= $t['id'] ?>"><?= $t['name'] ?></a></h3>
-                                <div class="price-box">
-                                    <?if($t['price']!=0):?>
-                                    <span class="old-price">$<?= $t['price'] ?></span>
-                                    <?endif;?>
-                                    <span class="new-price">$<?= $t['sale_price'] ?></span>
+                                <div class="product-content">
+                                    <h3><a href="<?= base_url() ?>product/detail/<?= $t['id'] ?>"><?= $t['name'] ?></a></h3>
+                                    <div class="price-box">
+                                        <? if ($t['price'] != 0) : ?>
+                                            <span class="old-price">$<?= $t['price'] ?></span>
+                                        <? endif; ?>
+                                        
+                                        <? if ($all_check == 1) { ?>
+                                            <span class="old-price" style="color:red;">$<?= $t['sale_price'] ?></span>
+                                            <span class="new-price">$<?= $t['sale_price'] * ($all_discount / 100) ?></span>
+                                        <? } else { ?>
+                                            <span class="new-price">$<?= $t['sale_price'] ?></span>
+                                        <? } ?>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <?}?>
+                    <? } ?>
 
 
 
@@ -194,34 +208,34 @@
                     </div>
                 </div>
                 <div class="row">
-                    <?foreach($news as $n){?>
-                    <div class="col-lg-6 col-md-6">
-                        <!-- single-blog Start -->
-                        <div class="single-blog mt-30">
-                            <div class="blog-image">
-                                <a href="<?= base_url() ?>news/detail/<?= $n['id'] ?>">
-                                    <?if($n['cover']==""){?>
-                                    <img src="<?= base_url() ?>assets/images/blog/b01.png" alt="">
-                                    <?}else{?>
-                                    <img src="<?= base_url() . $n['cover'] ?>" alt="">
-                                    <?}?>
-                                </a>
-                                <div class="meta-tag">
-                                    <p><?= date("d/M", strtotime($n['date'])) ?></p>
+                    <? foreach ($news as $n) { ?>
+                        <div class="col-lg-6 col-md-6">
+                            <!-- single-blog Start -->
+                            <div class="single-blog mt-30">
+                                <div class="blog-image">
+                                    <a href="<?= base_url() ?>news/detail/<?= $n['id'] ?>">
+                                        <? if ($n['cover'] == "") { ?>
+                                            <img src="<?= base_url() ?>assets/images/blog/b01.png" alt="">
+                                        <? } else { ?>
+                                            <img src="<?= base_url() . $n['cover'] ?>" alt="">
+                                        <? } ?>
+                                    </a>
+                                    <div class="meta-tag">
+                                        <p><?= date("d/M", strtotime($n['date'])) ?></p>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="blog-content">
-                                <h4><a href="<?= base_url() ?>news/detail/<?= $n['id'] ?>"><?= $n['title'] ?></a></h4>
-                                <p class="p16"><?= mb_substr(strip_tags($n['content']), 0, 100) ?>...</p>
-                                <div class="read-more">
-                                    <a href="<?= base_url() ?>news/detail/<?= $n['id'] ?>" class="p16">查看更多</a>
+                                <div class="blog-content">
+                                    <h4><a href="<?= base_url() ?>news/detail/<?= $n['id'] ?>"><?= $n['title'] ?></a></h4>
+                                    <p class="p16"><?= mb_substr(strip_tags($n['content']), 0, 100) ?>...</p>
+                                    <div class="read-more">
+                                        <a href="<?= base_url() ?>news/detail/<?= $n['id'] ?>" class="p16">查看更多</a>
+                                    </div>
                                 </div>
                             </div>
+                            <!-- single-blog End -->
                         </div>
-                        <!-- single-blog End -->
-                    </div>
-                    <?}?>
+                    <? } ?>
 
                 </div>
             </div>

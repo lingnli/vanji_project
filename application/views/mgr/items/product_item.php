@@ -8,7 +8,7 @@
                 <span class="input-group-addon sort_up">▲</span>
             <? endif; ?>
             <input type="hidden" id="sort_<?= $item['id'] ?>" value="<?= $item['sort'] ?>">
-            <!-- <select class="form-control select2">
+            <select class="form-control select2">
                 <?
                 for ($index = 1; $index <= $total; $index++) {
                     echo '<option value="' . $index . '"';
@@ -18,8 +18,8 @@
                     echo '>' . $index . '</option>';
                 }
                 ?>
-            </select> -->
-            <input class="form-control" disabled type="text" value="<?= $item['sort'] ?>">
+            </select> 
+            <!-- <input class="form-control sort"  type="text" value="<?= $item['sort'] ?>"> -->
             <? if ($item['sort'] == $total) : ?>
                 <span class="input-group-addon" style="color: #CCC; cursor: not-allowed;">▼</span>
             <? else : ?>

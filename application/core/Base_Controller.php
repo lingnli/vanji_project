@@ -76,6 +76,7 @@ class  Base_Controller  extends  CI_Controller  {
 			$this->data['footer_text'] = $this->db->get_where("settings", array("id" => 15))->row()->content;
 
 			$this->data['discount_type'] = $this->db->get_where("settings", array("id" => 17))->row()->content;
+			$this->data['all_discount'] = (int)$this->db->get_where("settings", array("id" => 24))->row()->content;
 
 			$this->data['index_top'] = $this->db->get_where("settings", array("id" => 18))->row()->content;
 			$this->data['index_select'] = $this->db->get_where("settings", array("id" => 19))->row()->content;
@@ -98,22 +99,31 @@ class  Base_Controller  extends  CI_Controller  {
 			$u_id =	$this->encryption->decrypt($this->session->uid);
 
 			$temp_cart = $this->db->where(array("u_id" => $u_id, "is_checkout" => 0))->get($this->cart)->row_array();
+			
 			if($temp_cart){
 				$temp_cart['content']= unserialize($temp_cart['content']);
+				
 				$menu_total =0;
 				$menu_product = array();
 			
-			
+				$i=0;
 				foreach($temp_cart['content'] as $t){
 					$p_id = $t['p_id'];
 
 					$product_item =
 					$this->db->where(array("id" => $p_id,"is_delete"=>0))->get($this->product)->row_array();
-
-					$product_item['images'] = unserialize($product_item['images']);
-					$product_item['number'] = $t['quantity'];
-					$menu_total += $t['quantity']*$product_item['sale_price'];
-					array_push($menu_product,$product_item);
+					if(!$product_item){
+						unset($temp_cart['content'][$i]);
+						$d['content'] = serialize($temp_cart['content']);
+						$this->db->where(array("u_id" => $u_id, "is_checkout" => 0))->update($this->cart,$d);
+					}else{
+						$product_item['images'] = unserialize($product_item['images']);
+						$product_item['number'] = $t['quantity'];
+						$menu_total += $t['quantity'] * $product_item['sale_price'];
+						array_push($menu_product, $product_item);
+					}
+					
+					$i++;
 				}
 			}
 

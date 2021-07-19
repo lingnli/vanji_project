@@ -34,6 +34,9 @@ class Discount extends Base_Controller {
 		$type = $this->db->where(array("id" => 17 ))->get('settings')->row_array();
 		$this->data['type'] = $type['content'];
 
+		$all = $this->db->where(array("id" => 24))->get('settings')->row_array();
+		$this->data['all'] = $all['content'];
+
 		//滿額
 		$list_1 = $this->db->select("D.*")
 			->from($this->discount . " D")
@@ -178,16 +181,37 @@ class Discount extends Base_Controller {
 			$type = 1;
 		}elseif($type == 'quantity'){
 			$type = 2;
+		} elseif ($type == 'all') {
+			$type = 3;
 		}
 
 		$this->db->where(array("id" => 17))->update('settings', array('content'=>$type));
 
 		if($type==1){
 			$this->js_output_and_redirect("已更新全站折扣方式為「滿額折扣」", $_SERVER['HTTP_REFERER']);
-		}else{
+		} elseif ($type == 2) {
 			$this->js_output_and_redirect("已更新全站折扣方式為「滿件折扣」", $_SERVER['HTTP_REFERER']);
+		} elseif ($type == 3) {
+			$this->js_output_and_redirect("已更新全站折扣方式為「全館折扣」", $_SERVER['HTTP_REFERER']);
 		}
 		
+	}
+
+	//修改全館折扣
+	public function edit_all()
+	{
+
+		$all   = $this->input->post("all");
+
+		if ($all == '') {
+			$this->js_output_and_back("全館折扣不可為空值");
+		} 
+
+		$res = $this->db->where(array("id" => 24))->update('settings', array('content' => $all));
+
+		if ($res) {
+			$this->js_output_and_redirect("更新全站折扣成功", $_SERVER['HTTP_REFERER']);
+		} 
 	}
 
 }

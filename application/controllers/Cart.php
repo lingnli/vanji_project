@@ -11,7 +11,11 @@ class Cart extends Base_Controller {
 		$this->load->model("Member_model");
 		$this->load->model("Pay_model");
 		$this->load->model("EC_logistic");
-		
+		if ($this->data['discount_type'] == 3) {
+			$this->all_discount = true;
+		} else {
+			$this->all_discount = false;
+		}
 	}
 
 
@@ -30,6 +34,12 @@ class Cart extends Base_Controller {
 		//session中抓出使用者id去判斷是否登入
 		$u_id =	$this->encryption->decrypt($this->session->uid);
 
+		//判斷庫存是否足夠
+		$check_quantity =$this->db->get_where('product', array("id" => $p_id))->row_array();
+		if($check_quantity['number']< $quantity){
+			$this->js_output_and_back("數量不足");
+			exit();
+		}
 
 		$product = array();
 		$product['p_id'] = $p_id;
@@ -53,8 +63,18 @@ class Cart extends Base_Controller {
 				foreach ($temp_cart as $t) {
 					
 					if ($t['p_id'] == $p_id) {
+
+						
+
 						//若產品id及spec_id相同->增加數量
 						$temp_cart[$i]['quantity'] += $product['quantity'];
+
+
+						$check_quantity = $this->db->get_where('product', array("id" => $p_id))->row_array();
+						if ($check_quantity['number'] <$temp_cart[$i]['quantity']) {
+							$this->js_output_and_back("數量不足");
+							exit();
+						}
 						// print_r('111');exit;
 						$_SESSION['temp_cart'] = $temp_cart;
 						$is_inarray = TRUE;
@@ -285,15 +305,26 @@ class Cart extends Base_Controller {
 				$this->db->select('P.*')
 				->from("product P")																
 				->where("P.id=$p_id")				
-				->get()->row_array();				
-
+				->get()->row_array();
+				
+				if($product_item['number']==0){
+					$product_item['check_number'] = 'zero';	
+				}else if($product_item['number'] >= $c['quantity']){
+					$product_item['number'] = $c['quantity'];
+					$product_item['check_number'] = 'true';	
+				} else if ($product_item['number'] < $c['quantity']) {
+					$product_item['check_number'] = 'false';	
+				}
+				if($this->all_discount){
+					$product_item['sale_price'] = $product_item['sale_price']* ($this->data['all_discount'] / 100);
+				}
 				$product_item['number'] = $c['quantity'];
 				$product_item['images'] = unserialize($product_item['images']);
 				$total_price += $product_item['sale_price']*$c['quantity'];
 				$total_num += $c['quantity'];
 
 				array_push($product,$product_item);
-		}
+			}
 		}
 
 		$this->data['product'] = $product;
@@ -301,7 +332,7 @@ class Cart extends Base_Controller {
 		// $this->data['total_price_ship'] = $total_price + (int)$this->data['ship'];
 		$this->data['total_price_ship'] = $total_price ;
 		$this->data['product_num'] = $total_num;	
-		// print_r($this->data);exit;
+		
 
 
 		$this->load->view('cart', $this->data);
@@ -317,18 +348,29 @@ class Cart extends Base_Controller {
 		//從session中取得u_id
 		$u_id = $this->encryption->decrypt($this->session->uid);
 		//從是否存在$u_id判斷登入狀態
-
+		
 		if($u_id != ""){
+			
+			
+
 			//取出未結購物車
 			$cart = $this->db->where(array("u_id" => $u_id, "is_checkout" => 0))->get($this->cart)->row_array();
 			//取出購物車內容
 			$cart_array = unserialize($cart["content"]);
-
-			//根據spec_id去找對應的array
+			
+			//根據spec_id去找對應的array	
 			$i = 0;
 			foreach ($cart_array as $p) {
 				if ($p['p_id'] == $p_id) {
 					$cart_array[$i]['quantity'] = $num;
+					//判斷庫存是否足夠
+					$check_quantity = $this->db->get_where('product', array("id" => $p_id))->row_array();
+
+					if ($check_quantity['number'] < $cart_array[$i]['quantity']) {
+
+						$this->output(FALSE, '數量不足');
+						exit();
+					}
 				}
 				$i++;
 			}
@@ -345,7 +387,9 @@ class Cart extends Base_Controller {
 			foreach ($cart_array as $p) {
 				$p_item_id = $p['p_id'];
 				$product_spec_price = $this->db->where(array("id" => $p_item_id))->get($this->product)->row_array();
-
+				if ($this->all_discount) {
+					$product_spec_price['sale_price'] = $product_spec_price['sale_price'] * ($this->data['all_discount'] / 100);
+				}
 				$total_price += $product_spec_price['sale_price'] * $p['quantity'];
 			}
 			$res = $this->db->where(array("u_id" => $u_id, "is_checkout" => 0))->update($this->cart, $data);
@@ -354,7 +398,11 @@ class Cart extends Base_Controller {
 			//該商品總金額		
 			$product_choose = $this->db->where(array("id" => $p_id))->get($this->product)->row_array();
 			$product_price = $product_choose['sale_price'] * $num;
-
+			if ($this->all_discount) {
+				$product_price = $product_choose['sale_price'] * ($this->data['all_discount'] / 100) * $num;
+			} else {
+				$product_price = $product_choose['sale_price'] * $num;
+			}
 
 			if ($res) {
 				$this->output(TRUE, '成功', array('total_price' => $total_price, 'product_price' => $product_price));
@@ -371,6 +419,15 @@ class Cart extends Base_Controller {
 			foreach ($cart_array as $p) {
 				if ($p['p_id'] == $p_id) {
 					$cart_array[$i]['quantity'] = $num;
+
+					//判斷庫存是否足夠
+					$check_quantity = $this->db->get_where('product', array("id" => $p_id))->row_array();
+
+					if ($check_quantity['number'] < $cart_array[$i]['quantity']) {
+						
+						$this->output(FALSE, '數量不足');
+						exit();
+					}
 				}
 				$i++;
 			}
@@ -381,7 +438,9 @@ class Cart extends Base_Controller {
 			foreach ($cart_array as $p) {
 				$p_item_id = $p['p_id'];
 				$product_spec_price = $this->db->where(array("id" => $p_item_id))->get($this->product)->row_array();
-
+				if ($this->all_discount) {
+					$product_spec_price['sale_price'] = $product_spec_price['sale_price'] * ($this->data['all_discount'] / 100);
+				}
 				$total_price += $product_spec_price['sale_price'] * $p['quantity'];
 			}
 
@@ -390,7 +449,14 @@ class Cart extends Base_Controller {
 
 			//該商品總金額		
 			$product_choose = $this->db->where(array("id" => $p_id))->get($this->product)->row_array();
-			$product_price = $product_choose['sale_price'] * $num;
+
+			if ($this->all_discount) {				
+				$product_price = $product_choose['sale_price']*($this->data['all_discount'] / 100) * $num;
+			}else{
+				$product_price = $product_choose['sale_price'] * $num;
+			}
+
+			
 
 			$this->output(TRUE, '成功', array('total_price' => $total_price, 'product_price' => $product_price));
 
@@ -559,7 +625,9 @@ class Cart extends Base_Controller {
 					->from("product P")
 					->where("P.id=$p_id")
 					->get()->row_array();
-
+				if ($this->all_discount) {
+					$product_item['sale_price'] = $product_item['sale_price'] * ($this->data['all_discount'] / 100);
+				}
 				$product_item['number'] = $c['quantity'];
 				$product_item['images'] = unserialize($product_item['images']);
 				$total_price += $product_item['sale_price'] * $c['quantity'];
@@ -798,8 +866,10 @@ class Cart extends Base_Controller {
 			->from($this->product . " T")			
 			->where('T.is_delete = 0 AND T.id = ' . $t['p_id'])
 			->get()->row_array();
-			
 
+			if ($this->all_discount) {
+				$product_data['sale_price'] = $product_data['sale_price'] * ($this->data['all_discount'] / 100);
+			}
 			$product_data['quantity'] = $t['quantity'];
 
 			$total += $product_data['sale_price'] * $product_data['quantity'];			
