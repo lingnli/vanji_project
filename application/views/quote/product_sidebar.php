@@ -8,6 +8,11 @@
       <!-- filter-price-content start -->
       <div class="filter-price-content">
         <form action="#" method="post">
+          <div class="d-flex flex-column">
+            <input class="mb-20" type="text" id="price-min">
+            <input class="mb-20" type="text" id="price-max">
+            <button class="btn price-count">篩選</button>
+          </div>
           <div id="price-slider" class="price-slider"></div>
           <div class="filter-price-wapper">
             <div class="filter-price-cont">

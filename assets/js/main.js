@@ -451,8 +451,28 @@ $( "#price-slider" ).slider({
   });
   $( "#min-price" ).val('$' + $( "#price-slider" ).slider( "values", 0 ));   
   $( "#max-price" ).val('$' + $( "#price-slider" ).slider( "values", 1 )); 
-    
-  
+
+$("#price-min").keydown(function (event) {
+    console.log(event.target.value);
+});
+$("#price-max").keydown(function (event) {
+    if (event.which == 13) {
+        console.log($(this).val());
+    }
+});
+$(".price-count").on("click", function (e) {
+    var $slider = $("#price-slider");
+    $slider.slider("values", 0, $("#price-min").val());
+    $slider.slider("values", 1, $("#price-max").val());
+    e.preventDefault();
+    $( "#min-price" ).val('$' + $("#price-min").val());
+    $( "#max-price" ).val('$' + $("#price-max").val());
+})
+$(".add-to-cart-button").on("click", function (e) {
+    e.preventDefault();
+    $("#price-min").val($( "#min-price" ).val().substr(1));
+    $("#price-max").val($( "#max-price" ).val().substr(1));
+}) 
 /*--
     showlogin toggle function
 --------------------------*/
