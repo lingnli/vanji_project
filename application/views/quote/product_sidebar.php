@@ -8,10 +8,11 @@
       <!-- filter-price-content start -->
       <div class="filter-price-content">
         <form action="#" method="post">
-          <div class="d-flex flex-column">
-            <input class="mb-20" type="text" id="price-min">
-            <input class="mb-20" type="text" id="price-max">
-            <button class="btn price-count">篩選</button>
+          <div class="d-flex count-block" style="">
+            <input type="text" id="price-min" style="">
+            <span class="pl-10 pr-10">-</span>
+            <input type="text mr-10" id="price-max" style="margin-right: 5px;">
+            <button class="btn price-count d-flex align-items justify-content-center">GO</button>
           </div>
           <div id="price-slider" class="price-slider"></div>
           <div class="filter-price-wapper">
@@ -79,3 +80,25 @@
   </div>
   <!-- shop-sidebar-wrap end -->
 </div>
+<style>
+  .count-block {
+    max-width: 100px;
+    max-height: 27px;
+  }
+  .count-block button{
+    padding:5px 20px;
+    max-height: 27px;
+    align-items: center;
+  }
+  .count-block input{
+    max-width: 100px;
+  }
+  @media(max-width: 1211px) {
+    .count-block input{
+      max-width: 70px;
+    }
+    .count-block button{
+      padding: 10px 15px;
+    }
+  }
+</style>
