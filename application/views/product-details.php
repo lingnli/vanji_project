@@ -168,7 +168,13 @@
                                     <li class="old_prize"> $<?= $product['price'] ?></li>
                                 <? endif; ?>
 
-                                <li> $<?= $product['sale_price'] ?></li>
+                                <? if ($all_check == 1) { ?>
+                                    <li style="text-decoration: line-through;"> $<?= $product['sale_price'] ?></li>
+                                    <li> $<?= $product['sale_price'] * ($all_discount / 100) ?></li>
+                                <? } else { ?>
+                                    <li> $<?= $product['sale_price'] ?></li>
+                                <? } ?>
+
                             </ul>
 
                             <!-- product-quantity-action start -->

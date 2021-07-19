@@ -12,7 +12,7 @@
             <input type="text" id="price-min" style="">
             <span class="pl-10 pr-10">-</span>
             <input type="text mr-10" id="price-max" style="margin-right: 5px;">
-            <button class="btn price-count d-flex align-items justify-content-center">GO</button>
+            <button class="btn price-count d-flex align-items justify-content-center search_b">GO</button>
           </div>
           <div id="price-slider" class="price-slider"></div>
           <div class="filter-price-wapper">
@@ -62,7 +62,7 @@
               <img src="<?= base_url() ?><?= ($images == array()) ? "assets/images/product/p1.jpg" : $images[0] ?>" alt=""></a>
           </div>
           <div class="product-content text-left">
-            <h3><a href="<?= base_url() ?>product/detail"><?= $b['name'] ?></a></h3>
+            <h3><a href="<?= base_url() ?>product/detail/<?= $b['id'] ?>"><?= $b['name'] ?></a></h3>
             <div class="price-box">
               <? if ($b['price'] != 0) : ?>
                 <span class="old-price">$<?= $b['price'] ?></span>
@@ -85,19 +85,23 @@
     max-width: 100px;
     max-height: 27px;
   }
-  .count-block button{
-    padding:5px 20px;
+
+  .count-block button {
+    padding: 5px 20px;
     max-height: 27px;
     align-items: center;
   }
-  .count-block input{
+
+  .count-block input {
     max-width: 100px;
   }
+
   @media(max-width: 1211px) {
-    .count-block input{
+    .count-block input {
       max-width: 70px;
     }
-    .count-block button{
+
+    .count-block button {
       padding: 10px 15px;
     }
   }

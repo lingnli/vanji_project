@@ -21,7 +21,12 @@
         <? if ($item['price'] != 0) : ?>
           <span class="old-price">$<?= $item['price'] ?></span>
         <? endif; ?>
-        <span class="new-price">$<?= $item['sale_price'] ?></span>
+        <? if ($all_check == 1) { ?>
+          <span class="old-price" style="color:red;">$<?= $item['sale_price'] ?></span>
+          <span class="new-price">$<?= $item['sale_price'] * ($all_discount / 100) ?></span>
+        <? } else { ?>
+          <span class="new-price">$<?= $item['sale_price'] ?></span>
+        <? } ?>
       </div>
       <p><?= mb_substr(strip_tags($item['detail']), 0, 100) ?>... </p>
     </div>

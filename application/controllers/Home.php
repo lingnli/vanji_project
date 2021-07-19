@@ -6,10 +6,16 @@ class Home extends Base_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load->model("Member_model");
+		if($this->data['discount_type']==3){
+			$this->all_discount = true;
+		}else{
+			$this->all_discount = false;
+		}
+		
 	}
 
 	public function index(){
-
+		
 		$this->flow_record("home");
 
 		//輪播圖
@@ -27,7 +33,8 @@ class Home extends Base_Controller {
 
 		//新聞
 		$this->data['news'] = $this->db->limit(2)->where(array("is_delete" => 0))->get($this->news)->result_array();
-
+		$this->data['all_check'] = $this->all_discount;
+		
 		$this->load->view('index', $this->data);
 	}
 

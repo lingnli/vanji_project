@@ -7,18 +7,25 @@ class Product extends base_Controller
     {
         parent::__construct();
         $this->page_count = 18;
+        if ($this->data['discount_type'] == 3) {
+            $this->all_discount = true;
+        } else {
+            $this->all_discount = false;
+        }
     }
 
     public function index()
     {
         $product_id = $this->session->userdata('product_id');
-        
+        $page = $this->session->userdata('page');
+        $this->session->unset_userdata('page');
         $this->session->unset_userdata('product_id');
         if($_POST){
             $this->data['search'] = $_POST['search'];
         }else{
             $this->data['search'] = "";
         }
+        $this->data['page'] = ($page)?$page:1;
 
         $this->flow_record("product");
 
@@ -54,6 +61,9 @@ class Product extends base_Controller
         $min   = ($this->input->post("min")) ? $this->input->post("min") : "";
         $max   = ($this->input->post("max")) ? $this->input->post("max") : "";
 
+        $d_min   = ($this->input->post("d_min")) ? $this->input->post("d_min") : "";
+        $d_max   = ($this->input->post("d_max")) ? $this->input->post("d_max") : "";
+        
 
         $syntax = "P.is_delete = 0";
         if ($search == "") {
@@ -78,9 +88,9 @@ class Product extends base_Controller
         if($sort !=""){
             
             if($sort== 'rating_low'){
-                $order_by = "P.price ASC";
+                $order_by = "P.sale_price ASC";
             } elseif ($sort == 'rating_high') {
-                $order_by = "P.price DESC";
+                $order_by = "P.sale_price DESC";
             } elseif ($sort == 'time_new') {
                 $order_by = "P.create_date DESC";
             } elseif ($sort == 'time_old') {
@@ -88,18 +98,31 @@ class Product extends base_Controller
             }
             
         }
-
-        if($min!="" && $max!=""){
-            $min = substr($min,1);
+        
+        if ($min != "" && $max != "") {
+            $min = substr($min, 1);
             $max = substr($max, 1);
 
-            $syntax .=" AND( ";
-            $syntax .="P.price BETWEEN ".$min." AND ".$max;
+            $syntax .= " AND( ";
+            $syntax .= "P.sale_price BETWEEN " . $min . " AND " . $max;
             $syntax .= ")";
-
         }
 
 
+
+        if ( $d_max != "") {
+               if($d_min == ""){
+                   $d_min = 0;
+               }
+
+                $syntax .= " AND( ";
+                $syntax .= "P.sale_price BETWEEN " . $d_min . " AND " . $d_max;
+                $syntax .= ")";
+            
+        }
+        
+
+        
         $total = $this->db->from($this->product . " P")
             ->where($syntax)
             ->get()->num_rows();
@@ -116,13 +139,13 @@ class Product extends base_Controller
                 ->limit($this->page_count, ($page - 1) * $this->page_count)
                 ->get()->result_array();
         // }else{
-            //登入狀態
+        //登入狀態
 
 
         // }
-        
 
-        
+
+        $this->data['all_check'] = $this->all_discount;
 
         $html = "";
 
@@ -130,7 +153,9 @@ class Product extends base_Controller
             $item['images'] = unserialize($item['images']);
             
             $html .= $this->load->view("items/product_item", array(
-                "item"      =>    $item,                
+                "item"          =>    $item,
+                "all_check"     =>    $this->all_discount,
+                "all_discount"  =>    $this->data['all_discount'],    
             ), TRUE);
         }
 
@@ -141,6 +166,8 @@ class Product extends base_Controller
 
             $list_html .= $this->load->view("items/product_list_item", array(
                     "item"      =>    $item,
+                "all_check"     =>    $this->all_discount,
+                "all_discount"  =>    $this->data['all_discount'],    
                 ), TRUE);
         }
 
@@ -163,7 +190,14 @@ class Product extends base_Controller
 
     public function classify($id) 
     {
+        $product_id = $this->session->userdata('product_id');
+        $page = $this->session->userdata('page');
+        $this->session->unset_userdata('page');
+        $this->session->unset_userdata('product_id');
 
+        $this->data['page'] = ($page) ? $page : 1;
+        $this->data['product_id'] = $product_id;
+        
         $this->flow_record("product/classify/".$id);
 
         $this->data['classify'] =  $this->db->select('P.classify,count(PD.id) as num,P.id')
@@ -190,7 +224,8 @@ class Product extends base_Controller
 
         $min   = ($this->input->post("min")) ? $this->input->post("min") : "";
         $max   = ($this->input->post("max")) ? $this->input->post("max") : "";
-
+        $d_min   = ($this->input->post("d_min")) ? $this->input->post("d_min") : "";
+        $d_max   = ($this->input->post("d_max")) ? $this->input->post("d_max") : "";
 
         $syntax = "P.is_delete = 0 AND P.classify_id = $classify_id";
 
@@ -200,9 +235,9 @@ class Product extends base_Controller
         if ($sort != "") {
 
             if ($sort == 'rating_low') {
-                $order_by = "P.price ASC";
+                $order_by = "P.sale_price ASC";
             } elseif ($sort == 'rating_high') {
-                $order_by = "P.price DESC";
+                $order_by = "P.sale_price DESC";
             } elseif ($sort == 'time_new') {
                 $order_by = "P.create_date DESC";
             } elseif ($sort == 'time_old') {
@@ -215,7 +250,19 @@ class Product extends base_Controller
             $max = substr($max, 1);
 
             $syntax .= " AND( ";
-            $syntax .= "P.price BETWEEN " . $min . " AND " . $max;
+            $syntax .= "P.sale_price BETWEEN " . $min . " AND " . $max;
+            $syntax .= ")";
+        }
+
+
+
+        if ($d_max != "") {
+            if ($d_min == "") {
+                $d_min = 0;
+            }
+
+            $syntax .= " AND( ";
+            $syntax .= "P.sale_price BETWEEN " . $d_min . " AND " . $d_max;
             $syntax .= ")";
         }
 
@@ -241,7 +288,7 @@ class Product extends base_Controller
 
         // }
 
-
+        $this->data['all_check'] = $this->all_discount;
 
 
         $html = "";
@@ -251,6 +298,8 @@ class Product extends base_Controller
 
             $html .= $this->load->view("items/product_item", array(
                 "item"      =>    $item,
+                "all_check"     =>    $this->all_discount,
+                "all_discount"  =>    $this->data['all_discount'],  
             ), TRUE);
         }
 
@@ -261,6 +310,8 @@ class Product extends base_Controller
 
             $list_html .= $this->load->view("items/product_list_item", array(
                 "item"      =>    $item,
+                "all_check"     =>    $this->all_discount,
+                "all_discount"  =>    $this->data['all_discount'],  
             ), TRUE);
         }
 
@@ -282,9 +333,15 @@ class Product extends base_Controller
 
     public function detail($id = false) 
     {
+        if($_GET){
+            $page = ($_GET['page']) ? $_GET['page'] : 1;
+            $this->session->set_userdata('page', $page);
+        }
+        
         $this->flow_record("product/detail/" . $id);
 
         $this->session->set_userdata('product_id', $id);
+        
 
         $product =  $this->db->select('P.*')
                         ->from("product P")
@@ -298,14 +355,19 @@ class Product extends base_Controller
             ->where("P.is_delete = 0 AND P.p_id = $id AND P.is_show = 1")
             ->get()->result_array();
 
-
+        // $order_by = "P.sort ASC";
+        // $list = $this->db->select('P.*')
+        //     ->from("product P")
+        //     ->where("P.is_delete = 0")            
+        //     ->order_by($order_by)            
+        //     ->get()->result_array();
 
 
         $this->data['images'] = unserialize($product['images']);
         
         $this->data['product'] = $product;
         $this->data['comment'] = $comment;
-
+        $this->data['all_check'] = $this->all_discount;
         $this->load->view('product-details',$this->data);
     }
 

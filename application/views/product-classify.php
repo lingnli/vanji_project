@@ -111,15 +111,19 @@
 
 
 
+
         <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
         <script>
-            var page = 1;
+            var page = "<?= $page ?>";
             var search = "";
             var sort = "";
             var min = "";
             var max = "";
+            var d_min = "";
+            var d_max = "";
             var is_login = "<?= $is_login ?>";
             var classify_id = "<?= $classify_id ?>";
+            var product_id = "<?= $product_id ?>";
 
             $(document).ready(function($) {
 
@@ -131,14 +135,36 @@
                     load_data(1);
                 });
 
+                $(document).on('click', '.detail_click', function(event) {
+
+                    event.preventDefault();
+                    console.log($(this).attr("href"));
+                    url = $(this).attr("href") + '?page=' + page;
+                    location.href = url;
+
+                });
 
                 $(".search").on('click', function(event) {
 
                     min = $("#min-price").val();
                     max = $("#max-price").val();
+                    d_min = 0;
+                    d_max = 0;
+                    // console.log(min);
+                    // console.log(max);
+                    load_data(1);
 
-                    console.log(min);
-                    console.log(max);
+
+                });
+
+                $(".search_b").on('click', function(event) {
+                    // console.log(333)
+                    d_min = $("#price-min").val();
+                    d_max = $("#price-max").val();
+                    min = 0;
+                    max = 0;
+                    // console.log(min);
+                    // console.log(max);
                     load_data(1);
 
 
@@ -196,6 +222,8 @@
                         sort: sort,
                         min: min,
                         max: max,
+                        d_min: d_min,
+                        d_max: d_max,
                         classify_id: classify_id
                     },
                     dataType: "json",
@@ -207,9 +235,18 @@
                             total = parseInt(data.total);
                             search = data.search;
                             generate_page(data.total_page);
-                            $('html,body').animate({
-                                scrollTop: 0,
-                            }, 500)
+                            if (product_id != "") {
+
+                                console.log($("#product_" + product_id).offset().top)
+
+                                setTimeout(function() {
+                                    $('html,body').animate({
+                                        scrollTop: $("#product_" + product_id).offset().top - 100,
+                                    }, 500)
+                                }, 1500);
+
+
+                            }
                         }
                     },
                     failure: function(errMsg) {}

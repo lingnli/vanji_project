@@ -47,6 +47,8 @@
 - Google Font 
 ---------*/
 @import url("https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700,800|Poppins:300,400,500,600,700,800,900");
+
+@import url("//fonts.googleapis.com/earlyaccess/notosanstc.cs");
 /*-- Common Style --*/
 *, *::after, *::before {
   box-sizing: border-box;
@@ -70,7 +72,7 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   color: #222;
-  font-family: "Microsoft JhengHei", sans-serif;
+  font-family: "Noto Sans Tc", sans-serif;
   font-weight: 500;
   margin-top: 0;
 }

@@ -57,12 +57,13 @@
 
                             <form action="<?= base_url() ?>mgr/discount/edit_type" method="POST">
                                 <label for="type">滿額折扣</label>
-                                <input type="radio" id="type" name="type" value="price" <?if($type==1){?>checked
-                                <?}?>>
+                                <input type="radio" id="type" name="type" value="price" <? if ($type == 1) { ?>checked <? } ?>>
 
                                 <label for="quantity">滿件折扣</label>
-                                <input type="radio" id="quantity" name="type" value="quantity" <?if($type==2){?>checked
-                                <?}?>>
+                                <input type="radio" id="quantity" name="type" value="quantity" <? if ($type == 2) { ?>checked <? } ?>>
+
+                                <label for="all">全館折扣</label>
+                                <input type="radio" id="all" name="type" value="all" <? if ($type == 3) { ?>checked <? } ?>>
                                 <button type='submit' class="btn btn-primary btn">更新</button>
                             </form>
 
@@ -93,18 +94,19 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <? for($i=0;$i<count($list_1);$i++){ $item = $list_1[$i]; ?>
-                                    <tr data-id='<?= $item['id'] ?>'>
-                                        <td><?= $item['title'] ?></td>
-                                        <td><?= $item['price_limit'] ?></td>
-                                        <td><?= $item['discount'] ?></td>
-                                        <td><?= $item['start_date'] ?></td>
-                                        <td><?= $item['end_date'] ?></td>
-                                        <td style="width:10%;">
-                                            <button class="btn btn-primary btn-xs edit-btn" data-toggle="tooltip" data-original-title="編輯"><span class="fa fa-fw ti-pencil"></span></button>
-                                            <button class="del-btn btn btn-danger btn-xs"><span class="fa fa-fw ti-trash"></span></button>
-                                        </td>
-                                    </tr>
+                                    <? for ($i = 0; $i < count($list_1); $i++) {
+                                        $item = $list_1[$i]; ?>
+                                        <tr data-id='<?= $item['id'] ?>'>
+                                            <td><?= $item['title'] ?></td>
+                                            <td><?= $item['price_limit'] ?></td>
+                                            <td><?= $item['discount'] ?></td>
+                                            <td><?= $item['start_date'] ?></td>
+                                            <td><?= $item['end_date'] ?></td>
+                                            <td style="width:10%;">
+                                                <button class="btn btn-primary btn-xs edit-btn" data-toggle="tooltip" data-original-title="編輯"><span class="fa fa-fw ti-pencil"></span></button>
+                                                <button class="del-btn btn btn-danger btn-xs"><span class="fa fa-fw ti-trash"></span></button>
+                                            </td>
+                                        </tr>
                                     <? } ?>
                                 </tbody>
                             </table>
@@ -135,21 +137,44 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <? for($i=0;$i<count($list_2);$i++){ $item = $list_2[$i]; ?>
-                                    <tr data-id='<?= $item['id'] ?>'>
-                                        <td><?= $item['title'] ?></td>
-                                        <td><?= $item['quantity_limit'] ?></td>
-                                        <td><?= $item['discount'] ?></td>
-                                        <td><?= $item['start_date'] ?></td>
-                                        <td><?= $item['end_date'] ?></td>
-                                        <td style="width:10%;">
-                                            <button class="btn btn-primary btn-xs edit-btn" data-toggle="tooltip" data-original-title="編輯"><span class="fa fa-fw ti-pencil"></span></button>
-                                            <button class="del-btn btn btn-danger btn-xs"><span class="fa fa-fw ti-trash"></span></button>
-                                        </td>
-                                    </tr>
+                                    <? for ($i = 0; $i < count($list_2); $i++) {
+                                        $item = $list_2[$i]; ?>
+                                        <tr data-id='<?= $item['id'] ?>'>
+                                            <td><?= $item['title'] ?></td>
+                                            <td><?= $item['quantity_limit'] ?></td>
+                                            <td><?= $item['discount'] ?></td>
+                                            <td><?= $item['start_date'] ?></td>
+                                            <td><?= $item['end_date'] ?></td>
+                                            <td style="width:10%;">
+                                                <button class="btn btn-primary btn-xs edit-btn" data-toggle="tooltip" data-original-title="編輯"><span class="fa fa-fw ti-pencil"></span></button>
+                                                <button class="del-btn btn btn-danger btn-xs"><span class="fa fa-fw ti-trash"></span></button>
+                                            </td>
+                                        </tr>
                                     <? } ?>
                                 </tbody>
                             </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12 col-xs-12">
+                <div class="panel filterable">
+                    <div class="panel-heading clearfix">
+                        <h3 class="panel-title pull-left m-t-6">
+                            <i class="ti-view-list"></i> 全館折扣
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="m-t-10">
+
+                            <form action="<?= base_url() ?>mgr/discount/edit_all" method="POST">
+                                <label for="all_1">全館折扣%數(8折->80)</label>
+                                <input type="input" id="all_1" name="all" value="<?= $all ?>">
+
+                                <button type='submit' class="btn btn-primary btn">更新</button>
+                            </form>
+
                         </div>
                     </div>
                 </div>

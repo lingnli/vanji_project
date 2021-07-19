@@ -120,24 +120,17 @@
 
         <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
         <script>
-            var page = 1;
+            var page = "<?= $page ?>";
             var search = "<?= $search ?>";
             var sort = "";
             var min = "";
             var max = "";
+            var d_min = "";
+            var d_max = "";
             var is_login = "<?= $is_login ?>";
             var product_id = "<?= $product_id ?>";
-            // if (product_id != "") {
-            //     location.href = '<?= base_url() ?>product#product_' + product_id;
-            //     console.log(product_id)
-            // } else {
-            //     console.log(123)
-            // }
+
             $(document).ready(function($) {
-                // $('html,body').animate({
-                //     scrollTop: 0,
-                // }, 1)
-                // console.log(999)
 
                 load_data(page);
 
@@ -147,14 +140,32 @@
                     load_data(1);
                 });
 
+                $(document).on('click', '.detail_click', function(event) {
+
+                    event.preventDefault();
+                    console.log($(this).attr("href"));
+                    url = $(this).attr("href") + '?page=' + page;
+                    location.href = url;
+
+                });
 
                 $(".search").on('click', function(event) {
 
                     min = $("#min-price").val();
                     max = $("#max-price").val();
+                    d_min = 0;
+                    d_max = 0;
+                    load_data(1);
 
-                    console.log(min);
-                    console.log(max);
+
+                });
+
+                $(".search_b").on('click', function(event) {
+
+                    d_min = $("#price-min").val();
+                    d_max = $("#price-max").val();
+                    min = 0;
+                    max = 0;
                     load_data(1);
 
 
@@ -211,7 +222,9 @@
                         search: search,
                         sort: sort,
                         min: min,
-                        max: max
+                        max: max,
+                        d_min: d_min,
+                        d_max: d_max,
                     },
                     dataType: "json",
                     success: function(data) {
@@ -228,13 +241,11 @@
 
                                 setTimeout(function() {
                                     $('html,body').animate({
-                                        scrollTop: $("#product_" + product_id).offset().top-100,
+                                        scrollTop: $("#product_" + product_id).offset().top - 100,
                                     }, 500)
                                 }, 1500);
 
 
-                            } else {
-                                console.log(123)
                             }
 
                         }
