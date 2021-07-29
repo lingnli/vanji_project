@@ -63,7 +63,7 @@
                                                     <? } elseif ($p['check_number'] == 'false') { ?>
                                                         數量不足
                                                     <? } else { ?>
-                                                        <input id="detailPlus" class="d_<?= $p['id'] ?>" min=0 value="<?= $p['number'] ?>" type="number" name="number" data-id="<?= $p['id'] ?>" data-price="<?= $p['sale_price'] ?>">
+                                                        <input id="detailPlus" class="d_<?= $p['id'] ?>" min=1 value="<?= $p['number'] ?>" type="number" name="number" data-id="<?= $p['id'] ?>" data-price="<?= $p['sale_price'] ?>">
                                                     <? } ?>
 
                                                 </td>

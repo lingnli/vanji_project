@@ -35,7 +35,7 @@ class Cart extends Base_Controller {
 		$u_id =	$this->encryption->decrypt($this->session->uid);
 
 		//判斷庫存是否足夠
-		$check_quantity =$this->db->get_where('product', array("id" => $p_id))->row_array();
+		$check_quantity = $this->db->get_where('product', array("id" => $p_id))->row_array();
 		if($check_quantity['number']< $quantity){
 			$this->js_output_and_back("數量不足");
 			exit();
@@ -44,7 +44,7 @@ class Cart extends Base_Controller {
 		$product = array();
 		$product['p_id'] = $p_id;
 		$product['quantity'] = $quantity;
-
+		
 		//無$u_id->未登入，將購物車記錄在session
 		if (!$u_id) {
 
@@ -75,7 +75,7 @@ class Cart extends Base_Controller {
 							$this->js_output_and_back("數量不足");
 							exit();
 						}
-						// print_r('111');exit;
+	
 						$_SESSION['temp_cart'] = $temp_cart;
 						$is_inarray = TRUE;
 						$this->js_output_and_redirect("加入購物車成功", $_SERVER['HTTP_REFERER']);
@@ -150,6 +150,13 @@ class Cart extends Base_Controller {
 						if ($t['p_id'] == $p_id) {
 							//若產品id及spec_id相同->增加數量
 							$content[$i]['quantity'] += $product['quantity'];
+
+								$check_quantity = $this->db->get_where('product', array("id" => $p_id))->row_array();
+								if ($check_quantity['number'] < $content[$i]['quantity']) {
+									$this->js_output_and_back("數量不足");
+									exit();
+								}
+
 							// print_r('111');exit;
 							$data['content'] = serialize($content);
 							$this->db->where(array("u_id" => $u_id))->update($this->cart, $data);
