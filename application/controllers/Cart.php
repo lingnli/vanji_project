@@ -953,6 +953,7 @@ class Cart extends Base_Controller {
 			"products_str"      =>	$products_str,
 			"fee" 							=>	$ship,
 			"coupon" 					  =>	$coupon,
+			"area" 					  =>	$area,
 			"coupon_discount"   =>	$coupon_discount,			
 			"status"  				  =>	"pending", //第一次將訂單存入db中，狀態為處理中
 			"discount_type" 	  =>	$discount_type_code,
@@ -1103,7 +1104,8 @@ class Cart extends Base_Controller {
 			$this->data['store'] = $shop['CVSStoreName'];
 		}
 
-
+		// print_r($this->data['cart']);
+		// exit;
 
 		$this->load->view('cart-history.php', $this->data);
 	}

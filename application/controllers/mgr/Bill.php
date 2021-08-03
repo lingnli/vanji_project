@@ -61,7 +61,18 @@ class Bill extends Base_Controller {
 		
 		//抓出對應id的內容
 		$oridata = $this->db->where(array("id"=>$id))->get($this->order)->row_array();
-
+		$area = "";
+		if($oridata['area'] == 'tw'){
+			$area = "台灣";
+		} else if ($oridata['area'] == 'hk') {
+			$area = "香港";
+		} else if ($oridata['area'] == 'sg') {
+			$area = "新加玻";
+		} else if ($oridata['area'] == 'au') {
+			$area = "澳門";
+		} else if ($oridata['area'] == 'ma') {
+			$area = "馬來西亞";
+		}
 
 		$oridata['products'] = unserialize($oridata['products']);
 		$products_srt = "";
@@ -97,7 +108,8 @@ class Bill extends Base_Controller {
 								["狀態", "status", "select", $oridata['status'], ["id","status"]],
 								["是否出貨", "delivery_success", "select", $oridata['delivery_success'], ["id", "delivery_success"]],
 								["訂單日期", "create_date", "plain", $oridata['create_date']],
-								["超取資訊", "", "plain", $shop_str]
+								["超取資訊", "", "plain", $shop_str],
+								["宅配資訊", "", "plain", $area.$oridata['addr']]
 						];
 						
 

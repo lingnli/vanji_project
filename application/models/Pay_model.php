@@ -33,14 +33,14 @@ class Pay_model extends CI_Model
 
 
 	/* 測試 */
-	// private $HashKey    = '5294y06JbISpM5x9';
-	// private $HashIV     = 'v77hoKGq4kWxNNIS';
-	// private $MerchantID = 2000132;
+	private $HashKey    = '5294y06JbISpM5x9';
+	private $HashIV     = 'v77hoKGq4kWxNNIS';
+	private $MerchantID = 2000132;
 
 	/* 正式 */
-	private $HashKey    = 'Eg9AvMpW65j2EJNB';
-	private $HashIV     = 'CUuk6pXxA9za9LZ1';
-	private $MerchantID = 3172126;
+	// private $HashKey    = 'Eg9AvMpW65j2EJNB';
+	// private $HashIV     = 'CUuk6pXxA9za9LZ1';
+	// private $MerchantID = 3172126;
 	/* 正式 */
 
 	function __construct()
@@ -60,10 +60,10 @@ class Pay_model extends CI_Model
 
 
 		//服務位置-正式
-		$obj->ServiceURL  = "https://payment.ecpay.com.tw/Cashier/AioCheckOut/V5";  	
+		// $obj->ServiceURL  = "https://payment.ecpay.com.tw/Cashier/AioCheckOut/V5";  	
 
 		//服務位置-測試
-		// $obj->ServiceURL  = "https://payment-stage.ecpay.com.tw/Cashier/AioCheckOut/V5";
+		$obj->ServiceURL  = "https://payment-stage.ecpay.com.tw/Cashier/AioCheckOut/V5";
 
 		$obj->HashKey     = $this->HashKey;
 		$obj->HashIV      = $this->HashIV;

@@ -177,35 +177,36 @@
 
                             </ul>
 
-                            <!-- product-quantity-action start -->
+
                             <form action="<?= base_url() ?>cart/add/<?= $product['id'] ?>" method="post">
                                 <div class="product-quantity-action">
-                                    <div class="prodict-statas"><span>數量 :</span></div>
+                                    <div class="prodict-statas"><span>庫存 :</span></div>
                                     <div class="product-quantity">
                                         <div class="product-quantity">
                                             <div class="cart-plus-minus">
-                                                <input value="1" type="number" name="quantity">
+                                                <input style="
+    width: 50px;" value="<?= $product['number'] ?>" type="number" name="" disabled>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <!-- product-quantity-action end -->
-                                <!-- pro_dtl_btn start -->
+
                                 <ul class="pro_dtl_btn">
+                                    <li>
+
+                                        <div class="cart-plus-minus">
+                                            <input value="1" type="number" name="quantity" style="    height: 40px;
+    width: 50px;">
+                                        </div>
+
+                                    </li>
                                     <li><button type="submit" class="buy_now_btn" style="background-color: #fff;border: 1px solid #dddddd;display: block;font-size: 20px;height: 40px;line-height: 40px;text-align: center;">放入購物車</button></li>
                                     <li><a class="heart" data-id="<?= $product['id'] ?>"><i class="ion-heart"></i></a></li>
                                 </ul>
                             </form>
-                            <!-- pro_dtl_btn end -->
-                            <!-- pro_social_share start -->
+
                             <div class="pro_social_share d-flex">
                                 <button data-id="<?= $product['id'] ?>" class="btn title_2 copy">複製連結</button>
-                                <!-- <ul class="pro_social_link">
-                                    <li><a href="#"><i class="ion-social-twitter"></i></a></li>
-                                    <li><a href="#"><i class="ion-social-tumblr"></i></a></li>
-                                    <li><a href="#"><i class="ion-social-facebook"></i></a></li>
-                                    <li><a href="#"><i class="ion-social-instagram-outline"></i></a></li>
-                                </ul> -->
                             </div>
                             <!-- pro_social_share end -->
                         </div>

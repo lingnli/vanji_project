@@ -83,17 +83,46 @@
             <a href="<?= base_url() ?>member/favorite"><i class="ion-android-favorite-outline"></i></a>
           </div>
           <div class="person-wrap" style="padding:0 20px 0 0;">
-            <?if($isLogin == 0){?>
-            <a href="<?= base_url() ?>home/login_register"><i class="ion-android-person"></i></a>
-            <?}else{?>
-            <a href="<?= base_url() ?>member/home"><i class="ion-android-person"></i></a>
-            <?}?>
+            <? if ($isLogin == 0) { ?>
+              <a href="<?= base_url() ?>home/login_register"><i class="ion-android-person"></i></a>
+            <? } else { ?>
+              <a href="<?= base_url() ?>member/home"><i class="ion-android-person"></i></a>
+            <? } ?>
           </div>
-          <a href="<?= base_url() ?>cart/index"><i class="fas fa-shopping-cart d-flex align-items-center justify-content-center" style="font-size: 16px; height: 26px; padding-right: 10px;"></i></a>
+          <style>
+            .sss {
+              font-size: 11px;
+              width: 12px;
+              height: 12px;
+              display: block;
+              background-color: red;
+              color: #fff;
+              text-align: center;
+              position: absolute;
+              bottom: 8px;
+              right: 5px;
+              line-height: 15px;
+              -webkit-border-radius: 50%;
+              -moz-border-radius: 50%;
+              border-radius: 50%;
+            }
+
+            @media (max-width: 768px) {
+              .sss {                
+                right: 35px;
+              }
+            }
+          </style>
+          <a href="<?= base_url() ?>cart/index">
+            <i class="fas fa-shopping-cart d-flex align-items-center justify-content-center" style="font-size: 16px; height: 26px; padding-right: 10px;"></i>
+            <?if($menu_count != 0):?>
+            <span class="sss"></span>
+            <?endif;?>
+          </a>
           <!-- <div class="shopping-cart-wrap">
             <a><i class="ion-ios-cart-outline"></i> <span id="cart-total"><?= $menu_count ?></span></a>
             <ul class="mini-cart">
-              <?foreach($menu_product as $p){?>
+              <? foreach ($menu_product as $p) { ?>
               <li class="cart-item">
                 <div class="cart-image">
                   <a href="<?= base_url() ?>product/detail/<?= $p['id'] ?>">
@@ -109,7 +138,7 @@
                   <a class="remove_from_cart" href="#"><i class="icon-trash icons"></i></a>
                 </div>
               </li>
-              <?}?>
+              <? } ?>
               <li class="subtotal-titles">
                 <div class="subtotal-titles">
                   <h3>小計 :</h3><span>$ <?= $menu_total ?></span>
@@ -140,7 +169,7 @@
     <button class="search-close"><span class="ion-android-close"></span></button>
   </div>
   <div class="sidebar-search-input">
-    <form method="post" action="<?=base_url()?>product">
+    <form method="post" action="<?= base_url() ?>product">
       <div class="form-search">
         <input id="search" class="input-text" name="search" placeholder="搜尋商品名稱" type="input">
         <button class="search-btn" type="submit">
