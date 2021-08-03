@@ -1,8 +1,9 @@
 /*--
     02. Header Css
 -----------------------*/
-// .header-top-area {
-// }
+.header-top-area {
+    
+}
 .transparent-header {
     background-color: transparent;
     position: absolute;
@@ -43,6 +44,9 @@
             &::after{ 
                 display: none;
             }
+        }
+        & a {
+            
         }
     }
 }
