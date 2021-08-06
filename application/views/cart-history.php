@@ -40,28 +40,6 @@
                 <? if ($cart['status'] == 'paid' || ($cart['status'] == 'pending' && $cart['payment'] == 'atm')) { ?>
                     <div class="col-lg-12">
                         <div class="section-title text-center">
-                            <? if ($cart['payment'] == 'credit' && $cart['payment'] == 'credit_3') { ?>
-                                <h2>已收到您的訂單!</h2>
-                                <p class="p16">我們將盡快為您寄出。<br><br></p>
-                            <? } else if ($cart['payment'] == 'atm') { ?>
-                                <p class="p16">[ATM匯款資料]<br>
-                                    銀行代號：012(台北富邦)<br>
-                                    戶名：梵日精品股份有限公司<br>
-                                    銀行帳號(南港分行)：<br>
-                                    4201 0206 9209
-                                    <br>
-                                    轉帳後，請完成以下步驟：
-                                    <br>
-                                    1.轉帳完成後請按下已完成結帳按鈕<br>
-                                    2.轉帳畫面或刷卡畫面拍照截圖、帳號末五碼<br>
-                                    3.告知粉絲專頁並提供匯款截圖<br>
-                                    4.後續將為您整理訂單並安排出貨流程<br>
-                                    <br>
-                                <h2 class="cc">已完成結帳</h2>
-                                <br>
-                                <h2 class="cc">發送訊息到粉絲專頁</h2>
-                                </p>
-                            <? } ?>
                         </div>
                     </div>
 
@@ -123,13 +101,11 @@
                                                             信用卡一次付清
                                                         <? } else if ($cart['payment'] == 'credit_3') { ?>
                                                             信用卡分三期
-                                                        <? } else if ($cart['payment'] == 'atm') { ?>
-                                                            atm轉帳<br>
+                                                        <? } else if ($cart['payment'] == 'atm') { ?>                                                            
                                                             【ATM匯款資料】<br>
-                                                            銀行代號：012(台北富邦)<br>
-                                                            戶名：梵日精品股份有限公司<br>
-                                                            銀行帳號(南港分行)：<br>
-                                                            4201 0206 9209
+                                                            銀行代號：<?= $cart['BankCode'] ?><br>
+                                                            銀行帳號：<?= $cart['vAccount'] ?><br>
+                                                            繳費期限：<?= $cart['ExpireDate'] ?><br>
                                                         <? } ?> <span></span>
                                                     </li>
                                                 </ul>

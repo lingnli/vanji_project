@@ -953,7 +953,7 @@ class Cart extends Base_Controller {
 			"products_str"      =>	$products_str,
 			"fee" 							=>	$ship,
 			"coupon" 					  =>	$coupon,
-			"area" 					  =>	$area,
+			"area" 					  	=>	$area,
 			"coupon_discount"   =>	$coupon_discount,			
 			"status"  				  =>	"pending", //第一次將訂單存入db中，狀態為處理中
 			"discount_type" 	  =>	$discount_type_code,
@@ -967,45 +967,20 @@ class Cart extends Base_Controller {
 
 		if ($res) {
 
-			//信用卡一次付清
-			if($payment == 'credit'){
-				$this->Pay_model->pay(
-					$order_no, 												//訂單編號
-					$product_data_array, 							//商品內容(array)
-					$amount, 													//總金額
-					$products_str, 										//訂單描述
-					$payment,													//付款方式(optional) 預設為all
-					base_url() . "cart/paysuccess",		//付款完成通知接收post
-					base_url() . "cart/payresult",		//付款完成通知return_url
-					"",																//cvsextend 超商選擇
-					"",																//信用卡，定期定額, D/M/Y
-					"",																//信用卡，定期周期
-					""																//信用卡分期
-				);
+			$this->Pay_model->pay(
+				$order_no, 												//訂單編號
+				$product_data_array, 							//商品內容(array)
+				$amount, 													//總金額
+				$products_str, 										//訂單描述
+				$payment,													//付款方式(optional) 預設為all
+				base_url() . "cart/paysuccess",		//付款完成通知接收post
+				base_url() . "cart/payresult",		//付款完成通知return_url
+				"",																//cvsextend 超商選擇
+				"",																//信用卡，定期定額, D/M/Y
+				"",																//信用卡，定期周期
+				""																//信用卡分期
+			);
 
-			} elseif ($payment == 'credit_3') {
-				//分三期
-				$this->Pay_model->pay(
-					$order_no, 												//訂單編號
-					$product_data_array, 							//商品內容(array)
-					$amount, 													//總金額
-					$products_str, 										//訂單描述
-					'credit',													//付款方式(optional) 預設為all
-					base_url() . "cart/paysuccess",		//付款完成通知接收post
-					base_url() . "cart/payresult",		//付款完成通知return_url
-					"",																//cvsextend 超商選擇
-					"",																//信用卡，定期定額, D/M/Y
-					"",																//信用卡，定期周期
-					"3"																//信用卡分期
-				); 
-
-			} elseif ($payment == 'atm') {
-				//atm轉帳->不進金流 顯示轉帳帳號
-				header("Location: " . base_url() . "cart/payment/" . $order_no);
-			}
-
-
-			// }
 
 		} else {
 			$this->js_output_and_back("下單發生錯誤，請聯繫管理員 ");
@@ -1039,7 +1014,7 @@ class Cart extends Base_Controller {
 		
 		$order = $this->db->where(array("order_no" => $order_no))->get($this->order)->row_array();
 		
-		if($order['status']=='paid' && $order['is_check'] == 0){
+		if($order['is_check'] == 0){
 
 			$this->db->where(array("order_no" => $order_no))->update($this->order, array("is_check" => 1));
 				
@@ -1153,9 +1128,7 @@ class Cart extends Base_Controller {
 
 	//綠界 前端返回頁面
 	public function payresult()
-	{
-
-
+	{		
 
 		if ($_POST) {
 			$trade_no = $this->input->post("MerchantTradeNo");
@@ -1202,6 +1175,15 @@ class Cart extends Base_Controller {
 
 			}
 
+			if($order['payment'] == 'atm'){
+				$atm_data = [
+					'BankCode' 	 => $_POST['BankCode'],
+					'vAccount' 	 => $_POST['vAccount'],
+					'ExpireDate' => $_POST['ExpireDate'],
+				];
+				
+				$this->db->where(array("order_no" => $trade_no))->update('order',$atm_data);
+			}
 
 
 			$data = $this->db->get_where("order", array("order_no" => $trade_no))->row_array();

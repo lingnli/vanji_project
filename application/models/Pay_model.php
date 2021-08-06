@@ -33,14 +33,14 @@ class Pay_model extends CI_Model
 
 
 	/* 測試 */
-	private $HashKey    = '5294y06JbISpM5x9';
-	private $HashIV     = 'v77hoKGq4kWxNNIS';
-	private $MerchantID = 2000132;
+	// private $HashKey    = '5294y06JbISpM5x9';
+	// private $HashIV     = 'v77hoKGq4kWxNNIS';
+	// private $MerchantID = 2000132;
 
 	/* 正式 */
-	// private $HashKey    = 'Eg9AvMpW65j2EJNB';
-	// private $HashIV     = 'CUuk6pXxA9za9LZ1';
-	// private $MerchantID = 3172126;
+	private $HashKey    = 'Eg9AvMpW65j2EJNB';
+	private $HashIV     = 'CUuk6pXxA9za9LZ1';
+	private $MerchantID = 3172126;
 	/* 正式 */
 
 	function __construct()
@@ -48,16 +48,10 @@ class Pay_model extends CI_Model
 		parent::__construct();
 	}
 
-	public function pay($MerchantTradeNo, $items, $totalAmount, $dec, $payType = "credit", $retureURL = FALSE, $ClientRedirectURL = FALSE, $cvsextend = "CVS", $periodType = "", $periodFrequency = "", $CreditInstallment="")
+	public function pay($MerchantTradeNo, $items, $totalAmount, $dec, $payType = "credit", $retureURL = FALSE, $ClientRedirectURL = FALSE, $cvsextend = "CVS", $periodType = "", $periodFrequency = "")
 	{
-
-
-		// if ($retureURL === FALSE) $retureURL = base_url()."checkout/receive";
-		// if ($ClientRedirectURL === FALSE) $ClientRedirectURL = base_url()."checkout/result";
-
 		$this->load->library("ECPay_AllInOne");
 		$obj = new ECPay_AllInOne();
-
 
 		//服務位置-正式
 		// $obj->ServiceURL  = "https://payment.ecpay.com.tw/Cashier/AioCheckOut/V5";  	
@@ -69,11 +63,10 @@ class Pay_model extends CI_Model
 		$obj->HashIV      = $this->HashIV;
 		$obj->MerchantID  = $this->MerchantID;
 
-		$obj->EncryptType = '1';
-		//CheckMacValue加密類型，請固定填入1，使用SHA256加密
+		$obj->EncryptType = '1';  //CheckMacValue加密類型，請固定填入1，使用SHA256加密
 
 		$expire_time = 60 * 24 * 3; // Expire in 3 days
-		$expire_date = 3; // Expire in 3 days
+		$expire_date = 3;           // Expire in 3 days
 
 		//基本參數(請依系統規劃自行調整)
 		$obj->Send['ReturnURL']         = $retureURL;			  							//付款完成通知回傳的網址
@@ -86,6 +79,7 @@ class Pay_model extends CI_Model
 		/*
 		payType:判斷付款方式
 		*/
+
 		//付款方式:全功能
 		if ($payType == "all") {
 			$obj->Send['ChoosePayment'] = ECPay_PaymentMethod::ALL;
@@ -104,12 +98,12 @@ class Pay_model extends CI_Model
 			//付款方式:Credit
 		} else if ($payType == "credit") {
 			$obj->Send['ChoosePayment'] = ECPay_PaymentMethod::Credit;
-
-			//分期
-			if($CreditInstallment!=""){
-				$obj->SendExtend['CreditInstallment'] = '3';	
-			}
 			
+			//付款方式:Credit_3
+		} else if ($payType == "credit_3") {
+			$obj->Send['ChoosePayment'] = ECPay_PaymentMethod::Credit;
+			$obj->SendExtend['CreditInstallment'] = '3';
+
 			//定期定額付款
 		} else if ($payType == "credit_period") {
 			$obj->Send['ChoosePayment'] = ECPay_PaymentMethod::Credit;
@@ -127,50 +121,25 @@ class Pay_model extends CI_Model
 
 			//超商付款
 		} else if ($payType == "cvs") {
-			// if ($cvsextend == "FAMILY") {
-			// 	$obj->Send['ChoosePayment']         = ECPay_PaymentMethod::CVS;
-			// 	// $obj->Send['ChooseSubPayment']		= $cvsextend;
-			// 	$obj->SendExtend['PaymentInfoURL']  = $ClientRedirectURL;
-
-			// }else{
 			$obj->Send['ChoosePayment']         = ECPay_PaymentMethod::CVS;
 			$obj->Send['ChooseSubPayment']		= $cvsextend;
-
 			$obj->SendExtend['ClientRedirectURL'] = $ClientRedirectURL;
-			// }
 			$obj->SendExtend['StoreExpireDate'] = $expire_time;
-			// $obj->SendExtend['PaymentInfoURL']  = base_url()."api/paymentinfo";
 		}
 
 
-		$obj->Send['Items']             = $dec;			//訂單的商品資料
-		$obj->Send['ItemName']             = $dec;			//訂單的商品資料
+		$obj->Send['Items']           = $dec;			//訂單的商品資料
+		$obj->Send['ItemName']        = $dec;			//訂單的商品資料
 		$obj->Send['OrderResultURL']	= $ClientRedirectURL;
 		//為付款完成後，綠界科技將頁面導回到合作特店網址，並將付款結果帶回
 
 
 		// print_r($obj);
 		// exit;
-		//save db
-		// $data = array(
-		// 		"TradeNo"     =>	$obj->Send['MerchantTradeNo'],
-		// 		"TradeDate"   =>	$obj->Send['MerchantTradeDate'],
-		// 		"TotalAmount" =>	$obj->Send['TotalAmount'],
-		// 		"TradeDesc"   =>	$obj->Send['TradeDesc'],
-		// 		"Payment"     =>	$obj->Send['ChoosePayment'],
-		// 		"Items"       =>	serialize($obj->Send['Items'])
-		// 	);
-		// $this->db->insert('transaction', $data);
-
-		// $f = fopen("log.txt", "a+");
-		// fwrite($f, "Create Order\n".date("Y-m-d H:i:s")."\n".json_encode($data)."\n\n");
-		// fclose($f);
 
 		//產生訂單(auto submit至ECPay)
 		$obj->CheckOut();
 
-		// $Response = (string)$obj->CheckOutString();
-		// echo $Response;
 	}
 
 
