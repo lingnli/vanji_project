@@ -41,7 +41,7 @@ class Pay_model extends CI_Model
 	private $HashKey    = 'Eg9AvMpW65j2EJNB';
 	private $HashIV     = 'CUuk6pXxA9za9LZ1';
 	private $MerchantID = 3172126;
-	/* 正式 */
+	
 
 	function __construct()
 	{
