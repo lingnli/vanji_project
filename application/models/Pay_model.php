@@ -54,10 +54,10 @@ class Pay_model extends CI_Model
 		$obj = new ECPay_AllInOne();
 
 		//服務位置-正式
-		// $obj->ServiceURL  = "https://payment.ecpay.com.tw/Cashier/AioCheckOut/V5";  	
+		$obj->ServiceURL  = "https://payment.ecpay.com.tw/Cashier/AioCheckOut/V5";  	
 
 		//服務位置-測試
-		$obj->ServiceURL  = "https://payment-stage.ecpay.com.tw/Cashier/AioCheckOut/V5";
+		// $obj->ServiceURL  = "https://payment-stage.ecpay.com.tw/Cashier/AioCheckOut/V5";
 
 		$obj->HashKey     = $this->HashKey;
 		$obj->HashIV      = $this->HashIV;

@@ -1088,9 +1088,9 @@ class Cart extends Base_Controller {
 	//綠界 信用卡ATM 付完款後
 	public function paysuccess()
 	{
-		$f = fopen("log.txt", "a+");
-		fwrite($f, "Pay success\n" . date("Y-m-d H:i:s") . "\n" . json_encode($_POST) . "\n\n");
-		fclose($f);
+		// $f = fopen("log.txt", "a+");
+		// fwrite($f, "Pay success\n" . date("Y-m-d H:i:s") . "\n" . json_encode($_POST) . "\n\n");
+		// fclose($f);
 
 		$data = array(
 			"TradeNo"              =>	$this->input->post("MerchantTradeNo"),

@@ -19,6 +19,8 @@ class Cron extends Base_Controller{
 			->from($this->order . " S")
 			->where($syntax)
 			->get()->result_array();
+
+		$f = fopen("cron_log.txt", "a+");
 		
 		if($list){
 			foreach ($list as $l) {
@@ -35,11 +37,15 @@ class Cron extends Base_Controller{
 				}
 				$this->db->where(array("id" => $l['id']))->update($this->order, array('status' => 'cancel'));
 			}
+
+			fwrite($f, "record success\n" . date("Y-m-d H:i:s") . "\n取消訂單編號：" . $l['order_no'] . "\n\n");
 		}else{
 			echo '無資料';
+			fwrite($f, "record success\n" . date("Y-m-d H:i:s") . "\n無訂單可取消");
 		}
 
-
+		
+		fclose($f);
 		
 		
 	}
