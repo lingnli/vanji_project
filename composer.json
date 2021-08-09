@@ -1,0 +1,13 @@
+{
+    "name": "lingnili/vanji",
+    "type": "project",
+    "require": {
+        "facebook/php-business-sdk": "^8.0.3"
+    },
+    "authors": [
+        {
+            "name": "lingnili 0420",
+            "email": "wmdlifecoba@email.com"
+        }
+    ]
+}
