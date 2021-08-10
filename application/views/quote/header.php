@@ -25,8 +25,6 @@
   <link rel="stylesheet" href="<?= base_url() ?>assets/css/plugins/animation.css">
   <link rel="stylesheet" href="<?= base_url() ?>assets/css/plugins/jqueryui.min.css">
   <link rel="icon" href="<?= base_url() ?>assets/images/icon/logo.ico" type="image/x-icon" />
-
-  <link rel="icon" href="<?= base_url() ?>assets/images/icon/logo.ico" type="image/x-icon" />
   <!-- Vendor & Plugins CSS (Please remove the comment from below vendor.min.css & plugins.min.css for better website load performance and remove css files from avobe) -->
   <!--
     <script src="<?= base_url() ?>assets/js/vendor/vendor.min.js"></script>
