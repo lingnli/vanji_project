@@ -278,17 +278,18 @@ class Member_model extends CI_Model {
 
 		//locolhost測試
 
-		// $mail->IsSMTP();                         // 設定使用SMTP方式寄信        
-		$mail->SMTPAuth = true;                     // 設定SMTP需要驗證
-		$mail->SMTPSecure = "ssl";                  // Gmail的SMTP主機需要使用SSL連線   
-		$mail->SMTPDebug = 2;
-		$mail->Host = "localhost";                  // Gmail的SMTP主機        
-		// $mail->Port = 25;                        // Gmail的SMTP主機的port為465      
-		$mail->CharSet = "utf-8";                   // 設定郵件編碼   
+
+		$mail->IsSMTP();                         // 設定使用SMTP方式寄信        
+		$mail->SMTPAuth = true;                     		// 設定SMTP需要驗證
+		$mail->SMTPSecure = "tls";                  		// Gmail的SMTP主機需要使用SSL連線   
+		// $mail->SMTPDebug = 1;
+		$mail->Host = "smtp.gmail.com";                  	// Gmail的SMTP主機        
+		$mail->Port = 587;                        			// Gmail的SMTP主機的port為465      
+		$mail->CharSet = "utf-8";
 		//$mail->WordWrap = 50;                     // 每50個字元自動斷行
 
-		//$mail->Username = "wmdlifecoba@gmail.com";     // 設定驗證帳號        
-		//$mail->Password = "";                     // 設定驗證密碼        
+		$mail->Username = "vanjijewelry2020@gmail.com";     // 設定驗證帳號        
+		$mail->Password = "mqcakioierkjgddu";                     // 設定驗證密碼        
 
 		$mail->From = "vanji@service.com";         // 設定寄件者信箱        
 		$mail->FromName = "梵日珠寶";                   // 設定寄件者姓名    
