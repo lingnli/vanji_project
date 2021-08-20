@@ -14,7 +14,11 @@
 
 
         <!-- breadcrumb-area start -->
-        <div class="breadcrumb-area section-ptb">
+        <div class="breadcrumb-area section-ptb" <? if ($top_bg[6]['cover'] == "") : ?> style=" background: url(<?= base_url() ?>assets/images/bg/bgb.png); background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;" <? else : ?> style=" background: url(<?= base_url() . $top_bg[6]['cover'] ?>); background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;" <? endif; ?>>
             <div class="container">
                 <div class="row">
                     <div class="col-12">
@@ -101,7 +105,7 @@
                                                             信用卡一次付清
                                                         <? } else if ($cart['payment'] == 'credit_3') { ?>
                                                             信用卡分三期
-                                                        <? } else if ($cart['payment'] == 'atm') { ?>                                                            
+                                                        <? } else if ($cart['payment'] == 'atm') { ?>
                                                             【ATM匯款資料】<br>
                                                             銀行代號：<?= $cart['BankCode'] ?><br>
                                                             銀行帳號：<?= $cart['vAccount'] ?><br>

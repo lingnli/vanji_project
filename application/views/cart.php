@@ -245,7 +245,7 @@
 
                             } else {
                                 alert(data.msg)
-                                $('.d_'+p_id).val(num - 1)
+                                $('.d_' + p_id).val(num - 1)
                             }
                         }
                     });
@@ -279,11 +279,12 @@
                     $('.delivery-con').hide();
 
                 } else {
-                    if (payment == 'atm') {
-                        $('.delivery-con').hide();
-                    } else {
-                        $('.delivery-con').show();
-                    }
+                    $('.delivery-con').show();
+                    // if (payment == 'atm') {
+                    //     $('.delivery-con').hide();
+                    // } else {
+                    //     $('.delivery-con').show();
+                    // }
                 }
             });
 

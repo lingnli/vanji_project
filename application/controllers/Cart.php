@@ -611,7 +611,9 @@ class Cart extends Base_Controller {
 		}else{
 			$cart_content = $this->session->userdata('temp_cart');
 		}
-		// print_r($cart_content);exit;
+		
+		// print_r($this->session);
+		// exit;
 
 		if ($cart_content == array() || $cart_content == ' ') {
 			$this->js_output_and_back("請先選擇商品後進行結帳");
@@ -757,11 +759,11 @@ class Cart extends Base_Controller {
 		}
 		
 		if($user_id){
-			if ($order_check) {
-				$ship = (int)$this->data['ship'];
-			} else {
+			// if ($order_check) {
+			// 	$ship = (int)$this->data['ship'];
+			// } else {
 				$ship = 0;
-			}
+			// }
 		}else{
 			if ($area != 'tw') {
 				$ship = 200;
