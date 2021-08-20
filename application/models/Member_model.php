@@ -289,7 +289,7 @@ class Member_model extends CI_Model {
 		//$mail->WordWrap = 50;                     // 每50個字元自動斷行
 
 		$mail->Username = "vanjijewelry2020@gmail.com";     // 設定驗證帳號        
-		$mail->Password = "mqcakioierkjgddu";                     // 設定驗證密碼        
+		$mail->Password = "wkvhpzdampggsyuz";                     // 設定驗證密碼        
 
 		$mail->From = "vanji@service.com";         // 設定寄件者信箱        
 		$mail->FromName = "梵日珠寶";                   // 設定寄件者姓名    
