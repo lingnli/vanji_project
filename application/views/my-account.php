@@ -74,10 +74,35 @@
                                                                 <td><a href="<?= base_url() ?>cart/payment/<?= $o['order_no'] ?>"><?= $o['order_no'] ?></a></td>
                                                                 <td><?= date("Y-m-d", strtotime($o['create_date'])) ?></td>
                                                                 <td>
-                                                                    <? if ($o['delivery_status'] == 1) { ?>
+                                                                    <? if ($o['delivery_success'] == 1) { ?>
                                                                         已出貨
                                                                     <? } else { ?>
-                                                                        處理中
+
+                                                                        <? if ($o['payment'] == 'credit') { ?>
+                                                                            <? if ($o['status'] == 'pending') { ?>
+                                                                                信用卡付款失敗
+                                                                            <? } else if ($o['status'] == 'paid') { ?>
+                                                                                待出貨
+                                                                            <? } ?>
+                                                                        <? } else if ($o['payment'] == 'atm') { ?>
+                                                                            <? if ($o['status'] == 'pending') { ?>
+                                                                                待轉帳
+                                                                            <? } else if ($o['status'] == 'paid') { ?>
+                                                                                待出貨
+                                                                            <? } else { ?>
+                                                                                已取消
+                                                                            <? } ?>
+                                                                        <? } ?>
+
+                                                                        <!-- <? if ($o['status'] == 'cancel') { ?>
+                                                                            已取消
+                                                                        <? } else if ($o['status'] == 'pending' && $o['payment'] == 'credit') { ?>
+                                                                            信用卡付款失敗
+                                                                        <? } else if ($o['status'] == 'pending' && $o['payment'] == 'atm') { ?>
+                                                                            待轉帳
+                                                                        <? } else { ?>
+                                                                            處理中
+                                                                        <? } ?> -->
                                                                     <? } ?>
                                                                 </td>
                                                                 <td>$<?= $o['amount'] ?></td>

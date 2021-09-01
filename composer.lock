@@ -4,8 +4,45 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "144e171fa2633fe031bdff54141a81d9",
+    "content-hash": "944e79b81a5c35698653762069e2f35e",
     "packages": [
+        {
+            "name": "ecpay/sdk",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ECPay/SDK_PHP.git",
+                "reference": "5cbb10182652195c6f402a26c4f7749a5920658c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ECPay/SDK_PHP/zipball/5cbb10182652195c6f402a26c4f7749a5920658c",
+                "reference": "5cbb10182652195c6f402a26c4f7749a5920658c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Ecpay\\Sdk\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "ECPay SDK",
+            "support": {
+                "issues": "https://github.com/ECPay/SDK_PHP/issues",
+                "source": "https://github.com/ECPay/SDK_PHP/tree/1.1.0"
+            },
+            "time": "2021-08-12T11:43:55+00:00"
+        },
         {
             "name": "facebook/php-business-sdk",
             "version": "8.0.4",

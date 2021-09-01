@@ -1,9 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+// require 'vendor/autoload.php';
+
+// use Ecpay\Sdk\Factories\Factory;
+// use Ecpay\Sdk\Response\ArrayResponse;
+
 class Cart extends Base_Controller {
-
-
 
 	public function __construct(){
 		parent::__construct();
@@ -518,10 +521,82 @@ class Cart extends Base_Controller {
 	//結帳頁面
 	public function check() 
 	{
+	
+			// $factory = new Factory();
+			
+			// $response = $factory->create(ArrayResponse::class);
+
+			// if(array_key_exists("MerchantTradeNo", $response->get($_POST))){
+			// 	$MerchantTradeNo  = $response->get($_POST)["MerchantTradeNo"];
+			// 	$LogisticsSubType = $response->get($_POST)["LogisticsSubType"];
+			// 	$CVSStoreID       = $response->get($_POST)["CVSStoreID"];
+			// 	$CVSStoreName     = $response->get($_POST)["CVSStoreName"];
+			// 	$CVSAddress       = $response->get($_POST)["CVSAddress"];
+			// 	$CVSTelephone     = $response->get($_POST)["CVSTelephone"];
+			// 	$CVSOutSide       = $response->get($_POST)["CVSOutSide"];
+			// 	$ExtraData        = $response->get($_POST)["ExtraData"];
+			// 	$shop = array(
+			// 		"MerchantTradeNo"  =>	$MerchantTradeNo,
+			// 		"LogisticsSubType" =>	$LogisticsSubType,
+			// 		"CVSStoreID"       =>	$CVSStoreID,
+			// 		"CVSStoreName"     =>	$CVSStoreName,
+			// 		"CVSAddress"       =>	$CVSAddress,
+			// 		"CVSTelephone"     =>	$CVSTelephone,
+			// 		"CVSOutSide"       =>	$CVSOutSide,
+			// 		"ExtraData"        =>	$ExtraData
+			// 	);
+			// 	if ($shop['LogisticsSubType'] == 'FAMIC2C') {
+			// 		$shop['store'] = '全家店到店';
+			// 	} else if ($shop['LogisticsSubType'] == 'UNIMARTC2C') {
+			// 		$shop['store'] = '7-ELEVEN 超商交貨便';
+			// 	} else if ($shop['LogisticsSubType'] == 'HILIFEC2C') {
+			// 		$shop['store'] = '萊爾富店到店';
+			// 	} else if ($shop['LogisticsSubType'] == 'OKMARTC2C') {
+			// 		$shop['store'] = 'OK店到店';
+			// 	}
+
+			// 	$this->data['shop'] = $shop;
+
+			// 	$coupon  = $this->session->userdata('coupon');
+			// 	$area  = $this->session->userdata('area');
+			// 	$delivery  = $this->session->userdata('delivery');
+			// 	$payment  = $this->session->userdata('payment');				
+			// }else{
+			// 	$coupon            =	$this->input->post("coupon");
+			// 	$area            =	$this->input->post("area") ? $this->input->post("area") : "";
+			// 	$delivery            =	$this->input->post("delivery") ? $this->input->post("delivery") : "";
+			// 	$payment            =	$this->input->post("payment") ? $this->input->post("payment") : "";
+
+			// 	if ($area == "") {
+			// 		$this->js_output_and_back("請選擇運送地區");
+			// 		exit();
+			// 	}
+			// 	if ($payment == "") {
+			// 		$this->js_output_and_back("請選擇付款方式");
+			// 		exit();
+			// 	}
+			// 	if ($delivery == "") {
+			// 		$this->js_output_and_back("請選擇運送方式");
+			// 		exit();
+			// 	}
+			// 	$this->session->set_userdata('coupon', $coupon);
+			// 	$this->session->set_userdata('area', $area);
+			// 	$this->session->set_userdata('delivery', $delivery);
+			// 	$this->session->set_userdata('payment', $payment);
+
+			// 	$this->data['shop'] = array();
+			// }
+
+
+
+
+
+
+
 
 		//選超取後回傳到結帳頁面，接收超商的資訊
-		if ($this->input->post("MerchantTradeNo") != null) {
-			// print_r($_POST);exit;
+		if ($this->input->post("MerchantTradeNo")) {
+
 			$MerchantTradeNo  = $this->input->post("MerchantTradeNo");
 			$LogisticsSubType = $this->input->post("LogisticsSubType");
 			$CVSStoreID       = $this->input->post("CVSStoreID");
@@ -543,16 +618,16 @@ class Cart extends Base_Controller {
 			if($shop['LogisticsSubType']== 'FAMIC2C'){
 				$shop['store'] = '全家店到店';
 			} else if ($shop['LogisticsSubType'] == 'UNIMARTC2C') {
-				$shop['store'] = '：7-ELEVEN 超商交貨便';
+				$shop['store'] = '7-ELEVEN 超商交貨便';
 			} else if ($shop['LogisticsSubType'] == 'HILIFEC2C') {
 				$shop['store'] = '萊爾富店到店';
-			} else if ($shop['LogisticsSubType'] == 'OKMARTC2C:OK') {
+			} else if ($shop['LogisticsSubType'] == 'OKMARTC2C') {
 				$shop['store'] = 'OK店到店';
 			}
 
 			$this->data['shop'] = $shop;
-			// print_r($this->data['shop']);
-			// exit;
+			print_r($this->data['shop']);
+			exit;
 			$coupon  = $this->session->userdata('coupon');
 			$area  = $this->session->userdata('area');
 			$delivery  = $this->session->userdata('delivery');
@@ -590,16 +665,6 @@ class Cart extends Base_Controller {
 
 		//判斷此使用者是否有結帳完成訂單
 		$order_check = $this->db->where(array("user_id" => $user_id,'is_delete'=>0,'status'=>'paid'))->get($this->order)->row_array();
-		// print_r($order_check);
-		// exit;
-		// if (!$user_id) {
-		// $this->js_output_and_redirect("請先登入後再進行結帳", base_url() . "home/login_register");
-		// exit;
-
-		// }
-
-
-
 
 		//抓出user的id
 		if ($user_id) {
@@ -612,11 +677,11 @@ class Cart extends Base_Controller {
 			$cart_content = $this->session->userdata('temp_cart');
 		}
 		
-		// print_r($this->session);
-		// exit;
+
 
 		if ($cart_content == array() || $cart_content == ' ') {
-			$this->js_output_and_back("請先選擇商品後進行結帳");
+			$this->js_output_and_redirect("請先選擇商品後進行結帳",base_url().'cart');
+
 		}
 
 
@@ -759,11 +824,7 @@ class Cart extends Base_Controller {
 		}
 		
 		if($user_id){
-			// if ($order_check) {
-			// 	$ship = (int)$this->data['ship'];
-			// } else {
 				$ship = 0;
-			// }
 		}else{
 			if ($area != 'tw') {
 				$ship = 200;
@@ -772,7 +833,6 @@ class Cart extends Base_Controller {
 			}
 		}
 
-		// print_r($ship);exit;
 
 		$this->data['discount_type'] = $discount_type;
 		$this->data['discount_str'] = $discount_str;		
@@ -811,6 +871,14 @@ class Cart extends Base_Controller {
 		$discount_type_code     = $this->input->post("discount_type_code") ? $this->input->post("discount_type_code") : 0;
 		$discount_percent_code     = $this->input->post("discount_percent_code") ? $this->input->post("discount_percent_code") : "";
 		$shop     = $this->input->post("shop") ? $this->input->post("shop") : "";
+		// print_r($_POST);exit;
+
+		if ($delivery == 'convenient') {
+			if ($shop == "") {
+				$this->js_output_and_back("請選擇超商");
+				exit();
+			}
+		}
 
 		//防呆
 		if($delivery=='home'){
@@ -963,7 +1031,7 @@ class Cart extends Base_Controller {
 			'delivery_status'		=>	$delivery_stauts,
 			'convenient_data'		=>	serialize($shop)
 		);
-		// print_r($data);exit;
+		// print_r($payment);exit;
 		//存入order db
 		$res = $this->db->insert("order", $data);		
 
@@ -1010,6 +1078,7 @@ class Cart extends Base_Controller {
 
 		//取出對應訂單
 		$cart = $this->db->where(array("order_no" => $order_no))->get($this->order)->row_array();
+		
 
 		$cart['products'] = unserialize($cart['products']);
 
@@ -1019,7 +1088,9 @@ class Cart extends Base_Controller {
 		if($order['is_check'] == 0){
 
 			$this->db->where(array("order_no" => $order_no))->update($this->order, array("is_check" => 1));
-				
+			//發信寄送訂單編號
+			$this->Member_model->send_mail($cart['email'], "感謝您的購買，您的訂單編號是: " . $order_no . "<br> 可至官網的「訂單查詢」頁面，輸入訂單編號即可查看訂單進度與資訊。", "訂單成立通知");
+
 			if($order['coupon']!=""){
 				//coupon加入coupon_use	
 				$coupon_code = $order['coupon'];
@@ -1261,7 +1332,21 @@ class Cart extends Base_Controller {
 
 
 
+	//訂單搜尋
+	public function search()
+	{
+		if($_POST){
+			$order_no = $this->input->post("order_no");
+			if($order_no == ""){
+				$this->js_output_and_back("訂單編號不可為空值");
+				exit();
+			}
 
+			header("Location: " . base_url() . "cart/payment/" . $order_no);
+			exit();
+		}
+		$this->load->view('cart-search.php', $this->data);
+	}
 
 
 
@@ -1323,4 +1408,6 @@ class Cart extends Base_Controller {
 			show_404();
 		}
 	}
+
+
 }

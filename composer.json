@@ -2,12 +2,17 @@
     "name": "lingnili/vanji",
     "type": "project",
     "require": {
-        "facebook/php-business-sdk": "^8.0.3"
+        "facebook/php-business-sdk": "^8.0.3",
+        "ecpay/sdk": "^1.1"
     },
     "authors": [
         {
             "name": "lingnili 0420",
             "email": "wmdlifecoba@email.com"
         }
-    ]
+    ],
+    "config": {
+
+    "platform-check": false
+}
 }

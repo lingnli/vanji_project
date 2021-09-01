@@ -28,6 +28,7 @@ $config['base_url'] = 'http://localhost/vanji/';
 // $config['base_url'] = 'https://vanji.com.tw/';
 
 
+
 $config['langs'] = ['tw', 'en'];
 
 /*
@@ -142,7 +143,9 @@ $config['subclass_prefix'] = 'Base_';
 | Note: This will NOT disable or override the CodeIgniter-specific
 |	autoloading (application/config/autoload.php)
 */
-$config['composer_autoload'] = FALSE;
+// $config['composer_autoload'] =realpath(APPPATH . '../vendor/autoload.php');
+$config['composer_autoload'] = TRUE;
+// $config['composer_autoload'] = FCPATH . 'vendor/autoload.php'; 
 
 /*
 |--------------------------------------------------------------------------

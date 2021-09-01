@@ -41,7 +41,7 @@
         <div class="main-content-wrap section-ptb cart-page">
             <div class="container">
 
-                <? if ($cart['status'] == 'paid' || ($cart['status'] == 'pending' && $cart['payment'] == 'atm')) { ?>
+                <? if ($cart['status'] == 'paid' || ((($cart['status'] == 'pending') || ($cart['status'] == 'cancel')) && $cart['payment'] == 'atm')) { ?>
                     <div class="col-lg-12">
                         <div class="section-title text-center">
                         </div>
@@ -83,13 +83,7 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="">
-                                            <!--coupon-all-->
 
-                                            <!-- <div class="coupon">
-                                            <h3>Coupon</h3>
-                                            <p>使用優惠碼</p>
-                                            <p style="border: 1px solid #ebebeb; background-color: #fff; width: 200px; padding: 5px 10px;">cc820 (折扣200)</p>
-                                        </div> -->
                                             <div class="cart-page-total">
                                                 <h2></h2>
                                                 <ul>
@@ -98,9 +92,9 @@
                                                             郵寄
                                                         <? } elseif ($cart['delivery_status'] == 1) { ?>
                                                             超商取貨<br> <?= $store_type ?> <?= $store ?>
-                                                        <? } ?> <span></span>
+                                                        <? } ?>
                                                     </li>
-                                                    <li>付款方式:
+                                                    <li>付款方式：
                                                         <? if ($cart['payment'] == 'credit') { ?>
                                                             信用卡一次付清
                                                         <? } else if ($cart['payment'] == 'credit_3') { ?>
@@ -110,10 +104,49 @@
                                                             銀行代號：<?= $cart['BankCode'] ?><br>
                                                             銀行帳號：<?= $cart['vAccount'] ?><br>
                                                             繳費期限：<?= $cart['ExpireDate'] ?><br>
-                                                        <? } ?> <span></span>
+                                                        <? } ?>
+                                                    </li>
+                                                    <li>付款狀態：
+                                                        <? if ($cart['status'] == 'pending') { ?>
+                                                            未轉帳
+                                                        <? } elseif ($cart['status'] == 'paid') { ?>
+                                                            已付款
+                                                        <? } elseif ($cart['status'] == 'cancel') { ?>
+                                                            過期未付款已取消
+                                                        <? } ?>
+                                                    </li>
+                                                    <li>出貨狀態：
+                                                        <? if ($cart['delivery_success'] == '0') { ?>
+                                                            待出貨
+                                                        <? } elseif ($cart['delivery_success'] == '1') { ?>
+                                                            已出貨
+                                                        <? } ?>
                                                     </li>
                                                 </ul>
+
+                                                <p class="text-center">您的訂單編號已傳送至您的EMAIL信箱<br>如需查詢訂單狀態請使用訂單查詢功能</p>
                                             </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="cart-page-total">
+                                            <h2>總計</h2>
+                                            <ul style="    margin-bottom: 10px;">
+                                                <? if ($discount_str != "") { ?>
+                                                    <li><?= $discount_type ?>
+                                                        <span><?= $discount_str ?></span>
+                                                    </li>
+                                                <? } ?>
+                                                <li>商品金額 <span>$<?= $cart['amount'] + $cart['coupon_discount'] - $cart['fee'] ?></span></li>
+                                                <? if ($cart['coupon'] != "") { ?>
+                                                    <li>優惠碼<?= $cart['coupon'] ?> <span>-$<?= $cart['coupon_discount'] ?></span></li>
+                                                <? } ?>
+                                                <li>郵寄運費 <span>$<?= $cart['fee'] ?></span></li>
+                                                <li>總金額 <span>$<?= $cart['amount'] ?></span></li>
+                                            </ul>
+                                            <p class="mb-2" style="color:red">※完成匯款後截圖訊息至粉絲頁</p>
+                                            <div style="color:white;border:none;" class="openn btn btn-primary">粉絲頁收件匣</div>
                                         </div>
                                     </div>
 
@@ -130,25 +163,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-4">
-                                        <div class="cart-page-total">
-                                            <h2>總計</h2>
-                                            <ul>
-                                                <? if ($discount_str != "") { ?>
-                                                    <li><?= $discount_type ?>
-                                                        <span><?= $discount_str ?></span>
-                                                    </li>
-                                                <? } ?>
-                                                <li>商品金額 <span>$<?= $cart['amount'] + $cart['coupon_discount'] - $cart['fee'] ?></span></li>
-                                                <? if ($cart['coupon'] != "") { ?>
-                                                    <li>優惠碼<?= $cart['coupon'] ?> <span>-$<?= $cart['coupon_discount'] ?></span></li>
-                                                <? } ?>
-                                                <li>郵寄運費 <span>$<?= $cart['fee'] ?></span></li>
-                                                <li>總金額 <span>$<?= $cart['amount'] ?></span></li>
-                                            </ul>
-                                            <!-- <a href="checkout.html" class="proceed-checkout-btn">下一步</a> -->
-                                        </div>
-                                    </div>
+
 
                                 </div>
                             </form>
@@ -172,3 +187,13 @@
 
 
         <?php include("quote/footer.php"); ?>
+        <script>
+            $(".openn").on('click', function(event) {
+
+                window.location.href = 'https://www.facebook.com/messages/t/949142695176781';
+
+
+
+
+            });
+        </script>

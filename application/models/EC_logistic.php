@@ -10,7 +10,7 @@ class EC_logistic extends CI_Model {
 	// private $HashKey    = 'XBERn1YOvpM9nfZc';
 	// private $HashIV     = 'h1ONHk4P4yqbl5LK';
 	// private $MerchantID = 2000933;
-	// private $gateway_url = "https://logistics-stage.ecpay.com.tw/Express/Create";
+	
 
 	function __construct()
 	{

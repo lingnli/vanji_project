@@ -77,7 +77,7 @@ $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
 	'username' => 'root',
-	'password' => '',
+	'password' => '1111',
 	'database' => 'vanji',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
@@ -140,3 +140,25 @@ $db['publish'] = array(
 );
 
 
+
+$db['strength'] = array(
+	'dsn'	   => 'mysql:host=localhost;dbname=salesapp_strength',
+	'username' => 'salesapp',
+	'password' => 'f*1Em11^tPq_',
+	'database' => 'salesapp_strength',
+	'hostname' => 'localhost',
+	'dbdriver' => 'pdo',
+	'dbprefix' => '',
+	'pconnect' => FALSE,
+	'db_debug' => (ENVIRONMENT !== 'production'),
+	'cache_on' => FALSE,
+	'cachedir' => '',
+	'char_set' => 'utf8',
+	'dbcollat' => 'utf8_unicode_ci',
+	'swap_pre' => '',
+	'encrypt'  => FALSE,
+	'compress' => FALSE,
+	'stricton' => FALSE,
+	'failover' => array(),
+	'save_queries' => TRUE
+);

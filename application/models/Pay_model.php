@@ -133,10 +133,6 @@ class Pay_model extends CI_Model
 		$obj->Send['OrderResultURL']	= $ClientRedirectURL;
 		//為付款完成後，綠界科技將頁面導回到合作特店網址，並將付款結果帶回
 
-
-		// print_r($obj);
-		// exit;
-
 		//產生訂單(auto submit至ECPay)
 		$obj->CheckOut();
 

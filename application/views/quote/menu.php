@@ -58,6 +58,8 @@
               </li>
               <li><a href="<?= base_url() ?>home/faq">購物說明</a>
               </li>
+              <li><a href="<?= base_url() ?>cart/search">訂單查詢</a>
+              </li>
               <li><a href="<?= base_url() ?>home/contact">聯絡我們</a>
               </li>
             </ul>
@@ -108,16 +110,16 @@
             }
 
             @media (max-width: 768px) {
-              .sss {                
+              .sss {
                 right: 35px;
               }
             }
           </style>
           <a href="<?= base_url() ?>cart/index">
             <i class="fas fa-shopping-cart d-flex align-items-center justify-content-center" style="font-size: 16px; height: 26px; padding-right: 10px;"></i>
-            <?if($menu_count != 0):?>
-            <span class="sss"></span>
-            <?endif;?>
+            <? if ($menu_count != 0) : ?>
+              <span class="sss"></span>
+            <? endif; ?>
           </a>
           <!-- <div class="shopping-cart-wrap">
             <a><i class="ion-ios-cart-outline"></i> <span id="cart-total"><?= $menu_count ?></span></a>
@@ -193,7 +195,7 @@
     <div class="off-canvas-inner">
 
       <!-- mobile menu start -->
-      <div class="mobile-navigation">
+      <div class="mobile-navigation" style="max-height: 350px;">
 
         <!-- mobile menu navigation start -->
         <nav>
@@ -203,7 +205,9 @@
             <li><a href="<?= base_url() ?>news">最新系列</a></li>
             <li><a href="<?= base_url() ?>product">全部商品</a></li>
             <li><a href="<?= base_url() ?>home/faq">購物說明</a></li>
+            <li><a href="<?= base_url() ?>cart/search">訂單查詢</a></li>
             <li><a href="<?= base_url() ?>home/contact">聯絡我們</a></li>
+
 
           </ul>
         </nav>
