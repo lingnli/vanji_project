@@ -1138,7 +1138,7 @@ class Cart extends Base_Controller {
 				$store_type = '7-ELEVEN 超商交貨便';
 			} else if ($shop['LogisticsSubType'] == 'HILIFEC2C') {
 				$store_type = '萊爾富店到店';
-			} else if ($shop['LogisticsSubType'] == 'OKMARTC2C:OK') {
+			} else if ($shop['LogisticsSubType'] == 'OKMARTC2C') {
 				$store_type = 'OK店到店';
 			}
 
