@@ -204,7 +204,7 @@
                                                                     <option value="UNIMARTC2C">711統一超商</option>
                                                                     <option value="FAMIC2C">全家便利商店</option>
                                                                     <option value="HILIFEC2C">萊爾富便利商店</option>
-                                                                    <!-- <option value="OKMARTC2C">OK便利商店</option> -->
+                                                                    <option value="OKMARTC2C">OK便利商店</option>
                                                                 </select>
                                                             </div>
 
@@ -289,8 +289,8 @@
                 // createCookie('store', $("input[name=store]:checked").val(), 3);
                 // console.log($("select[name=con_choose]").val());
 
-                // location.href = '<?= base_url() ?>cvs/map/' + $("select[name=con_choose]").val();
-                location.href = '<?= base_url() ?>cart/cvschoose/' + $("select[name=con_choose]").val();
+                location.href = '<?= base_url() ?>cvs/map/' + $("select[name=con_choose]").val();
+                // location.href = '<?= base_url() ?>cart/cvschoose/' + $("select[name=con_choose]").val();
 
             }
         </script>

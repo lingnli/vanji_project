@@ -1,10 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-// require 'vendor/autoload.php';
-
-// use Ecpay\Sdk\Factories\Factory;
-// use Ecpay\Sdk\Response\ArrayResponse;
 
 class Cart extends Base_Controller {
 
@@ -521,71 +517,69 @@ class Cart extends Base_Controller {
 	//結帳頁面
 	public function check() 
 	{
-	
-			// $factory = new Factory();
-			
-			// $response = $factory->create(ArrayResponse::class);
 
-			// if(array_key_exists("MerchantTradeNo", $response->get($_POST))){
-			// 	$MerchantTradeNo  = $response->get($_POST)["MerchantTradeNo"];
-			// 	$LogisticsSubType = $response->get($_POST)["LogisticsSubType"];
-			// 	$CVSStoreID       = $response->get($_POST)["CVSStoreID"];
-			// 	$CVSStoreName     = $response->get($_POST)["CVSStoreName"];
-			// 	$CVSAddress       = $response->get($_POST)["CVSAddress"];
-			// 	$CVSTelephone     = $response->get($_POST)["CVSTelephone"];
-			// 	$CVSOutSide       = $response->get($_POST)["CVSOutSide"];
-			// 	$ExtraData        = $response->get($_POST)["ExtraData"];
-			// 	$shop = array(
-			// 		"MerchantTradeNo"  =>	$MerchantTradeNo,
-			// 		"LogisticsSubType" =>	$LogisticsSubType,
-			// 		"CVSStoreID"       =>	$CVSStoreID,
-			// 		"CVSStoreName"     =>	$CVSStoreName,
-			// 		"CVSAddress"       =>	$CVSAddress,
-			// 		"CVSTelephone"     =>	$CVSTelephone,
-			// 		"CVSOutSide"       =>	$CVSOutSide,
-			// 		"ExtraData"        =>	$ExtraData
-			// 	);
-			// 	if ($shop['LogisticsSubType'] == 'FAMIC2C') {
-			// 		$shop['store'] = '全家店到店';
-			// 	} else if ($shop['LogisticsSubType'] == 'UNIMARTC2C') {
-			// 		$shop['store'] = '7-ELEVEN 超商交貨便';
-			// 	} else if ($shop['LogisticsSubType'] == 'HILIFEC2C') {
-			// 		$shop['store'] = '萊爾富店到店';
-			// 	} else if ($shop['LogisticsSubType'] == 'OKMARTC2C') {
-			// 		$shop['store'] = 'OK店到店';
-			// 	}
 
-			// 	$this->data['shop'] = $shop;
+			if(array_key_exists("MerchantTradeNo", $_POST)){
+				
+				$MerchantTradeNo  = $_POST["MerchantTradeNo"];
+				$LogisticsSubType = $_POST["LogisticsSubType"];
+				$CVSStoreID       = $_POST["CVSStoreID"];
+				$CVSStoreName     = $_POST["CVSStoreName"];
+				$CVSAddress       = $_POST["CVSAddress"];
+				$CVSTelephone     = $_POST["CVSTelephone"];
+				$CVSOutSide       = $_POST["CVSOutSide"];
+				$ExtraData        = $_POST["ExtraData"];
+				$shop = array(
+					"MerchantTradeNo"  =>	$MerchantTradeNo,
+					"LogisticsSubType" =>	$LogisticsSubType,
+					"CVSStoreID"       =>	$CVSStoreID,
+					"CVSStoreName"     =>	$CVSStoreName,
+					"CVSAddress"       =>	$CVSAddress,
+					"CVSTelephone"     =>	$CVSTelephone,
+					"CVSOutSide"       =>	$CVSOutSide,
+					"ExtraData"        =>	$ExtraData
+				);
+				if ($shop['LogisticsSubType'] == 'FAMIC2C') {
+					$shop['store'] = '全家店到店';
+				} else if ($shop['LogisticsSubType'] == 'UNIMARTC2C') {
+					$shop['store'] = '7-ELEVEN 超商交貨便';
+				} else if ($shop['LogisticsSubType'] == 'HILIFEC2C') {
+					$shop['store'] = '萊爾富店到店';
+				} else if ($shop['LogisticsSubType'] == 'OKMARTC2C') {
+					$shop['store'] = 'OK店到店';
+				}
 
-			// 	$coupon  = $this->session->userdata('coupon');
-			// 	$area  = $this->session->userdata('area');
-			// 	$delivery  = $this->session->userdata('delivery');
-			// 	$payment  = $this->session->userdata('payment');				
-			// }else{
-			// 	$coupon            =	$this->input->post("coupon");
-			// 	$area            =	$this->input->post("area") ? $this->input->post("area") : "";
-			// 	$delivery            =	$this->input->post("delivery") ? $this->input->post("delivery") : "";
-			// 	$payment            =	$this->input->post("payment") ? $this->input->post("payment") : "";
+				$this->data['shop'] = $shop;
 
-			// 	if ($area == "") {
-			// 		$this->js_output_and_back("請選擇運送地區");
-			// 		exit();
-			// 	}
-			// 	if ($payment == "") {
-			// 		$this->js_output_and_back("請選擇付款方式");
-			// 		exit();
-			// 	}
-			// 	if ($delivery == "") {
-			// 		$this->js_output_and_back("請選擇運送方式");
-			// 		exit();
-			// 	}
-			// 	$this->session->set_userdata('coupon', $coupon);
-			// 	$this->session->set_userdata('area', $area);
-			// 	$this->session->set_userdata('delivery', $delivery);
-			// 	$this->session->set_userdata('payment', $payment);
+				$coupon  = $this->session->userdata('coupon');
+				$area  = $this->session->userdata('area');
+				$delivery  = $this->session->userdata('delivery');
+				$payment  = $this->session->userdata('payment');				
+			}else{
+				$coupon            =	$this->input->post("coupon");
+				$area            =	$this->input->post("area") ? $this->input->post("area") : "";
+				$delivery            =	$this->input->post("delivery") ? $this->input->post("delivery") : "";
+				$payment            =	$this->input->post("payment") ? $this->input->post("payment") : "";
 
-			// 	$this->data['shop'] = array();
-			// }
+				if ($area == "") {
+					$this->js_output_and_back("請選擇運送地區");
+					exit();
+				}
+				if ($payment == "") {
+					$this->js_output_and_back("請選擇付款方式");
+					exit();
+				}
+				if ($delivery == "") {
+					$this->js_output_and_back("請選擇運送方式");
+					exit();
+				}
+				$this->session->set_userdata('coupon', $coupon);
+				$this->session->set_userdata('area', $area);
+				$this->session->set_userdata('delivery', $delivery);
+				$this->session->set_userdata('payment', $payment);
+
+				$this->data['shop'] = array();
+			}
 
 
 
@@ -595,69 +589,69 @@ class Cart extends Base_Controller {
 
 
 		//選超取後回傳到結帳頁面，接收超商的資訊
-		if ($this->input->post("MerchantTradeNo")) {
+		// if ($this->input->post("MerchantTradeNo")) {
 
-			$MerchantTradeNo  = $this->input->post("MerchantTradeNo");
-			$LogisticsSubType = $this->input->post("LogisticsSubType");
-			$CVSStoreID       = $this->input->post("CVSStoreID");
-			$CVSStoreName     = $this->input->post("CVSStoreName");
-			$CVSAddress       = $this->input->post("CVSAddress");
-			$CVSTelephone     = $this->input->post("CVSTelephone");
-			$CVSOutSide       = $this->input->post("CVSOutSide");
-			$ExtraData        = $this->input->post("ExtraData");
-			$shop= array(
-				"MerchantTradeNo"  =>	$MerchantTradeNo,
-				"LogisticsSubType" =>	$LogisticsSubType,
-				"CVSStoreID"       =>	$CVSStoreID,
-				"CVSStoreName"     =>	$CVSStoreName,
-				"CVSAddress"       =>	$CVSAddress,
-				"CVSTelephone"     =>	$CVSTelephone,
-				"CVSOutSide"       =>	$CVSOutSide,
-				"ExtraData"        =>	$ExtraData
-			);
-			if($shop['LogisticsSubType']== 'FAMIC2C'){
-				$shop['store'] = '全家店到店';
-			} else if ($shop['LogisticsSubType'] == 'UNIMARTC2C') {
-				$shop['store'] = '7-ELEVEN 超商交貨便';
-			} else if ($shop['LogisticsSubType'] == 'HILIFEC2C') {
-				$shop['store'] = '萊爾富店到店';
-			} else if ($shop['LogisticsSubType'] == 'OKMARTC2C') {
-				$shop['store'] = 'OK店到店';
-			}
+		// 	$MerchantTradeNo  = $this->input->post("MerchantTradeNo");
+		// 	$LogisticsSubType = $this->input->post("LogisticsSubType");
+		// 	$CVSStoreID       = $this->input->post("CVSStoreID");
+		// 	$CVSStoreName     = $this->input->post("CVSStoreName");
+		// 	$CVSAddress       = $this->input->post("CVSAddress");
+		// 	$CVSTelephone     = $this->input->post("CVSTelephone");
+		// 	$CVSOutSide       = $this->input->post("CVSOutSide");
+		// 	$ExtraData        = $this->input->post("ExtraData");
+		// 	$shop= array(
+		// 		"MerchantTradeNo"  =>	$MerchantTradeNo,
+		// 		"LogisticsSubType" =>	$LogisticsSubType,
+		// 		"CVSStoreID"       =>	$CVSStoreID,
+		// 		"CVSStoreName"     =>	$CVSStoreName,
+		// 		"CVSAddress"       =>	$CVSAddress,
+		// 		"CVSTelephone"     =>	$CVSTelephone,
+		// 		"CVSOutSide"       =>	$CVSOutSide,
+		// 		"ExtraData"        =>	$ExtraData
+		// 	);
+		// 	if($shop['LogisticsSubType']== 'FAMIC2C'){
+		// 		$shop['store'] = '全家店到店';
+		// 	} else if ($shop['LogisticsSubType'] == 'UNIMARTC2C') {
+		// 		$shop['store'] = '7-ELEVEN 超商交貨便';
+		// 	} else if ($shop['LogisticsSubType'] == 'HILIFEC2C') {
+		// 		$shop['store'] = '萊爾富店到店';
+		// 	} else if ($shop['LogisticsSubType'] == 'OKMARTC2C') {
+		// 		$shop['store'] = 'OK店到店';
+		// 	}
 
-			$this->data['shop'] = $shop;
-			print_r($this->data['shop']);
-			exit;
-			$coupon  = $this->session->userdata('coupon');
-			$area  = $this->session->userdata('area');
-			$delivery  = $this->session->userdata('delivery');
-			$payment  = $this->session->userdata('payment');
+		// 	$this->data['shop'] = $shop;
+		// 	print_r($this->data['shop']);
+		// 	exit;
+		// 	$coupon  = $this->session->userdata('coupon');
+		// 	$area  = $this->session->userdata('area');
+		// 	$delivery  = $this->session->userdata('delivery');
+		// 	$payment  = $this->session->userdata('payment');
 
-		} else {
-			$coupon            =	$this->input->post("coupon");
-			$area            =	$this->input->post("area") ? $this->input->post("area") : "";
-			$delivery            =	$this->input->post("delivery") ? $this->input->post("delivery") : "";
-			$payment            =	$this->input->post("payment") ? $this->input->post("payment") : "";
+		// } else {
+		// 	$coupon            =	$this->input->post("coupon");
+		// 	$area            =	$this->input->post("area") ? $this->input->post("area") : "";
+		// 	$delivery            =	$this->input->post("delivery") ? $this->input->post("delivery") : "";
+		// 	$payment            =	$this->input->post("payment") ? $this->input->post("payment") : "";
 
-			if ($area == "") {
-				$this->js_output_and_back("請選擇運送地區");
-				exit();
-			}
-			if ($payment == "") {
-				$this->js_output_and_back("請選擇付款方式");
-				exit();
-			}
-			if ($delivery == "") {
-				$this->js_output_and_back("請選擇運送方式");
-				exit();
-			}
-			$this->session->set_userdata('coupon', $coupon);
-			$this->session->set_userdata('area', $area);
-			$this->session->set_userdata('delivery', $delivery);
-			$this->session->set_userdata('payment', $payment);
+		// 	if ($area == "") {
+		// 		$this->js_output_and_back("請選擇運送地區");
+		// 		exit();
+		// 	}
+		// 	if ($payment == "") {
+		// 		$this->js_output_and_back("請選擇付款方式");
+		// 		exit();
+		// 	}
+		// 	if ($delivery == "") {
+		// 		$this->js_output_and_back("請選擇運送方式");
+		// 		exit();
+		// 	}
+		// 	$this->session->set_userdata('coupon', $coupon);
+		// 	$this->session->set_userdata('area', $area);
+		// 	$this->session->set_userdata('delivery', $delivery);
+		// 	$this->session->set_userdata('payment', $payment);
 
-			$this->data['shop'] = array();
-		}
+		// 	$this->data['shop'] = array();
+		// }
 
 
 		//判斷是否登入
