@@ -124,7 +124,7 @@
                                                     </li>
                                                 </ul>
 
-                                                <p class="text-center">您的訂單編號已傳送至您的EMAIL信箱<br>如需查詢訂單狀態請使用訂單查詢功能</p>
+                                                <p class="text-center" style="color:red">您的訂單編號已傳送至您的EMAIL信箱<br>如需查詢訂單狀態請使用訂單查詢功能</p>
                                             </div>
                                         </div>
                                     </div>

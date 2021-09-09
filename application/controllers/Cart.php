@@ -95,11 +95,13 @@ class Cart extends Base_Controller {
 				//建立暫時購物車
 				$temp_cart = array();
 				array_push($temp_cart, $product);
-				
+
 
 
 				//將temp_cart存入session
-				$_SESSION['temp_cart'] = $temp_cart;
+				// $_SESSION['temp_cart'] = $temp_cart;
+
+				$this->session->set_userdata('temp_cart', $temp_cart);
 				$this->js_output_and_redirect("加入購物車成功", $_SERVER['HTTP_REFERER']);
 			}
 
@@ -240,50 +242,7 @@ class Cart extends Base_Controller {
 
 	public function index() //購物車頁面
 	{
-
-		//選超取後回傳到結帳頁面，接收超商的資訊
-		if ($_POST) {
-			$MerchantTradeNo  = $this->input->post("MerchantTradeNo");
-			$LogisticsSubType = $this->input->post("LogisticsSubType");
-			$CVSStoreID       = $this->input->post("CVSStoreID");
-			$CVSStoreName     = $this->input->post("CVSStoreName");
-			$CVSAddress       = $this->input->post("CVSAddress");
-			$CVSTelephone     = $this->input->post("CVSTelephone");
-			$CVSOutSide       = $this->input->post("CVSOutSide");
-			$ExtraData        = $this->input->post("ExtraData");
-			$this->data['shop'] = array(
-				"MerchantTradeNo"  =>	$MerchantTradeNo,
-				"LogisticsSubType" =>	$LogisticsSubType,
-				"CVSStoreID"       =>	$CVSStoreID,
-				"CVSStoreName"     =>	$CVSStoreName,
-				"CVSAddress"       =>	$CVSAddress,
-				"CVSTelephone"     =>	$CVSTelephone,
-				"CVSOutSide"       =>	$CVSOutSide,
-				"ExtraData"        =>	$ExtraData
-			);
-			// print_r($this->data['shop']);exit;
-		} else {
-			$this->data['shop'] = array();
-		}
-
-
-		//判斷是否登入
-		// $user_id = $this->encryption->decrypt($this->session->uid);w
-
-		// if(!$user_id){
-		// 	$this->js_output_and_redirect("請先登入後再進行結帳", base_url()."home/login_register");
-		// 	exit;
-		// }
-
-		//運費
 		
-		// $ship =$this->db->get_where('funiture_info', array("id=" => 10))->row_array();
-		// $this->data['ship'] = $ship['content'];
-		// print_r($this->data['ship']);exit;
-
-
-		// $city = $this->get_zipcode()['city'];
-		// $this->data['city'] = $city;
 
 		//判斷是否登入
 		$user_id = $this->encryption->decrypt($this->session->uid);
@@ -520,7 +479,11 @@ class Cart extends Base_Controller {
 
 
 			if(array_key_exists("MerchantTradeNo", $_POST)){
-				
+			
+			// exit;
+			// print_r($this->input->ip_address());
+			// print_r($this->session->userdata('temp_cart'));
+			// exit;
 				$MerchantTradeNo  = $_POST["MerchantTradeNo"];
 				$LogisticsSubType = $_POST["LogisticsSubType"];
 				$CVSStoreID       = $_POST["CVSStoreID"];
@@ -581,103 +544,112 @@ class Cart extends Base_Controller {
 				$this->data['shop'] = array();
 			}
 
-
-
-
-
-
-
-
-		//選超取後回傳到結帳頁面，接收超商的資訊
-		// if ($this->input->post("MerchantTradeNo")) {
-
-		// 	$MerchantTradeNo  = $this->input->post("MerchantTradeNo");
-		// 	$LogisticsSubType = $this->input->post("LogisticsSubType");
-		// 	$CVSStoreID       = $this->input->post("CVSStoreID");
-		// 	$CVSStoreName     = $this->input->post("CVSStoreName");
-		// 	$CVSAddress       = $this->input->post("CVSAddress");
-		// 	$CVSTelephone     = $this->input->post("CVSTelephone");
-		// 	$CVSOutSide       = $this->input->post("CVSOutSide");
-		// 	$ExtraData        = $this->input->post("ExtraData");
-		// 	$shop= array(
-		// 		"MerchantTradeNo"  =>	$MerchantTradeNo,
-		// 		"LogisticsSubType" =>	$LogisticsSubType,
-		// 		"CVSStoreID"       =>	$CVSStoreID,
-		// 		"CVSStoreName"     =>	$CVSStoreName,
-		// 		"CVSAddress"       =>	$CVSAddress,
-		// 		"CVSTelephone"     =>	$CVSTelephone,
-		// 		"CVSOutSide"       =>	$CVSOutSide,
-		// 		"ExtraData"        =>	$ExtraData
-		// 	);
-		// 	if($shop['LogisticsSubType']== 'FAMIC2C'){
-		// 		$shop['store'] = '全家店到店';
-		// 	} else if ($shop['LogisticsSubType'] == 'UNIMARTC2C') {
-		// 		$shop['store'] = '7-ELEVEN 超商交貨便';
-		// 	} else if ($shop['LogisticsSubType'] == 'HILIFEC2C') {
-		// 		$shop['store'] = '萊爾富店到店';
-		// 	} else if ($shop['LogisticsSubType'] == 'OKMARTC2C') {
-		// 		$shop['store'] = 'OK店到店';
-		// 	}
-
-		// 	$this->data['shop'] = $shop;
-		// 	print_r($this->data['shop']);
-		// 	exit;
-		// 	$coupon  = $this->session->userdata('coupon');
-		// 	$area  = $this->session->userdata('area');
-		// 	$delivery  = $this->session->userdata('delivery');
-		// 	$payment  = $this->session->userdata('payment');
-
-		// } else {
-		// 	$coupon            =	$this->input->post("coupon");
-		// 	$area            =	$this->input->post("area") ? $this->input->post("area") : "";
-		// 	$delivery            =	$this->input->post("delivery") ? $this->input->post("delivery") : "";
-		// 	$payment            =	$this->input->post("payment") ? $this->input->post("payment") : "";
-
-		// 	if ($area == "") {
-		// 		$this->js_output_and_back("請選擇運送地區");
-		// 		exit();
-		// 	}
-		// 	if ($payment == "") {
-		// 		$this->js_output_and_back("請選擇付款方式");
-		// 		exit();
-		// 	}
-		// 	if ($delivery == "") {
-		// 		$this->js_output_and_back("請選擇運送方式");
-		// 		exit();
-		// 	}
-		// 	$this->session->set_userdata('coupon', $coupon);
-		// 	$this->session->set_userdata('area', $area);
-		// 	$this->session->set_userdata('delivery', $delivery);
-		// 	$this->session->set_userdata('payment', $payment);
-
-		// 	$this->data['shop'] = array();
-		// }
-
-
 		//判斷是否登入
 		$user_id = $this->encryption->decrypt($this->session->uid);
 
-		//判斷此使用者是否有結帳完成訂單
-		$order_check = $this->db->where(array("user_id" => $user_id,'is_delete'=>0,'status'=>'paid'))->get($this->order)->row_array();
-
 		//抓出user的id
 		if ($user_id) {
+
+			$ip = $this->input->ip_address();
+			$temp = [
+				'ip' => $ip,
+				'user_id' =>  $user_id,
+				"coupon"      =>	$this->input->post("coupon"),
+				"area"      =>	$this->input->post("area") ? $this->input->post("area") : "",
+				"delivery"      =>	$this->input->post("delivery") ? $this->input->post("delivery") : "",
+				"payment"      =>	$this->input->post("payment") ? $this->input->post("payment") : "",
+			];
+			if (!$this->db->where("ip = '$ip'")->get('temp_id')->row_array()) {
+				$this->db->insert('temp_id', $temp);
+			}
+			
+
 			$this->data['user'] = $this->db->where(array("id" => $user_id))->get($this->user)->row_array();
 			$cart = $this->db->where(array("u_id" => $user_id, "is_checkout" => 0))->get($this->cart)->row_array();
 
 			$cart_content = unserialize($cart['content']);
 
+			if ($cart_content == array()) {
+				print_r($user_id);
+				print_r($cart);
+				print_r(111);exit;
+				$this->js_output_and_redirect("請先選擇商品後進行結帳", base_url() . 'cart');
+			}
 		}else{
-			$cart_content = $this->session->userdata('temp_cart');
+			
+			$ip = $this->input->ip_address();			
+			if ($this->db->where("ip = '$ip'")->get('temp_id')->row_array()) {
+				$temp_user_data = $this->db->where("ip = '$ip'")->get('temp_id')->row_array();
+				$user_id = $temp_user_data['user_id'];
+				$coupon  = $temp_user_data['coupon'];
+				$area  = $temp_user_data['area'];
+				$delivery  = $temp_user_data['delivery'];
+				$payment  = $temp_user_data['payment'];
+
+				$this->Login_model->login(array(
+					"uid"      =>    $this->encryption->encrypt($user_id),
+					"id" =>     $user_id,
+				));
+
+				$this->data['user'] = $this->db->where(array("id" => $user_id))->get($this->user)->row_array();
+				$cart = $this->db->where(array("u_id" => $user_id, "is_checkout" => 0))->get($this->cart)->row_array();
+				$cart_content = unserialize($cart['content']);
+
+				if ($cart_content == array()) {
+					print_r($user_id);
+					print_r($cart);
+					print_r(222);
+					exit;
+					$this->js_output_and_redirect("請先選擇商品後進行結帳", base_url() . 'cart');
+				}
+
+			}else{
+
+				$cart_content = $this->session->userdata('temp_cart');
+				$t_cart = serialize($cart_content);
+				$temp = [
+					'ip' => $ip,
+					'content' =>  $t_cart,
+					"coupon"      =>	$this->input->post("coupon"),
+					"area"      =>	$this->input->post("area") ? $this->input->post("area") : "",
+					"delivery"      =>	$this->input->post("delivery") ? $this->input->post("delivery") : "",
+					"payment"      =>	$this->input->post("payment") ? $this->input->post("payment") : "",
+				];
+				if (!$this->db->where("ip = '$ip'")->get('temp_cart')->row_array()) {
+					$this->db->insert('temp_cart', $temp);
+				}
+
+				if ($cart_content == '') {
+					$temp_data = $this->db->where("ip = '$ip'")->get('temp_cart')->row_array();
+
+					if ($temp_data['content'] == "") {
+						$this->js_output_and_redirect("請先選擇商品後進行結帳", base_url() . 'cart');
+						exit;
+					} else {
+						$cart_content = unserialize($temp_data['content']);
+						$coupon  = $temp_data['coupon'];
+						$area  = $temp_data['area'];
+						$delivery  = $temp_data['delivery'];
+						$payment  = $temp_data['payment'];
+
+						$this->session->set_userdata('temp_cart', $cart_content);
+						$this->session->set_userdata('coupon', $coupon);
+						$this->session->set_userdata('area', $area);
+						$this->session->set_userdata('delivery', $delivery);
+						$this->session->set_userdata('payment', $payment);
+					}
+				
+			}
+
+
+				
+			}
 		}
 		
 
 
-		if ($cart_content == array() || $cart_content == ' ') {
-			$this->js_output_and_redirect("請先選擇商品後進行結帳",base_url().'cart');
-
-		}
-
+		// print_r(111);
+		// exit;
 
 		$total_price = 0;
 		$total_amount = 0;
@@ -850,7 +822,7 @@ class Cart extends Base_Controller {
 	//綠界付款頁面
 	public function pay()
 	{
-		// print_r($_POST);exit;
+
 		$user_id = $this->encryption->decrypt($this->session->uid);
 		$username = $this->input->post("username");
 		$phone    = $this->input->post("phone");
@@ -1030,6 +1002,9 @@ class Cart extends Base_Controller {
 		$res = $this->db->insert("order", $data);		
 
 		if ($res) {
+			$ip = $this->input->ip_address();
+			$this->db->where("ip = '$ip'")->delete('temp_cart');
+			$this->db->where("ip = '$ip'")->delete('temp_id');
 
 			$this->Pay_model->pay(
 				$order_no, 												//訂單編號
@@ -1083,7 +1058,7 @@ class Cart extends Base_Controller {
 
 			$this->db->where(array("order_no" => $order_no))->update($this->order, array("is_check" => 1));
 			//發信寄送訂單編號
-			$this->Member_model->send_mail($cart['email'], "感謝您的購買，您的訂單編號是: " . $order_no . "<br> 可至官網的「訂單查詢」頁面，輸入訂單編號即可查看訂單進度與資訊。", "訂單成立通知");
+			$this->Member_model->send_mail($cart['email'], "感謝您的購買，您的訂單編號是: " . $order_no . "<br> 可至官網的「訂單查詢」頁面，輸入訂單編號即可查看訂單進度與資訊。<br>".base_url(). "/cart/search", "訂單成立通知");
 
 			if($order['coupon']!=""){
 				//coupon加入coupon_use	

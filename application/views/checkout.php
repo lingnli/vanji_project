@@ -59,25 +59,25 @@
                         <div class="col-lg-6 col-md-6">
                             <!-- billing-details-wrap start -->
                             <div class="billing-details-wrap">
-                                <form action="<?= base_url() ?>cart/pay" method="POST">
+                                <form action="<?= base_url() ?>cart/pay" method="POST" id='fform'>
                                     <h3 class="shoping-checkboxt-title">寄送資訊</h3>
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <p class="single-form-row">
                                                 <label>姓名 <span class="required">*</span></label>
-                                                <input type="text" name="username" required>
+                                                <input type="text" name="username" required <? if (get_cookie("username", true)) { ?>value="<?= get_cookie("username", true) ?>" <? } ?>>
                                             </p>
                                         </div>
                                         <div class="col-lg-6">
                                             <p class="single-form-row">
                                                 <label>手機 <span class="required">*</span></label>
-                                                <input type="text" name="phone" required>
+                                                <input type="text" name="phone" required <? if (get_cookie("phone", true)) { ?>value="<?= get_cookie("phone", true) ?>" <? } ?>>
                                             </p>
                                         </div>
                                         <div class="col-lg-12">
                                             <p class="single-form-row">
                                                 <label>Email <span class="required">*</span></label>
-                                                <input type="text" name="email" required>
+                                                <input type="text" name="email" required <? if (get_cookie("email", true)) { ?>value="<?= get_cookie("email", true) ?>" <? } ?>>
                                             </p>
                                         </div>
 
@@ -107,7 +107,7 @@
                                         <div class=" col-lg-12">
                                             <p class="single-form-row m-0">
                                                 <label>備註</label>
-                                                <textarea placeholder=" " class="checkout-mess" rows="2" cols="5"></textarea>
+                                                <textarea name="remark" class="remark" placeholder=" " class="checkout-mess" rows="2" cols="5"><? if (get_cookie("remark", true)) { ?><?= get_cookie("remark", true) ?> <? } ?></textarea>
                                             </p>
                                         </div>
                                     </div>
@@ -258,7 +258,7 @@
                                             <!-- ACCORDION END -->
                                         </div>
                                         <div class="order-button-payment">
-                                            <input type="submit" value="送出訂單">
+                                            <input type="button" class="ssubmit" value="送出訂單">
                                         </div>
                                     </div>
                                     <!-- your-order-wrapper start -->
@@ -277,13 +277,22 @@
         <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 
         <script>
+            $('.ssubmit').click(function() {
+                console.log(123)
+                delCookie("username")
+                delCookie("phone")
+                delCookie("email")
+                delCookie("remark")
+                $("#fform").submit();
+            })
+
             function choosecsv() {
 
-                // createCookie('username', $("input[name=username]").val(), 3);
-                // createCookie('phone', $("input[name=phone]").val(), 3);
-                // createCookie('addr', $("input[name=addr]").val(), 3);
-                // createCookie('email', $("input[name=email]").val(), 3);
-                // createCookie('remarks', $("input[name=remarks]").val(), 3);
+                createCookie('username', $("input[name=username]").val(), 3);
+                createCookie('phone', $("input[name=phone]").val(), 3);
+
+                createCookie('email', $("input[name=email]").val(), 3);
+                createCookie('remark', $(".remark").val(), 3);
 
                 // createCookie('delivery', $("#delivery").val(), 3);
                 // createCookie('store', $("input[name=store]:checked").val(), 3);
@@ -292,6 +301,28 @@
                 location.href = '<?= base_url() ?>cvs/map/' + $("select[name=con_choose]").val();
                 // location.href = '<?= base_url() ?>cart/cvschoose/' + $("select[name=con_choose]").val();
 
+            }
+
+            function delCookie(name) {
+                var exp = new Date();
+                exp.setTime(exp.getTime() - 1);
+                var cval = getCookie(name);
+                if (cval != null) document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
+            }
+
+            function getCookie(name) {
+                var arr = document.cookie.match(new RegExp("(^| )" + name+  "=([^;]*)(;|$)"));
+                if (arr != null) return unescape(arr[2]);
+                return null;
+            }
+            //資料存進cookie
+            function createCookie(name, value, days, path) {
+                if (days) {
+                    var date = new Date();
+                    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                    var expires = "; expires=" + date.toGMTString();
+                } else var expires = "";
+                document.cookie = name + "=" + encodeURIComponent(value) + expires + "; path=/";
             }
         </script>
 
